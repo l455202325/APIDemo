@@ -6,16 +6,32 @@
   "minPlatformVersion": "101",
   "icon": "/Common/logo.png",
   "features": [
-    { "name": "system.prompt" },
-    { "name": "system.router" },
-    { "name": "system.shortcut" },
-    {"name": "system.prompt"},
-    { "name": "system.shortcut" },
-    { "name": "system.barcode" },
-    { "name": "system.clipboard" }
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.barcode"
+    },
+    {
+      "name": "system.clipboard"
+    }
   ],
   "permissions": [
-    { "origin": "*" }
+    {
+      "origin": "*"
+    }
   ],
   "config": {
     "logLevel": "off"
@@ -40,7 +56,18 @@
       },
       "Clipboard": {
         "component": "index"
+      },
+      "BasicFunction": {
+        "component": "index"
+      },
+      "GeneralModule": {
+        "component": "index"
+      },
+      "ContainerModule": {
+        "component": "index"
       }
+
+
     }
   },
   "display": {
@@ -68,6 +95,18 @@
       },
       "Barcode": {
         "titleBarText": "剪贴板",
+        "menu": false
+      },
+      "BasicFunction": {
+        "titleBarText": "基本功能",
+        "menu": false
+      },
+      "GeneralModule": {
+        "titleBarText": "通用组件",
+        "menu": false
+      },
+      "ContainerModule": {
+        "titleBarText": "通用组件",
         "menu": false
       }
     }

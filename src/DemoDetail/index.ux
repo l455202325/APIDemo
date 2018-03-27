@@ -40,11 +40,11 @@
         lists: [
             {
                 name: '组件-通用组件',
-                url: ''
+                url: '/GeneralModule'
             },
             {
                 name: '组件-容器组件',
-                url: ''
+                url: '/ContainerModule'
             },
             {
                 name: '组件-基础组件',
@@ -64,7 +64,7 @@
             },
             {
                 name: '接口-基本功能',
-                url: ''
+                url: '/BasicFunction'
             },
             {
                 name: '接口-界面交互',
