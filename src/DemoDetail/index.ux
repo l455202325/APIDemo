@@ -1,7 +1,14 @@
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="demo-page">
-    <text class="title">{{text}}</text>
+    <text>{{selectDec}}</text>
+    <list>
+      <block for="item in lists">
+        <list-item type="listItem" class="item">
+          <text class="title" onclick="onItemClick(item)">{{item.name}}</text>
+        </list-item>
+      </block>
+    </list>
   </div>
 </template>
 
@@ -11,17 +18,88 @@
     justify-content: center;
     align-items: center;
   }
-
   .title {
     font-size: 40px;
     text-align: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .item {
+    border-bottom-color: #d1d1d1;
+    border-bottom-width: 1px;
   }
 </style>
 
 <script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
   export default {
     data: {
-      text: '欢迎打开详情页'
+        lists: [
+            {
+                name: '组件-通用组件',
+                url: ''
+            },
+            {
+                name: '组件-容器组件',
+                url: ''
+            },
+            {
+                name: '组件-基础组件',
+                url: ''
+            },
+            {
+                name: '组件-表单组件',
+                url: ''
+            },
+            {
+                name: '组件-媒体组件',
+                url: ''
+            },
+            {
+                name: '组件-其他组件',
+                url: ''
+            },
+            {
+                name: '接口-基本功能',
+                url: ''
+            },
+            {
+                name: '接口-界面交互',
+                url: ''
+            },
+            {
+                name: '接口-网络访问',
+                url: ''
+            },
+            {
+                name: '接口-文件数据',
+                url: ''
+            },
+            {
+                name: '接口-系统能力',
+                url: '/SystemCapability'
+            },
+            {
+                name: '接口-图形图像',
+                url: ''
+            },
+            {
+                name: '接口-声音音频',
+                url: ''
+            },
+            {
+                name: '接口-厂商服务',
+                url: ''
+            },
+            {
+                name: '接口-第三方服务',
+                url: ''
+            }
+        ],
+        selectDec:''
     },
     /**
      * 当用户点击菜单按钮时触发，调用app中定义的方法showMenu
@@ -29,6 +107,25 @@
      */
     onMenuPress() {
       this.$app.showMenu()
-    }
+    },
+    onInit(){
+        console.log("传递的数据",this.lists)
+    },
+      onItemClick(item) {
+          this.selectDec = item.name;
+          const url = item.url;
+          if(url != null && url != ''){
+              // 跳转到应用内的某个页面
+              router.push({
+                  uri: url
+              })
+          }else {
+              prompt.showToast({
+                  message:'功能正在加紧时间开发中...',
+                  duration:0
+              });
+          }
+      }
+
   }
 </script>

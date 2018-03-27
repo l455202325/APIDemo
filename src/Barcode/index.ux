@@ -1,0 +1,63 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <text class="title">{{content}}</text>
+        <!-- 点击识别二维码 -->
+        <input class="btn" type="button" value="扫描二维码" onclick="scan">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        font-size: 40px;
+        text-align: center;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import barcode from '@system.barcode';
+
+    export default {
+        data: {
+            content: '初始值'
+        },
+        scan () {
+            // 调用二维码扫描功能
+            barcode.scan({
+                success:function(data){
+                    this.content = data.result;
+                    this.content = "success";
+                    console.log("handling success: " + data.result);
+                },
+                fail: function(data, code) {
+                    this.content = "识别失败：错误码" +  code;
+                    this.content = "fail" ;
+                    console.log("handling success: " + data.result);
+                },
+                cancel:function () {
+                    this.content = "取消识别";
+                    this.content = "cancel";
+                },
+                complete:function () {
+                    this.content = "识别结束";
+                    this.content = "complete";
+                }
+            })
+        }
+    }
+</script>

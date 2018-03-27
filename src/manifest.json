@@ -1,5 +1,5 @@
 {
-  "package": "com.application.demo",
+  "package": "com.zixing.demo",
   "name": "APIDemo",
   "versionName": "1.0.0",
   "versionCode": "1",
@@ -8,7 +8,11 @@
   "features": [
     { "name": "system.prompt" },
     { "name": "system.router" },
-    { "name": "system.shortcut" }
+    { "name": "system.shortcut" },
+    {"name": "system.prompt"},
+    { "name": "system.shortcut" },
+    { "name": "system.barcode" },
+    { "name": "system.clipboard" }
   ],
   "permissions": [
     { "origin": "*" }
@@ -27,6 +31,15 @@
       },
       "About": {
         "component": "index"
+      },
+      "SystemCapability": {
+        "component": "index"
+      },
+      "Barcode": {
+        "component": "index"
+      },
+      "Clipboard": {
+        "component": "index"
       }
     }
   },
@@ -36,13 +49,25 @@
     "menu": true,
     "pages": {
       "Demo": {
-        "titleBarText": "示例页",
+        "titleBarText": "应用入口文件",
         "menu": false
       },
       "DemoDetail": {
-        "titleBarText": "详情页"
+        "titleBarText": "API接口列表"
       },
       "About": {
+        "menu": false
+      },
+      "SystemCapability": {
+        "titleBarText": "系统能力",
+        "menu": false
+      },
+      "Barcode": {
+        "titleBarText": "二维码",
+        "menu": false
+      },
+      "Barcode": {
+        "titleBarText": "剪贴板",
         "menu": false
       }
     }

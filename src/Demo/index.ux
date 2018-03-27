@@ -1,9 +1,9 @@
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="demo-page">
-    <text class="title">欢迎打开{{title}}</text>
+    <text class="title">紫星快应用API Demo合集</text>
     <!-- 点击跳转详情页 -->
-    <input class="btn" type="button" value="跳转到详情页" onclick="routeDetail">
+    <input class="btn" type="button" value="点击进入API列表" onclick="routeDetail">
   </div>
 </template>
 
@@ -35,7 +35,7 @@
 
   export default {
     data: {
-      title: '示例页面'
+
     },
     routeDetail () {
       // 跳转到应用内的某个页面，router用法详见：文档->接口->页面路由
