@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+  <script type="text/javascript" src="/tools/web.min.js"></script>
+  <script type="text/javascript" src="/tools/browser.min.js"></script>
+
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      margin: 0;
+      font-family: "微软雅黑", monospace;
+    }
+    html, body, div, li, ul, ol {
+      display: -webkit-flex;
+      display: flex;
+      /* 当子元素高度超出父元素时，na端表现：滚动条出现的情况下，不再收缩 */
+      flex-shrink: 0;
+    }
+
+    [comp-name="div"] {
+      /* div溢出内容 */
+      overflow: hidden;
+    }
+
+    * {
+      border-width: 0;
+      box-sizing: border-box;
+      border-style: solid;
+    }
+    a{
+      text-decoration: none;
+      color: initial;
+    }
+    input:focus {
+      outline: none;
+    }
+    ul, ol {
+      margin: 0;
+      list-style-type: none;
+      flex-direction: column;
+      padding: 0;
+    }
+    li {
+      flex-shrink: 0;
+    }
+
+    /* 顶级元素占据100% */
+    body > div:nth-of-type(1) {
+      width: 100%;
+      /* 防止滚动出该DIV */
+      overflow-x: hidden;
+      overflow-y: auto;
+      /* 用于List的屏幕滚动模式 */
+      /*min-height: 100%;*/
+      /*height: 100%;*/
+    }
+
+    body > [comp-name="progress"][type="circular"] {
+      position: fixed;
+      width: 100%;
+      transition: all 1s ease;
+    }
+    body > [comp-name="progress"][type="circular"][refreshing="false"] {
+      height: 0.3rem;
+    }
+    body > [comp-name="progress"][type="circular"][refreshing="true"] {
+      height: 1rem;
+    }
+
+    /* Components */
+    [comp-name="text"] {
+      display: inline-flex;
+      align-items: center;
+      word-wrap: break-word;
+      word-break: break-all;
+      flex-shrink: 1;
+      overflow: hidden;
+      color: rgba(0, 0, 0, 0.75);
+    }
+    [comp-name="text"][lines] {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+    }
+
+
+    [comp-name="image"] {
+      flex-shrink: 1;
+    }
+    [comp-name="image"][resizemode="cover"] > img[src="undefined"],
+    [comp-name="image"][resizemode="cover"] > img[src="null"],
+    [comp-name="image"][resizemode="cover"] > img[src=""] {
+      display: none;
+    }
+    /* 保持宽高比缩小或放大，使得两边都大于或等于显示边界，居中显示 */
+    [comp-name="image"][resizemode="cover"] {
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+    }
+    [comp-name="image"][resizemode="cover"] > img {
+      flex: none;
+      width: 100%;
+      height: 100%;
+    }
+    /* 保持宽高比，缩小或者放大，使得图片完全显示在显示边界内，居中显示 */
+    [comp-name="image"][resizemode="contain"] {
+      align-items: center;
+      justify-content: center;
+    }
+    [comp-name="image"][resizemode="contain"] > img {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    /* 不保存宽高比，填充满显示边界 */
+    [comp-name="image"][resizemode="stretch"] {
+    }
+    [comp-name="image"][resizemode="stretch"] > img {
+      width: 100%;
+      height: 100%;
+    }
+    /* 居中，无缩放 */
+    [comp-name="image"][resizemode="center"] {
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+    }
+    [comp-name="image"][resizemode="center"] > img {
+      object-fit: contain;
+    }
+
+
+    [comp-name="stack"] {
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      flex-grow: 1;
+    }
+    [comp-name="stack"] > * {
+      position: absolute;
+      /* 红米Note的小米浏览器需要定位一下 */
+      left: 0;
+    }
+
+    [comp-name="swiper"] {
+      align-items: center;
+      overflow: hidden;
+      flex-direction: row !important;
+      position: relative;
+      width: 100%;
+    }
+    [comp-name="swiper"] > * {
+      width: 100%;
+    }
+    [comp-name="swiper"] > .swiper-dot-list {
+      list-style-type: none;
+      position: absolute;
+      text-align: center;
+      bottom: 0;
+      z-index: 10;
+    }
+    [comp-name="swiper"] > .swiper-dot-list li {
+      display: inline-block;
+      width: calc(20/750*10rem);
+      height: calc(20/750*10rem);
+      background-color: #a0a0a0;
+      border-radius: 50%;
+      margin: 0.1rem 0.3rem;
+    }
+    [comp-name="swiper"] > .swiper-dot-list li.swiper-dot-active {
+      background-color: #33b4ff;
+    }
+
+
+    [comp-name="list"] {
+      max-height: 100%;
+      flex-grow: 1;
+    }
+    [comp-name="list"] > * {
+      width: 100%;
+    }
+
+
+    [comp-name="input"] {
+      align-self: stretch;
+      overflow: hidden;
+    }
+    [comp-name="input"][type="button"] {
+      /*height: calc(100/750*10rem);*/
+      background-color: #ece9e9;
+      justify-content: center;
+    }
+    [comp-name="input"][type="text"],
+    [comp-name="input"][type="email"],
+    [comp-name="input"][type="number"],
+    [comp-name="input"][type="date"],
+    [comp-name="input"][type="time"],
+    [comp-name="input"][type="password"] {
+      flex-basis: 2rem;
+    }
+
+    [comp-name="input"] [type="text"],
+    [comp-name="input"] [type="email"],
+    [comp-name="input"] [type="number"],
+    [comp-name="input"] [type="date"],
+    [comp-name="input"] [type="time"],
+    [comp-name="input"] [type="password"],
+    [comp-name="input"] [type="button"] {
+      background-color: inherit;
+      color: inherit;
+    }
+    [comp-name="input"] [type="checkbox"],
+    [comp-name="input"] [type="radio"] {
+    }
+    /* Input的默认值 */
+    [comp-name="input"] *, [comp-name="textarea"] {
+      font-size: calc(37.5/750*10rem);
+    }
+    [comp-name="textarea"] {
+      background-color: transparent;
+    }
+
+    [comp-name="refresh"] {
+      flex-grow: 1;
+    }
+
+    [comp-name="tabs"] {
+      flex-direction: column;
+      flex-grow: 1;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    [comp-name="tab-bar"] {
+      flex-shrink: 0;
+      z-index: 1001;
+      align-items: center;
+      height: calc(100/750*10rem);
+    }
+    [comp-name="tab-bar"] > * {
+      flex-grow: 1;
+    }
+    [comp-name="tab-bar"][mode="scrollable"] {
+      overflow-x: auto;
+    }
+    [comp-name="tab-bar"][mode="fixed"] > * {
+    }
+    [comp-name="tab-bar"][mode="scrollable"] > * {
+      flex-shrink: 0;
+    }
+    [comp-name="tab-content"] {
+      flex-grow: 1;
+      flex-basis: 0;
+      flex-direction: column;
+      max-height: 100%;
+    }
+    [comp-name="tab-content"] > * {
+      flex-basis: 0;
+      flex-grow: 1;
+      flex-shrink: 0;
+      display: none;
+      overflow: auto;
+    }
+
+    [comp-name="progress"][type="horizontal"] {
+    }
+    [comp-name="progress"][type="horizontal"] > div {
+      background-color: #f0f0f0;
+      flex-grow: 1;
+      /* 10px转换 */
+      border-radius: 0.3125rem;
+    }
+    [comp-name="progress"][type="horizontal"] > div > span {
+      background-color: #33b4ff;
+      border-radius: 0.3125rem;
+      transition: width 0.5s ease;
+    }
+    [comp-name="progress"][type="circular"] {
+      align-self: center;
+      /* 32px转换 */
+      width: 0.426667rem;
+      height: 0.426667rem;
+    }
+    [comp-name="progress"][type="circular"] > img {
+      width: 100%;
+      height: 100%;
+    }
+
+    [comp-name="slider"] {
+      flex-grow: 1;
+      align-items: center;
+      width: 100%;
+      height: 0.5rem;
+    }
+    [comp-name="slider"] > div {
+      align-items: center;
+      background-color: #f0f0f0;
+      height: 0.15625rem;
+      flex-grow: 1;
+      /* 10px转换 */
+      border-radius: 0.3125rem;
+    }
+    [comp-name="slider"] > div > span {
+      background-color: #33b4ff;
+      border-top-left-radius: 0.3125rem;
+      border-bottom-left-radius: 0.3125rem;
+      height: 100%;
+    }
+    [comp-name="slider"] > div > div {
+      /* 16px转换 */
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: #009688;
+      border-radius: 50%;
+      align-self: center;
+      position: relative;
+    }
+
+    [comp-name="switch"] {
+      align-self: center;
+      width: calc(75/750*10rem) !important;
+      height: calc(45/750*10rem) !important;
+    }
+    [comp-name="switch"] > div {
+      align-items: center;
+      height: calc(35/750*10rem);
+      flex-grow: 1;
+      border-radius: 0.3125rem;
+      position: relative;
+      align-self: center;
+    }
+    [comp-name="switch"] > div > div {
+      width: calc(45/750*10rem);
+      height: calc(45/750*10rem);
+      border-radius: 50%;
+      align-self: center;
+      position: relative;
+    }
+    [comp-name="switch"] > div[checked="true"] {
+      background-color: #89bcb8;
+    }
+    [comp-name="switch"] > div[checked="false"] {
+      background-color: #cbbebe;
+    }
+    [comp-name="switch"] > div[checked="true"] > div {
+      transition: all 0.5s linear;
+      background-color: #009688;
+      position: absolute;
+      right: 0;
+    }
+    [comp-name="switch"] > div[checked="false"] > div {
+      transition: all 0.5s linear;
+      background-color: #ece9e9;
+    }
+
+
+    [comp-name="picker"] {
+      align-self: center;
+      align-items: center;
+      height: 1rem;
+    }
+    [comp-name="picker"][disabled] {
+      color: #cbbebe;
+    }
+    [comp-name="picker"][disabled="false"] {
+      color: inherit;
+    }
+
+    .hybrid-overlay {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      z-index: 1001;
+      background-color: rgba(138, 133, 133, 0.3);
+    }
+    .hybrid-actionsheet {
+      flex-direction: column;
+      width: 100%;
+      height: 5rem;
+      position: fixed;
+      bottom: 0;
+      z-index: 1001;
+      background-color: #ffffff;
+      transition: all 0.5s ease;
+    }
+    /* 过渡效果 */
+    .hybrid-actionsheet.hide, .hybrid-actionsheet.hide ul, .hybrid-actionsheet.hide ul::before {
+      height: 0rem;
+      border: none;
+      margin: 0;
+    }
+    /* 按钮 */
+    .hybrid-actionsheet div.actions {
+      justify-content: space-between;
+      padding: 0.3rem;
+    }
+    .hybrid-actionsheet div.actions .submit{
+      background: transparent;
+      color: #33b4ff;
+    }
+    .hybrid-actionsheet div.actions .cancel{
+      background: transparent;
+      color: #a0a0a0;
+    }
+    /* 容器 */
+    .hybrid-actionsheet div.container {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    .hybrid-actionsheet ul{
+      flex-grow: 1;
+      overflow-y: auto;
+      margin: 0.5rem 0;
+      color: #cbbebe;
+      height: 3rem;
+      padding: 1rem 0;
+      transition: all 0.5s ease;
+    }
+    .hybrid-actionsheet ul li {
+      justify-content: center;
+      padding: 0.2rem 0;
+      height: 1rem;
+    }
+    .hybrid-actionsheet ul li.active {
+      color: #000000;
+      font-weight: bold;
+    }
+    /* 选择行的表示 */
+    .hybrid-actionsheet ul::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1rem;
+      border-top: 1px solid #cbbebe;
+      border-bottom: 1px solid #cbbebe;
+      bottom: 0;
+      margin-bottom: 1.5rem;
+      transition: all 0.5s ease;
+    }
+  </style>
+
+  <!-- 用户自定义的CSS，如：伪类转换 -->
+  <style type="text/css">
+
+  </style>
+
+</head>
+<body>
+<script type="text/javascript" src="/tools/index.js"></script>
+</body>
+</html>
