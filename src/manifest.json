@@ -65,7 +65,21 @@
       },
       "ContainerModule": {
         "component": "index"
+      },
+      "BasicComponents": {
+        "component": "index"
+      },
+      "FormComponents": {
+        "component": "index"
+      },
+      "MediaComponents":{
+        "component": "index"
+      },
+      "OtherComponents": {
+        "component": "index"
       }
+
+
 
 
     }
@@ -108,7 +122,26 @@
       "ContainerModule": {
         "titleBarText": "通用组件",
         "menu": false
+      },
+      "BasicComponents": {
+        "titleBarText": "基础组件",
+        "menu": false
+      },
+      "FormComponents": {
+        "titleBarText": "表单组件",
+        "menu": false
+      },
+      "MediaComponents": {
+        "titleBarText": "媒体组件",
+        "menu": false
+      },
+      "OtherComponents": {
+        "titleBarText": "其他组件",
+        "menu": false
       }
+
+
+
     }
   }
 }

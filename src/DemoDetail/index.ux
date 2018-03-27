@@ -48,19 +48,19 @@
             },
             {
                 name: '组件-基础组件',
-                url: ''
+                url: '/BasicComponents'
             },
             {
                 name: '组件-表单组件',
-                url: ''
+                url: '/FormComponents'
             },
             {
                 name: '组件-媒体组件',
-                url: ''
+                url: '/MediaComponents'
             },
             {
                 name: '组件-其他组件',
-                url: ''
+                url: '/OtherComponents'
             },
             {
                 name: '接口-基本功能',
