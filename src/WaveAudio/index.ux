@@ -1,0 +1,71 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <list>
+            <block for="item in listData">
+                <list-item type="listItem" class="item">
+                    <text class="title" onclick="onItemClick(item)">{{item.name}}</text>
+                </list-item>
+            </block>
+        </list>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 40px;
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+    .item {
+        border-bottom-color: #d1d1d1;
+        border-bottom-width: 1px;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            listData: [
+                {
+                    name: '音频',
+                    url: ''
+                }
+            ]
+        },
+        /**
+         * 当用户点击菜单按钮时触发，调用app中定义的方法showMenu
+         * 注意：使用加载器测试`创建桌面快捷方式`功能时，请先在`系统设置`中打开`应用加载器`的`桌面快捷方式`权限
+         */
+        onMenuPress() {
+            this.$app.showMenu()
+        },
+        onItemClick(item) {
+            this.selectDec = item.name;
+            const url = item.url;
+            if(url != null && url != ''){
+                // 跳转到应用内的某个页面
+                router.push({
+                    uri: url
+                })
+            }else {
+                prompt.showToast({
+                    message:'功能正在加紧时间开发中...',
+                    duration:0
+                });
+            }
+
+        }
+    }
+</script>

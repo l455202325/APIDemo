@@ -77,7 +77,27 @@
       },
       "OtherComponents": {
         "component": "index"
+      },
+      "InterfaceInteraction": {
+        "component": "index"
+      },
+      "NetworkAccess": {
+        "component": "index"
+      },
+      "FileData": {
+        "component": "index"
+      },
+      "Security": {
+        "component": "index"
+      },
+      "GraphicImage": {
+        "component": "index"
+      },
+      "WaveAudio": {
+        "component": "index"
       }
+
+
 
 
 
@@ -137,6 +157,30 @@
       },
       "OtherComponents": {
         "titleBarText": "其他组件",
+        "menu": false
+      },
+      "InterfaceInteraction": {
+        "titleBarText": "界面交互",
+        "menu": false
+      },
+      "NetworkAccess": {
+        "titleBarText": "网络访问",
+        "menu": false
+      },
+      "FileData": {
+        "titleBarText": "文件数据",
+        "menu": false
+      },
+      "Security": {
+        "titleBarText": "安全",
+        "menu": false
+      },
+      "GraphicImage": {
+        "titleBarText": "图形图像",
+        "menu": false
+      },
+      "WaveAudio": {
+        "titleBarText": "声音音频",
         "menu": false
       }
 

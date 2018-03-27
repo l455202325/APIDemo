@@ -68,27 +68,31 @@
             },
             {
                 name: '接口-界面交互',
-                url: ''
+                url: '/InterfaceInteraction'
             },
             {
                 name: '接口-网络访问',
-                url: ''
+                url: '/NetworkAccess'
             },
             {
                 name: '接口-文件数据',
-                url: ''
+                url: '/FileData'
             },
             {
                 name: '接口-系统能力',
                 url: '/SystemCapability'
             },
             {
+                name: '接口-安全',
+                url: '/Security'
+            },
+            {
                 name: '接口-图形图像',
-                url: ''
+                url: '/GraphicImage'
             },
             {
                 name: '接口-声音音频',
-                url: ''
+                url: '/WaveAudio'
             },
             {
                 name: '接口-厂商服务',
