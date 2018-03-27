@@ -39,55 +39,19 @@
         data: {
             listData: [
                 {
-                    name: '二维码',
-                    url: '/Barcode'
-                },
-                {
-                    name: '传感器',
+                    name: '推送',
                     url: ''
                 },
                 {
-                    name: '剪贴板',
-                    url: '/Clipboard'
-                },
-                {
-                    name: '地理位置',
+                    name: '支付',
                     url: ''
                 },
                 {
-                    name: '桌面图标',
+                    name: '统计',
                     url: ''
                 },
                 {
-                    name: '日历事件',
-                    url: ''
-                },
-                {
-                    name: '网络状态',
-                    url: '/NetworkState'
-                },
-                {
-                    name: '设备信息',
-                    url: ''
-                },
-                {
-                    name: '屏幕亮度',
-                    url: ''
-                },
-                {
-                    name: '系统音量',
-                    url: ''
-                },
-                {
-                    name: '电量信息',
-                    url: ''
-                },
-                {
-                    name: '用用管理',
-                    url: ''
-                },
-                {
-                    name: '录音',
+                    name: '账号',
                     url: ''
                 }
             ]

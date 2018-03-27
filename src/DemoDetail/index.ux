@@ -96,11 +96,11 @@
             },
             {
                 name: '接口-厂商服务',
-                url: ''
+                url: '/VendorService'
             },
             {
                 name: '接口-第三方服务',
-                url: ''
+                url: '/ThirdService'
             }
         ],
         selectDec:''

@@ -1,0 +1,78 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <text class="title">{{getContent}}</text>
+        <!-- 点击获取网络状态 -->
+        <input class="btn" type="button" value="获取网络状态" onclick="getType">
+
+        <text class="title">{{subscribeContent}}</text>
+        <!-- 点击监听网络状态 -->
+        <input class="btn" type="button" value="监听网络状态" onclick="subscribe">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import network from '@system.network'
+
+    export default {
+        data: {
+            getContent: '初始值',
+            subscribeContent: '初始值'
+
+        },
+        getType() {
+            //
+            this.getContent = "获取网路状态中..."
+            network.getType({
+
+                success: function (data) {
+                    this.getContent = "" + data.type;
+                    this.getContent = "success";
+                    console.log("handling success: " + data.type);
+                },
+                fail: function (data, code) {
+                    this.getContent = "识别失败：错误码" + code;
+                    this.getContent = "fail";
+                    console.log("handling success: " + data.result);
+                },
+                complete: function () {
+                    this.getContent = "识别结束";
+                    this.getContent = "complete";
+                }
+            })
+        },
+        subscribe() {
+            this.subscribeContent = "监听网络中..."
+            network.subscribe({
+                callback: function (data) {
+                    console.log("handling callback");
+                    this.subscribeContent = data.type
+                }
+            });
+        }
+    }
+</script>

@@ -26,6 +26,9 @@
     },
     {
       "name": "system.clipboard"
+    },
+    {
+      "name": "system.network"
     }
   ],
   "permissions": [
@@ -72,7 +75,7 @@
       "FormComponents": {
         "component": "index"
       },
-      "MediaComponents":{
+      "MediaComponents": {
         "component": "index"
       },
       "OtherComponents": {
@@ -95,13 +98,16 @@
       },
       "WaveAudio": {
         "component": "index"
+      },
+      "VendorService": {
+        "component": "index"
+      },
+      "ThirdService": {
+        "component": "index"
+      },
+      "NetworkState": {
+        "component": "index"
       }
-
-
-
-
-
-
     }
   },
   "display": {
@@ -182,10 +188,19 @@
       "WaveAudio": {
         "titleBarText": "声音音频",
         "menu": false
+      },
+      "VendorService": {
+        "titleBarText": "厂商服务",
+        "menu": false
+      },
+      "ThirdService": {
+        "titleBarText": "第三方服务",
+        "menu": false
+      },
+      "NetworkState": {
+        "titleBarText": "网络状态",
+        "menu": false
       }
-
-
-
     }
   }
 }
