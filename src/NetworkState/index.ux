@@ -51,11 +51,11 @@
             network.getType({
 
                 success: function (data) {
-                    _this.getContent = "" + data.type;
+                    _this.getContent = "当前网络：" + data.type;
                     console.log("handling success: " + data.type);
                 },
                 fail: function (data, code) {
-                    this.getContent = "识别失败：错误码" + code;
+                    _this.getContent = "识别失败：错误码" + code;
                     console.log("handling success: " + data.result);
                 },
                 complete: function () {
@@ -67,11 +67,12 @@
             })
         },
         subscribe() {
+            var _this = this;
             this.subscribeContent = "监听网络中..."
             network.subscribe({
                 callback: function (data) {
                     console.log("handling callback");
-                    this.subscribeContent = data.type
+                    _this.subscribeContent ="当前网络："+ data.type
                 }
             });
         }

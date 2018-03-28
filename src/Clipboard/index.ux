@@ -3,7 +3,7 @@
     <div class="demo-page">
 
         <label class="label">请输入内容：</label>
-        <input class="input" type="text" value="" placeholder="请输入要复制的内容" >
+        <input class="input" type="text" value="" placeholder="请输入要复制的内容" @change="handlerInputChange">
         <!-- 点击设置剪贴板内容 -->
         <input class="btn" type="button" value="复制" onclick="set">
         <!-- 点击设置剪贴板内容 -->
@@ -28,6 +28,7 @@
         width:100%;
         padding-left: 20px;
         padding-right: 20px;
+        margin-top: 20px;
     }
     .input{
         border-bottom-color: #8d8d8d;
@@ -54,24 +55,29 @@
 
     export default {
         data: {
-            content: ''
+            content: '',
+            inputContent:''
         },
         set(){
             var _this = this;
             clipboard.set({
-                text: '这个剪贴板的内容',
+                text: _this.inputContent,
                 success:function(){
-                    _this.content = "复制成功"
+                    // _this.content = "复制成功"
+                    prompt.showToast({
+                        message:_this.inputContent + " 复制成功",
+                        duration:0
+                    });
                 },
                 fail:function () {
                     _this.content = "复制失败"
                 },
                 complete:function () {
 //                    this.content = "完成"
-                    prompt.showToast({
-                        message:"复制完成",
-                        duration:0
-                    });
+//                     prompt.showToast({
+//                         message:"复制完成",
+//                         duration:0
+//                     });
                 }
             })
         },
@@ -80,7 +86,7 @@
             clipboard.get({
                 success:function(data){
                     console.log("handling success: " + data.text);
-                    _this.content = data.text;
+                    _this.content += data.text;
                 },
                 fail: function(data, code) {
                     console.log("handling fail, code=" + code);
@@ -91,6 +97,9 @@
                     });
                 }
             });
+        },
+        handlerInputChange(e){
+            this.inputContent = e.value;
         }
 
     }
