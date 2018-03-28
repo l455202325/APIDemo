@@ -1,0 +1,132 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <text class="title">位置信息</text>
+        <label class="label">longitude：{{getLongitude}}</label>
+        <label class="label">latitude：{{getLatitude}}</label>
+
+        <!-- 点击获取地理位置 -->
+        <input class="btn" type="button" value="获取地理位置" onclick="getLocation">
+
+        <text class="title">位置信息</text>
+        <label class="label">longitude：{{subscribeLongitude}}</label>
+        <label class="label">latitude：{{subscribeLatitude}}</label>
+
+        <!-- 点击监听地理位置 -->
+        <input class="btn" type="button" value="监听地理位置" onclick="subscribe">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: left;
+        padding: 20px;
+        color: #333333;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import geolocation from '@system.geolocation'
+    import prompt from '@system.prompt';
+    export default {
+        data: {
+            getLongitude: '未知',
+            getLatitude: '未知',
+            subscribeLongitude: '未知',
+            subscribeLatitude: '未知',
+
+        },
+        getLocation(){
+            geolocation.getLocation({
+                timeout:3000,
+                success:(data)=>{
+                    console.log("handling success: longitude=" + data.longitude + ", latitude=" + data.latitude);
+                        this.getLongitude = data.longitude;
+                        this.getLatitude = data.latitude;
+                    },
+                fail: (data, code)=> {
+                    console.log("handling fail, code=" + code);
+                    if (code == 201) {
+                        prompt.showToast({
+                            message:'用户拒绝，获取定位权限失败',
+                            duration:0
+                        });
+                    }else if (code == 204) {
+                        prompt.showToast({
+                            message:'超时返回',
+                            duration:0
+                        });
+                    }else if (code == 1000) {
+                        prompt.showToast({
+                            message:'系统位置开关关闭',
+                            duration:0
+                        });
+                    }else {
+                        prompt.showToast({
+                            message:'未知异常',
+                            duration:0
+                        });
+                    }
+                }
+                ,
+                complete: ()=> {
+                    prompt.showToast({
+                        message:'地理位置获取结束',
+                        duration:0
+                    });
+                }
+            })
+        },
+        subscribe() {
+            geolocation.subscribe({
+                callback:(data)=> {
+                    console.log("handling success: longitude=" + data.longitude + ", latitude=" + data.latitude);
+                    this.subscribeLongitude = data.longitude;
+                    this.subscribeLatitude = data.latitude;
+                    },
+                fail: function(data, code) {
+                    console.log("handling fail, code=" + code);
+                    if (code == 201) {
+                        prompt.showToast({
+                            message:'用户拒绝，获取定位权限失败',
+                            duration:0
+                        });
+                    }else if (code == 1000) {
+                        prompt.showToast({
+                            message:'系统位置开关关闭',
+                            duration:0
+                        });
+                    }else {
+                        prompt.showToast({
+                            message:'未知异常',
+                            duration:0
+                        });
+                    }
+                }
+            })
+        },
+        onDestroy(){
+            // 取消监听地理位置
+            geolocation.unsubscribe();
+        }
+    }
+</script>

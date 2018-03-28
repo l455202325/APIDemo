@@ -32,6 +32,9 @@
     },
     {
       "name": "system.sensor"
+    },
+    {
+      "name": "system.geolocation"
     }
   ],
   "permissions": [
@@ -113,9 +116,10 @@
       },
       "Sensor": {
         "component": "index"
+      },
+      "GeoLocation": {
+        "component": "index"
       }
-
-
     }
   },
   "display": {
@@ -212,9 +216,11 @@
       "Sensor": {
         "titleBarText": "传感器",
         "menu": false
+      },
+      "GeoLocation": {
+        "titleBarText": "地理位置",
+        "menu": false
       }
-
-
     }
   }
 }

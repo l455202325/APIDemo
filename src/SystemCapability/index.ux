@@ -52,7 +52,7 @@
                 },
                 {
                     name: '地理位置',
-                    url: ''
+                    url: '/GeoLocation'
                 },
                 {
                     name: '桌面图标',
