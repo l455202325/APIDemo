@@ -12,4 +12,4 @@
 ## 非常感谢大家积极参与到项目中来，现在功能开发小组人员已满，进入编写代码群二维码已经失效
 - 下面是进学习交流群的二维码链接
 ----------
-![image](https://github.com/l455202325/APIDemo/blob/master/images/group.jpg)(108*148)
+![image](https://github.com/l455202325/APIDemo/blob/master/images/group.jpg =108*148)
