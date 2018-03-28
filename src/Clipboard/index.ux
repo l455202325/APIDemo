@@ -50,34 +50,45 @@
 
 <script>
     import clipboard from '@system.clipboard';
+    import prompt from '@system.prompt';
 
     export default {
         data: {
             content: ''
         },
         set(){
+            var _this = this;
             clipboard.set({
                 text: '这个剪贴板的内容',
                 success:function(){
-                    this.content = "复制成功"
+                    _this.content = "复制成功"
                 },
                 fail:function () {
-                    this.content = "复制失败"
+                    _this.content = "复制失败"
                 },
                 complete:function () {
-                    this.content = "完成"
+//                    this.content = "完成"
+                    prompt.showToast({
+                        message:"复制完成",
+                        duration:0
+                    });
                 }
             })
         },
         get(){
+            var _this = this;
             clipboard.get({
                 success:function(data){
                     console.log("handling success: " + data.text);
-                    this.content = data.text;
+                    _this.content = data.text;
                 },
                 fail: function(data, code) {
                     console.log("handling fail, code=" + code);
-                    this.content = "handling fail, code=" + code;
+//                    _this.content = "handling fail, code=" + code;
+                    prompt.showToast({
+                        message:"黏贴失败",
+                        duration:0
+                    });
                 }
             });
         }

@@ -31,6 +31,7 @@
 
 <script>
     import barcode from '@system.barcode';
+    import prompt from '@system.prompt';
 
     export default {
         data: {
@@ -38,24 +39,27 @@
         },
         scan () {
             // 调用二维码扫描功能
+            var _this = this;
             barcode.scan({
                 success:function(data){
-                    this.content = data.result;
-                    this.content = "success";
+                    _this.content = data.result;
                     console.log("handling success: " + data.result);
+
                 },
                 fail: function(data, code) {
-                    this.content = "识别失败：错误码" +  code;
-                    this.content = "fail" ;
+                    _this.content = "识别失败：错误码" +  code;
                     console.log("handling success: " + data.result);
                 },
                 cancel:function () {
-                    this.content = "取消识别";
-                    this.content = "cancel";
+                    _this.content = "取消识别";
                 },
                 complete:function () {
-                    this.content = "识别结束";
-                    this.content = "complete";
+//                    _this.content = "识别结束";
+//                    _this.content = "complete";
+                    prompt.showToast({
+                        message:"识别结束",
+                        duration:0
+                    });
                 }
             })
         }

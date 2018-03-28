@@ -37,7 +37,7 @@
 
 <script>
     import network from '@system.network'
-
+    import prompt from '@system.prompt';
     export default {
         data: {
             getContent: '初始值',
@@ -47,21 +47,22 @@
         getType() {
             //
             this.getContent = "获取网路状态中..."
+            var _this = this;
             network.getType({
 
                 success: function (data) {
-                    this.getContent = "" + data.type;
-                    this.getContent = "success";
+                    _this.getContent = "" + data.type;
                     console.log("handling success: " + data.type);
                 },
                 fail: function (data, code) {
                     this.getContent = "识别失败：错误码" + code;
-                    this.getContent = "fail";
                     console.log("handling success: " + data.result);
                 },
                 complete: function () {
-                    this.getContent = "识别结束";
-                    this.getContent = "complete";
+                    prompt.showToast({
+                        message:"识别结束",
+                        duration:0
+                    });
                 }
             })
         },
