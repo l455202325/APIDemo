@@ -1,0 +1,147 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="labelTitle">重力感应数据：</label>
+        <label class="label">X：{{accelerometerX}}</label>
+        <label class="label">Y：{{accelerometerY}}</label>
+        <label class="label">Z：{{accelerometerZ}}</label>
+        <!-- 点击监听重力感应 -->
+        <input class="btn" type="button" value="监听重力感应"  @click="subscribeAccelerometer">
+
+
+        <label class="labelTitle">罗盘数据：</label>
+        <label class="label">面对的方向度数：{{compassDirection}}</label>
+        <!-- 点击监听罗盘数据 -->
+        <input class="btn" type="button" value="监听罗盘数据" onclick="subscribeCompass">
+
+        <label class="labelTitle">距离感应数据：(正式版本可用)</label>
+        <label class="label">手机距离：{{proximityDirection}} cm</label>
+        <!-- 监听距离感应数据 -->
+        <input class="btn" type="button" value="监听距离感应数据" onclick="subscribeProximity">
+
+        <label class="labelTitle">光线感应数据：(正式版本可用，这个亲测现在可以用)</label>
+        <label class="label">光线强度：{{intensity}} lux</label>
+        <!-- 点击监听光线感应数据 -->
+        <input class="btn" type="button" value="监听光线感应数据" onclick="subscribeLight">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .label{
+        font-size: 24px;
+        text-align: left;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+    }
+    .labelTitle{
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+    .input{
+        border-bottom-color: #8d8d8d;
+        border-width: 1px;
+        padding: 20px;
+        font-size: 24px;
+        width: 90%;
+        margin: 20px;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import sensor from '@system.sensor'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            accelerometerX:'未知',
+            accelerometerY:'未知',
+            accelerometerZ:'未知',
+            compassDirection:'未知',
+            proximityDirection:'未知',
+            intensity:'未知'
+        },
+        //  监听重力感应
+        subscribeAccelerometer(){
+            sensor.subscribeAccelerometer({callback: (ret)=>{
+                this.accelerometerX = ret.x;
+                this.accelerometerY = ret.y;
+                this.accelerometerZ = ret.z;
+                }});
+        },
+        // 监听罗盘数据
+        subscribeCompass(){
+            sensor.subscribeCompass({
+                callback:(ret)=>{
+                    // 当前返回的为弧度值 57.3 = 180/π 得到的大约值
+                    this.compassDirection = ret.direction*57.3;
+                }
+            })
+        },
+        // 监听距离感应数据
+        subscribeProximity(){
+            sensor.subscribeProximity({
+                callback:(ret)=>{
+                    this.proximityDirection = ret.direction;
+                    if (this.proximityDirection == undefined) {
+                        prompt.showToast({
+                            message:'该功能正式版本可用...',
+                            duration:0
+                        });
+                    }
+                }
+            })
+        },
+        // 监听光线感应数据
+        subscribeLight(){
+            sensor.subscribeLight({
+                callback:(ret) =>{
+                    console.log("handling callback, intensity = "+ ret.intensity);
+                    this.intensity  = ret.intensity;
+                    if (this.intensity == undefined) {
+                        prompt.showToast({
+                            message:'该功能正式版本可用...',
+                            duration:0
+                        });
+                    }
+                }
+            })
+        },
+
+        onDestroy () {
+            // 取消监听重力感应数据 以节省系统资源
+            sensor.unsubscribeAccelerometer();
+
+            // 取消监听罗盘数据
+            sensor.unsubscribeCompass()
+
+            // 取消监听距离感应数据。
+            sensor.unsubscribeProximity()
+
+            // 取消监听光线感应数据。
+            sensor.unsubscribeLight()
+        }
+    }
+</script>

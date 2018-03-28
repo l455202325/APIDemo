@@ -44,7 +44,7 @@
                 },
                 {
                     name: '传感器',
-                    url: ''
+                    url: '/Sensor'
                 },
                 {
                     name: '剪贴板',

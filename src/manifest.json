@@ -29,6 +29,9 @@
     },
     {
       "name": "system.network"
+    },
+    {
+      "name": "system.sensor"
     }
   ],
   "permissions": [
@@ -107,7 +110,12 @@
       },
       "NetworkState": {
         "component": "index"
+      },
+      "Sensor": {
+        "component": "index"
       }
+
+
     }
   },
   "display": {
@@ -200,7 +208,13 @@
       "NetworkState": {
         "titleBarText": "网络状态",
         "menu": false
+      },
+      "Sensor": {
+        "titleBarText": "传感器",
+        "menu": false
       }
+
+
     }
   }
 }
