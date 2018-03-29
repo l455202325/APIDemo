@@ -35,6 +35,9 @@
     },
     {
       "name": "system.geolocation"
+    },
+    {
+      "name": "system.calendar"
     }
   ],
   "permissions": [
@@ -118,6 +121,12 @@
         "component": "index"
       },
       "GeoLocation": {
+        "component": "index"
+      },
+      "Shortcut": {
+        "component": "index"
+      },
+      "Calendar": {
         "component": "index"
       }
     }
@@ -219,6 +228,18 @@
       },
       "GeoLocation": {
         "titleBarText": "地理位置",
+        "menu": false
+      },
+      "Shortcut": {
+        "titleBarText": "桌面图标",
+        "menu": false
+      },
+      "Clipboard": {
+        "titleBarText": "剪贴板",
+        "menu": false
+      },
+      "Calendar": {
+        "titleBarText": "日历事件",
         "menu": false
       }
     }

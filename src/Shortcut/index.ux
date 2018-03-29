@@ -1,0 +1,99 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+
+        <label class="label">是否创建桌面图标：{{getStatus}}</label>
+
+        <!-- 点击获取地理位置 -->
+        <input class="btn" type="button" value="获取桌面图标是否创建" onclick="hasInstalled">
+
+        <label class="label">创建结果：{{setStatus}}</label>
+
+        <!-- 点击监听地理位置 -->
+        <input class="btn" type="button" value="创建桌面图标" onclick="install">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .label {
+        font-size: 24px;
+        text-align: left;
+        margin-top: 40px;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import shortcut from '@system.shortcut'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            getStatus: '未知',
+            setStatus: '未知'
+        },
+        hasInstalled() {
+            shortcut.hasInstalled({
+                    success: (ret) => {
+                        // 获取创建状态成功，进行创建状态的判断
+                        if (ret) {
+                            this.getStatus = "已经创建";
+                        } else {
+                            this.getStatus = "未创建";
+                        }
+                    },
+                    fail: () => {
+                        // 获取创建状态失败
+                        prompt.showToast({
+                            message: '获取失败',
+                            duration: 0
+                        });
+                    },
+                    complete: () => {
+                        // 获取创建状态完成 这个不管失败成功都会回调
+                        prompt.showToast({
+                            message: '获取创建状态完成',
+                            duration: 0
+                        });
+                    }
+                }
+            );
+        },
+        install() {
+            shortcut.install({
+                // 创建图标成功，进行结果判断
+                success: (ret) => {
+                    if (ret) {
+                        this.setStatus = "已创建";
+                    } else {
+                        this.setStatus = "未创建";
+                    }
+                },
+                fail: (errmsg, errcode) => {
+                    // 创建图标失败
+                    prompt.showToast({message: 'error: ' + errcode + '---' + errmsg})
+                },
+                complete: () => {
+                    // 创建图标完成
+                    prompt.showToast({message: 'complete'})
+                }
+            })
+        }
+    }
+</script>

@@ -56,11 +56,11 @@
                 },
                 {
                     name: '桌面图标',
-                    url: ''
+                    url: '/Shortcut'
                 },
                 {
                     name: '日历事件',
-                    url: ''
+                    url: '/Calendar'
                 },
                 {
                     name: '网络状态',
