@@ -280,7 +280,7 @@
         "menu": false
       },
       "SystemCapability/Record": {
-        "titleBarText": "录音",
+        "titleBarText": "录音/音频",
         "menu": false
       },
       "SystemCapability/Volume": {

@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: '音频',
-                    url: ''
+                    url: '/SystemCapability/Record'
                 }
             ]
         },
