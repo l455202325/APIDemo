@@ -1,0 +1,170 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <label class="title">事件</label>
+        <div class="content">
+            <div class="lineItem">
+                <label class="label">事件标题：</label>
+                <input class="input" type="text" placeholder="请输入事件标题" value="{{title}}" @change="titleChange">
+            </div>
+            <div class="lineItem">
+                <label class="label">事件的描述：</label>
+                <input class="input" type="text" placeholder="请输入事件描述" value="{{description}}" @change="descriptionChange">
+            </div>
+            <div class="lineItem">
+                <label class="label">开始时间：</label>
+                <picker class="picker" type="date" value="{{startDate}}"  @change="startDateChange" />
+                <picker class="picker" type="time" value="{{startTime}}" @change="startTimeChange"/>
+            </div>
+            <div class="lineItem">
+                <label class="label">结束时间：</label>
+                <picker class="picker" type="date" value="{{endDate}}"  @change="endDateChange" />
+                <picker class="picker" type="time" value="{{endTime}}" @change="endTimeChange"/>
+            </div>
+        </div>
+
+        <!-- 点击插入日历事件 -->
+        <input class="btn" type="button" value="插入日历事件" onclick="insert">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .lineItem{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+    .input{
+        font-size: 26px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #8d8d8d;
+        padding: 5px;
+
+    }
+    .picker{
+        font-size: 34px;
+        color: #333333;
+        padding-left: 10px;
+    }
+    .title {
+        font-size: 40px;
+        text-align: left;
+        color: #333333;
+        font-weight: bold;
+    }
+    .label {
+        font-size: 36px;
+        text-align: left;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import calendar from '@system.calendar'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            title:'周末去爬山',
+            description:'听说这次去的妹子很多啊',
+            startDate: '选择日期',
+            startTime: '选择时间',
+            endDate: '选择日期',
+            endTime: '选择时间',
+        },
+        insert() {
+            if(this.startDate == '选择日期'){
+                prompt.showToast({
+                    message:'请先选择开始日期' ,
+                    duration:0
+                });
+                return;
+            }
+            if(this.startDate == '选择时间'){
+                prompt.showToast({
+                    message:'请先选择开始时间' ,
+                    duration:0
+                });
+                return;
+            }
+            let startTimeString = this.startDate +" " + this.startTime;
+            let timeStart = Date.parse(new Date(startTimeString));
+
+
+            calendar.insert({
+                title:this.title,
+                description:this.description,
+                startDate:timeStart,
+                endDate:timeStart,
+                remindMinutes:[5,15,30],
+                duration:"PT1H",
+                rrule:"FREQ=HOURLY;COUNT=1;WKST=SU",
+                success:(id)=>{
+                    prompt.showToast({
+                        message:'设置成功 id：' + id ,
+                        duration:1
+                    });
+                },
+                fail:(data, code)=>{
+                    prompt.showToast({
+                        message:'失败data:' + data +" code:" +code ,
+                        duration:1
+                    });
+                },
+                cancel:()=>{
+                    prompt.showToast({
+                        message:'取消',
+                        duration:0
+                    });
+                }
+            })
+        },
+        startDateChange(e){
+            this.startDate = e.year + "-" + e.month + "-" + e.day ;
+
+        },
+        startTimeChange(e){
+            this.startTime = e.hour + ":" + e.minute;
+        },
+        endDateChange(e){
+            this.endDate = e.year + "-" + e.month + "-" + e.day ;
+
+        },
+        endTimeChange(e){
+            this.endTime = e.hour + ":" + e.minute;
+        },
+        titleChange(e){
+            this.title = e.value;
+        },
+        descriptionChange(e){
+            this.description = e.value;
+        }
+    }
+</script>
