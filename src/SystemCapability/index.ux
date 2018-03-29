@@ -40,31 +40,31 @@
             listData: [
                 {
                     name: '二维码',
-                    url: '/Barcode'
+                    url: '/SystemCapability/Barcode'
                 },
                 {
                     name: '传感器',
-                    url: '/Sensor'
+                    url: '/SystemCapability/Sensor'
                 },
                 {
                     name: '剪贴板',
-                    url: '/Clipboard'
+                    url: '/SystemCapability/Clipboard'
                 },
                 {
                     name: '地理位置',
-                    url: '/GeoLocation'
+                    url: '/SystemCapability/GeoLocation'
                 },
                 {
                     name: '桌面图标',
-                    url: '/Shortcut'
+                    url: '/SystemCapability/Shortcut'
                 },
                 {
                     name: '日历事件',
-                    url: '/Calendar'
+                    url: '/SystemCapability/Calendar'
                 },
                 {
                     name: '网络状态',
-                    url: '/NetworkState'
+                    url: '/SystemCapability/NetworkState'
                 },
                 {
                     name: '设备信息',

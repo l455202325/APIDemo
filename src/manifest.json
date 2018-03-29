@@ -63,10 +63,10 @@
       "SystemCapability": {
         "component": "index"
       },
-      "Barcode": {
+      "SystemCapability/Sensor": {
         "component": "index"
       },
-      "Clipboard": {
+      "SystemCapability/Clipboard": {
         "component": "index"
       },
       "BasicFunction": {
@@ -114,19 +114,19 @@
       "ThirdService": {
         "component": "index"
       },
-      "NetworkState": {
+      "SystemCapability/NetworkState": {
         "component": "index"
       },
-      "Sensor": {
+      "SystemCapability/GeoLocation": {
         "component": "index"
       },
-      "GeoLocation": {
+      "SystemCapability/Shortcut": {
         "component": "index"
       },
-      "Shortcut": {
+      "SystemCapability/Calendar": {
         "component": "index"
       },
-      "Calendar": {
+      "SystemCapability/Barcode": {
         "component": "index"
       }
     }
@@ -150,12 +150,12 @@
         "titleBarText": "系统能力",
         "menu": false
       },
-      "Barcode": {
-        "titleBarText": "二维码",
+      "SystemCapability/Sensor": {
+        "titleBarText": "传感器",
         "menu": false
       },
-      "Barcode": {
-        "titleBarText": "剪贴板",
+      "SystemCapability/Barcode": {
+        "titleBarText": "二维码",
         "menu": false
       },
       "BasicFunction": {
@@ -218,27 +218,23 @@
         "titleBarText": "第三方服务",
         "menu": false
       },
-      "NetworkState": {
+      "SystemCapability/NetworkState": {
         "titleBarText": "网络状态",
         "menu": false
       },
-      "Sensor": {
-        "titleBarText": "传感器",
-        "menu": false
-      },
-      "GeoLocation": {
+      "SystemCapability/GeoLocation": {
         "titleBarText": "地理位置",
         "menu": false
       },
-      "Shortcut": {
+      "SystemCapability/Shortcut": {
         "titleBarText": "桌面图标",
         "menu": false
       },
-      "Clipboard": {
+      "SystemCapability/Clipboard": {
         "titleBarText": "剪贴板",
         "menu": false
       },
-      "Calendar": {
+      "SystemCapability/Calendar": {
         "titleBarText": "日历事件",
         "menu": false
       }
