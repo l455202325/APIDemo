@@ -50,7 +50,13 @@
     },
     {
       "name": "system.volume"
-    },{"name": "system.battery"}
+    },
+    {
+      "name": "system.battery"
+    },
+    {
+      "name": "system.audio"
+    }
   ],
   "permissions": [
     {

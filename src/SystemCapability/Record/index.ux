@@ -2,12 +2,18 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
 
-        <label class="labelTitle">调节模式</label>
-        <div class="lineItem">
-            <label class="label">自动调节</label>
-            <switch class="switch" checked="{{isAutomation}}" @change="switchChange"/>
-        </div>
-        <progress class="progress" type="horizontal" />
+        <!-- 点击获取网络状态 -->
+        <input class="btn" type="button" value="开始录音" onclick="recordStart" show="{{!isRecording}}">
+        <!-- 点击监听网络状态 -->
+        <input class="btn" type="button" value="结束录音" onclick="recordStop" show="{{isRecording}}">
+
+        <text class="title">录音文件地址：{{uri}}</text>
+
+        <input class="btn" type="button" value="播放录音" onclick="audioPlay" show="{{isShowAudio && !isPlay}}">
+        <input class="btn" type="button" value="暂停播放" onclick="audioPause" show="{{isShowAudio && isPlay}}">
+        <text class="title" show="{{duration > 0}}">总时长：{{duration}} 秒</text>
+        <text class="title" show="{{duration > 0}}">当前进度：{{currentTime}} 秒</text>
+
 
     </div>
 </template>
@@ -19,49 +25,16 @@
         align-items: center;
     }
 
-    .lineItem {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+    .title {
+        font-size: 40px;
         text-align: center;
-    }
-    .progress{
-        width: 90%;
-        height: 40px;
-    }
-
-    .input {
-        font-size: 26px;
-        color: #333333;
-        border-width: 1px;
-        border-color: #8d8d8d;
-        padding: 5px;
-
-    }
-
-    .label {
-        font-size: 36px;
-        text-align: left;
-    }
-
-    .labelTitle {
-        font-size: 30px;
-        text-align: left;
-        font-weight: bold;
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     .btn {
         width: 550px;
         height: 86px;
-        margin-top: 25px;
+        margin-top: 75px;
         border-radius: 43px;
         background-color: #09ba07;
         font-size: 30px;
@@ -71,18 +44,96 @@
 
 <script>
     import record from '@system.record'
+    import audio from '@system.audio'
     import prompt from '@system.prompt';
-
     export default {
         data: {
-            isAutomation: false,
-            accelerometerZ: '未知',
-            compassDirection: '未知',
-            proximityDirection: '未知',
-            intensity: '未知'
+            isRecording: false,
+            isShowAudio: false,
+            isPlay: false,
+            uri: '未知',
+            duration: '未知',
+            currentTime: '未知',
+
         },
         onShow() {
 
+        },
+        recordStart(){
+            this.isRecording = true;
+            record.start({
+                success:(data) =>{
+                    console.log("handling success: " + data.uri);
+                    this.uri =  data.uri;
+                },
+                fail:(data, code) =>{
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message:'失败data:' + data +" code:" +code ,
+                        duration:1
+                    });
+                },
+                complete:() =>{
+                    console.log("complete");
+                    this.isRecording = false;
+                    this.isShowAudio = true;
+
+                    prompt.showToast({
+                        message:'complete',
+                        duration:0
+                    });
+                }
+            })
+        },
+        recordStop(){
+            record.stop()
+        },
+
+        audioPlay(){
+            audio.src = this.uri
+
+            audio.onloadeddata = ()=> {
+                prompt.showToast({
+                    message:'开始播放',
+                    duration:0
+                });
+            };
+            audio.onended = () =>{
+                this.isPlay = false;
+                prompt.showToast({
+                    message:'播放结束',
+                    duration:0
+                });
+            };
+            audio.onerror = () =>{
+                this.isPlay = false;
+                prompt.showToast({
+                    message:'error',
+                    duration:0
+                });
+            };
+            audio.onpause = ()=> {
+                this.isPlay = false;
+                prompt.showToast({
+                    message:'pause',
+                    duration:0
+                });
+            };
+            audio.ontimeupdate = ()=> {
+                this.currentTime = audio.currentTime
+            };
+
+            audio.play();
+            this.isPlay = true;
+            this.duration = audio.duration ;
+        },
+        audioPause(){
+            audio.pause();
+        },
+        onDestroy(){
+            if (this.isRecording){
+                record.stop();
+            }
         }
 
     }
