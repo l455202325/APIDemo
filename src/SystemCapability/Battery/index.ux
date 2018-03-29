@@ -1,0 +1,72 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="labelTitle">系统电量</label>
+        <label class="label">充电状态：{{charging}}</label>
+        <label class="label">系统电量：{{level}} %</label>
+        <!-- 点击获取当前设备的电量信息 -->
+        <input class="btn" type="button" value="获取当前设备的电量信息"  @click="getStatus">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .label {
+        font-size: 36px;
+        text-align: left;
+    }
+    .labelTitle {
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 40px;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import battery from '@system.battery'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            charging: '未知',
+            level: '未知'
+        },
+        onShow() {
+
+        },
+        getStatus(){
+            battery.getStatus({
+                success:(data) =>{
+                    console.log("handling success, value=" + data.value);
+                    this.charging = data.charging?"充电中":"未充电"
+                    this.level = (data.level*100).toFixed(2);
+                },
+                fail:(data, code) =>{
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: 'fail data：' + data + ' code：' +code,
+                        duration: 0
+                    });
+                }
+            })
+        }
+    }
+</script>

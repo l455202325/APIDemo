@@ -50,7 +50,7 @@
     },
     {
       "name": "system.volume"
-    }
+    },{"name": "system.battery"}
   ],
   "permissions": [
     {
@@ -151,6 +151,9 @@
         "component": "index"
       },
       "SystemCapability/Volume": {
+        "component": "index"
+      },
+      "SystemCapability/Battery": {
         "component": "index"
       }
     }
@@ -276,6 +279,10 @@
       },
       "SystemCapability/Volume": {
         "titleBarText": "系统音量",
+        "menu": false
+      },
+      "SystemCapability/Battery": {
+        "titleBarText": "电量信息",
         "menu": false
       }
     }

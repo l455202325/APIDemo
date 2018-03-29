@@ -80,7 +80,7 @@
                 },
                 {
                     name: '电量信息',
-                    url: ''
+                    url: '/SystemCapability/Battery'
                 },
                 {
                     name: '用用管理',
