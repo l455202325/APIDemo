@@ -1,0 +1,141 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="labelTitle">调节模式</label>
+        <div class="lineItem">
+            <label class="label">自动调节</label>
+            <switch class="switch" checked="{{isAutomation}}" @change="switchChange"/>
+        </div>
+        <slider class="slider" min="0" max="255" step="1" @change="sliderChange" show="{{!isAutomation}}"/>
+
+        <!-- 点击获取屏幕亮度 -->
+        <input class="btn" type="button" value="获取屏幕亮度"  @click="getValue">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .lineItem {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+    .slider{
+        width: 100%;
+        color: #8d8d8d;
+        selected-color: #2daeff;
+        margin-top: 40px;
+    }
+
+    .input {
+        font-size: 26px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #8d8d8d;
+        padding: 5px;
+
+    }
+
+    .label {
+        font-size: 36px;
+        text-align: left;
+    }
+
+    .labelTitle {
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import brightness from '@system.brightness'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            isAutomation: false,
+            accelerometerZ: '未知',
+            compassDirection: '未知',
+            proximityDirection: '未知',
+            intensity: '未知'
+        },
+        onShow() {
+            this.getMode();
+        },
+        // 获取屏幕调节的模式
+        getMode() {
+            brightness.getMode({
+                success:(data) =>{
+                    console.log("handling success, mode=" + data.mode);
+                    prompt.showToast({
+                        message: '当前状态：' + data.mode,
+                        duration: 0
+                    });
+                    if(data.mode == 0){
+                        this.isAutomation = false
+                    }else if (data.mode == 1){
+                        this.isAutomation = true
+                    }
+                },
+                fail: function(data, code){
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        switchChange(e){
+            this.isAutomation = e.checked;
+        },
+        sliderChange(e){
+            prompt.showToast({
+                message: '当前值为：' + e.progress,
+                duration: 0
+            });
+        },
+        getValue(){
+            brightness.getValue({
+                success:(data) =>{
+                    console.log("handling success, value=" + data.value);
+                    prompt.showToast({
+                        message: '当前屏幕亮度值为：' + data.value,
+                        duration: 0
+                    });
+                },
+                fail:(data, code) =>{
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: 'fail data：' + data + ' code：' +code,
+                        duration: 0
+                    });
+                }
+            })
+        }
+
+    }
+</script>

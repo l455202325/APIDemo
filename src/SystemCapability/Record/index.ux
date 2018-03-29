@@ -1,0 +1,89 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="labelTitle">调节模式</label>
+        <div class="lineItem">
+            <label class="label">自动调节</label>
+            <switch class="switch" checked="{{isAutomation}}" @change="switchChange"/>
+        </div>
+        <progress class="progress" type="horizontal" />
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .lineItem {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+    .progress{
+        width: 90%;
+        height: 40px;
+    }
+
+    .input {
+        font-size: 26px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #8d8d8d;
+        padding: 5px;
+
+    }
+
+    .label {
+        font-size: 36px;
+        text-align: left;
+    }
+
+    .labelTitle {
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import record from '@system.record'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            isAutomation: false,
+            accelerometerZ: '未知',
+            compassDirection: '未知',
+            proximityDirection: '未知',
+            intensity: '未知'
+        },
+        onShow() {
+
+        }
+
+    }
+</script>

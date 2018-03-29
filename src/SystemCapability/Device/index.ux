@@ -87,14 +87,6 @@
         margin-top: 40px;
     }
 
-    .input {
-        border-bottom-color: #8d8d8d;
-        border-width: 1px;
-        padding: 20px;
-        font-size: 24px;
-        width: 90%;
-        margin: 20px;
-    }
 
     .btn {
         width: 550px;

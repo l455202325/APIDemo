@@ -41,6 +41,12 @@
     },
     {
       "name": "system.device"
+    },
+    {
+      "name": "system.brightness"
+    },
+    {
+      "name": "system.record"
     }
   ],
   "permissions": [
@@ -133,6 +139,12 @@
         "component": "index"
       },
       "SystemCapability/Device": {
+        "component": "index"
+      },
+      "SystemCapability/Brightness": {
+        "component": "index"
+      },
+      "SystemCapability/Record": {
         "component": "index"
       }
     }
@@ -246,6 +258,14 @@
       },
       "SystemCapability/Device": {
         "titleBarText": "设备信息",
+        "menu": false
+      },
+      "SystemCapability/Brightness": {
+        "titleBarText": "屏幕亮度",
+        "menu": false
+      },
+      "SystemCapability/Record": {
+        "titleBarText": "录音",
         "menu": false
       }
     }
