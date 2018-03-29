@@ -47,6 +47,9 @@
     },
     {
       "name": "system.record"
+    },
+    {
+      "name": "system.volume"
     }
   ],
   "permissions": [
@@ -145,6 +148,9 @@
         "component": "index"
       },
       "SystemCapability/Record": {
+        "component": "index"
+      },
+      "SystemCapability/Volume": {
         "component": "index"
       }
     }
@@ -266,6 +272,10 @@
       },
       "SystemCapability/Record": {
         "titleBarText": "录音",
+        "menu": false
+      },
+      "SystemCapability/Volume": {
+        "titleBarText": "系统音量",
         "menu": false
       }
     }

@@ -76,7 +76,7 @@
                 },
                 {
                     name: '系统音量',
-                    url: ''
+                    url: '/SystemCapability/Volume'
                 },
                 {
                     name: '电量信息',

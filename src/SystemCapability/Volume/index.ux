@@ -2,18 +2,14 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
 
-        <label class="labelTitle">调节模式</label>
-        <div class="lineItem">
-            <label class="label">设置屏幕亮度</label>
-            <switch class="switch" checked="{{isAutomation}}" @change="switchChange"/>
-        </div>
-        <slider class="slider" min="0" max="255" step="1" @change="sliderChange" show="{{isAutomation}}"/>
+        <label class="labelTitle">设置系统音量</label>
 
+        <slider class="slider" min="0" max="100" step="1" @change="sliderChange" show="{{isAutomation}}"/>
 
-        <label class="labelTitle">屏幕亮度</label>
-        <label class="label">屏幕亮度：{{value}}</label>
+        <label class="labelTitle">系统音量</label>
+        <label class="label">系统音量：{{value}}</label>
         <!-- 点击获取屏幕亮度 -->
-        <input class="btn" type="button" value="获取屏幕亮度"  @click="getValue">
+        <input class="btn" type="button" value="获取系统音量"  @click="getMediaValue">
 
     </div>
 </template>
@@ -23,17 +19,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    .lineItem {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-        text-align: center;
     }
     .slider{
         width: 100%;
@@ -66,7 +51,7 @@
 </style>
 
 <script>
-    import brightness from '@system.brightness'
+    import volume from '@system.volume'
     import prompt from '@system.prompt';
 
     export default {
@@ -77,36 +62,11 @@
         onShow() {
 
         },
-        // 获取屏幕调节的模式
-        // 这个API现在貌似有问题 一直返回自动调节
-
-        getMode() {
-            brightness.getMode({
-                success:(data) =>{
-                    console.log("handling success, mode=" + data.mode);
-                    prompt.showToast({
-                        message: '当前状态：' + data.mode,
-                        duration: 0
-                    });
-                    if(data.mode == 0){
-                        this.isAutomation = false
-                    }else if (data.mode == 1){
-                        this.isAutomation = true
-                    }
-                },
-                fail: function(data, code){
-                    console.log("handling fail, code=" + code);
-                }
-            })
-        },
-        switchChange(e){
-            this.isAutomation = e.checked;
-        },
         sliderChange(e){
-            this.setValue(e.progress)
+            this.setValue(e.progress/100);
         },
-        getValue(){
-            brightness.getValue({
+        getMediaValue(){
+            volume.getMediaValue({
                 success:(data) =>{
                     console.log("handling success, value=" + data.value);
                     this.value = data.value
@@ -121,7 +81,7 @@
             })
         },
         setValue(value){
-            brightness.setValue({
+            volume.setMediaValue({
                 value:value,
                 success:(data) =>{
                     console.log("handling success, value=" + data.value);
