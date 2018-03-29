@@ -1,0 +1,336 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <label class="labelTitle">设备信息</label>
+        <label class="label">设备品牌：{{brand}}</label>
+        <label class="label">设备生产商：{{manufacturer}}</label>
+        <label class="label">设备型号：{{model}}</label>
+        <label class="label">设备代号：{{product}}</label>
+        <label class="label">操作系统名称：{{osType}}</label>
+        <label class="label">操作系统版本名称：{{osVersionName}}</label>
+        <label class="label">操作系统版本号：{{osVersionCode}}</label>
+        <label class="label">运行平台版本名称：{{platformVersionName}}</label>
+        <label class="label">运行平台版本号：{{platformVersionCode}}</label>
+        <label class="label">系统语言：{{language}}</label>
+        <label class="label">系统地区：{{region}}</label>
+        <label class="label">屏幕宽：{{screenWidth}}</label>
+        <label class="label">屏幕高：{{screenHeight}}</label>
+        <!-- 点击获取设备信息 -->
+        <input class="btn" type="button" value="获取设备信息" @click="getInfo">
+
+
+        <label class="labelTitle">设备标识</label>
+        <label class="label">设备唯一标识：{{device}}</label>
+        <label class="label">设备的mac地址：{{mac}}</label>
+        <label class="label">用户唯一标识：{{user}}</label>
+        <label class="label">广告唯一标识(正式版可用)：{{advertising}}</label>
+        <!-- 点击获取设备标识 -->
+        <input class="btn" type="button" value="获取设备标识" onclick="getId">
+
+        <label class="labelTitle">单独获取设备唯一标识(正式版本可用)</label>
+        <label class="label">设备唯一标识：{{deviceId}}</label>
+        <!-- 点击获取设备唯一标识 -->
+        <input class="btn" type="button" value="获取设备唯一标识" onclick="getDeviceId">
+
+        <label class="labelTitle">单独获取用户唯一标识(正式版本可用)</label>
+        <label class="label">设备唯一标识：{{userId}}</label>
+        <!-- 点击获取用户唯一标识 -->
+        <input class="btn" type="button" value="获取用户唯一标识" onclick="getUserId">
+
+        <label class="labelTitle">单独获取广告唯一标识(正式版本可用)</label>
+        <label class="label">广告唯一标识：{{advertisingId}}</label>
+        <!-- 点击获取广告唯一标识 -->
+        <input class="btn" type="button" value="获取广告唯一标识" onclick="getAdvertisingId">
+
+        <label class="labelTitle">存储空间(正式版本可用)</label>
+        <label class="label">存储空间的总大小：{{totalStorage}}</label>
+        <!-- 点击获取存储空间的总大小 -->
+        <input class="btn" type="button" value="获取存储空间的总大小" onclick="getTotalStorage">
+
+        <label class="labelTitle">存储空间(正式版本可用)</label>
+        <label class="label">存储空间的可用大小：{{availableStorage}}</label>
+        <!-- 点击获取存储空间的可用大小 -->
+        <input class="btn" type="button" value="获取存储空间的可用大小" onclick="getAvailableStorage">
+
+        <label class="labelTitle">CPU信息(正式版本可用)</label>
+        <label class="label">CPU信息：{{cpuInfo}}</label>
+        <!-- 点击获取CPU信息 -->
+        <input class="btn" type="button" value="获取CPU信息" onclick="getCpuInfo">
+
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .label {
+        font-size: 24px;
+        text-align: left;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+    }
+
+    .labelTitle {
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+
+    .input {
+        border-bottom-color: #8d8d8d;
+        border-width: 1px;
+        padding: 20px;
+        font-size: 24px;
+        width: 90%;
+        margin: 20px;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import device from '@system.device'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            brand: '未知',
+            model: '未知',
+            manufacturer: '未知',
+            product: '未知',
+            osType: '未知',
+            osVersionName: '未知',
+            osVersionCode: '未知',
+            platformVersionName: '未知',
+            platformVersionCode: '未知',
+            language: '未知',
+            region: '未知',
+            screenWidth: '未知',
+            screenHeight: '未知',
+            device: '未知',
+            mac: '未知',
+            user: '未知',
+            advertising: '未知',
+            deviceId: '未知',
+            userId: '未知',
+            advertisingId: '未知',
+            totalStorage: '未知',
+            availableStorage: '未知',
+            cpuInfo: '未知'
+        },
+        //  获取设备信息
+        getInfo() {
+            device.getInfo({
+                success: (ret) => {
+                    console.log("handling success， brand=" + ret.brand);
+                    this.brand = ret.brand;
+                    this.model = ret.model;
+                    this.manufacturer = ret.manufacturer;
+                    this.product = ret.product;
+                    this.osType = ret.osType;
+                    this.osVersionName = ret.osVersionName;
+                    this.osVersionCode = ret.osVersionCode;
+                    this.platformVersionName = ret.platformVersionName;
+                    this.platformVersionCode = ret.platformVersionCode;
+                    this.language = ret.language;
+                    this.region = ret.region;
+                    this.screenWidth = ret.screenWidth;
+                    this.screenHeight = ret.screenHeight;
+                },
+                fail: (msg, code) => {
+                    prompt.showToast({
+                        message: '获取失败 msg：' + msg + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取设备标识
+        getId() {
+            device.getId({
+                type: ["device", "mac", "user", "advertising"],
+                success: (data) => {
+                    console.log("handling success: " + data.device);
+                    this.device = data.device;
+                    this.mac = data.mac;
+                    this.user = data.user;
+                    this.advertising = data.advertising;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取设备唯一标识
+        getDeviceId() {
+            device.getDeviceId({
+                success: (data) => {
+                    console.log("handling success: " + data.deviceId);
+                    this.deviceId = data.deviceId;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取用户一标识
+        getUserId() {
+            device.getUserId({
+                success: (data) => {
+                    console.log("handling success: " + data.userId);
+                    this.userId = data.userId;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取广告一标识
+        getAdvertisingId() {
+            device.getAdvertisingId({
+                success: (data) => {
+                    console.log("handling success: " + data.advertisingId);
+                    this.advertisingId = data.advertisingId;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取存储空间的总大小
+        getTotalStorage() {
+            device.getTotalStorage({
+                success: (data) => {
+                    console.log("handling success: " + data.totalStorage);
+                    this.totalStorage = data.totalStorage + " Byte";
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+        //  获取存储空间的可用大小
+        getAvailableStorage() {
+            device.getAvailableStorage({
+                success: (data) => {
+                    console.log("handling success: " + data.availableStorage);
+                    this.availableStorage = data.availableStorage + " Byte";
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        },
+
+        //  获取CPU信息
+        getCpuInfo() {
+            device.getCpuInfo({
+                success: (data) => {
+                    console.log("handling success: " + data.cpuInfo);
+                    this.cpuInfo = data.cpuInfo;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: '获取失败 msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    prompt.showToast({
+                        message: '获取完成',
+                        duration: 0
+                    });
+                }
+            })
+        }
+
+
+
+    }
+</script>

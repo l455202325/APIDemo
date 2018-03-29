@@ -68,7 +68,7 @@
                 },
                 {
                     name: '设备信息',
-                    url: ''
+                    url: '/SystemCapability/Device'
                 },
                 {
                     name: '屏幕亮度',

@@ -38,6 +38,9 @@
     },
     {
       "name": "system.calendar"
+    },
+    {
+      "name": "system.device"
     }
   ],
   "permissions": [
@@ -127,6 +130,9 @@
         "component": "index"
       },
       "SystemCapability/Barcode": {
+        "component": "index"
+      },
+      "SystemCapability/Device": {
         "component": "index"
       }
     }
@@ -236,6 +242,10 @@
       },
       "SystemCapability/Calendar": {
         "titleBarText": "日历事件",
+        "menu": false
+      },
+      "SystemCapability/Device": {
+        "titleBarText": "设备信息",
         "menu": false
       }
     }
