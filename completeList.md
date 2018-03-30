@@ -7,17 +7,17 @@
   |     |——通用动画
   |     |——通用渐变
   |——容器组件
-  |     |——div
-  |     |——list
-  |     |——list-item
-  |     |——popup
-  |     |——refresh
-  |     |——richtext
-  |     |——stack
-  |     |——swiper
-  |     |——tabs
-  |     |——tab-bar
-  |     |——tab-content
+  |     ├━━ div
+  |     ├━━ list
+  |     ├━━ list-item
+  |     ├━━ popup
+  |     ├━━ refresh
+  |     ├━━ richtext
+  |     ├━━ stack
+  |     ├━━ swiper
+  |     ├━━ tabs
+  |     ├━━ tab-bar
+  |     └━━ tab-content
   |——基础组件
   |     |——a
   |     |——image
