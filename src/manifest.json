@@ -77,6 +77,9 @@
     },
     {
       "name": "system.media"
+    },
+    {
+      "name": "system.image"
     }
   ],
   "permissions": [
@@ -223,6 +226,9 @@
         "component": "index"
       },
       "GraphicImage/Media": {
+        "component": "index"
+      },
+      "GraphicImage/Image": {
         "component": "index"
       }
     }
@@ -408,6 +414,10 @@
       },
       "GraphicImage/Media": {
         "titleBarText": "多媒体",
+        "menu": false
+      },
+      "GraphicImage/Image": {
+        "titleBarText": "图片编辑",
         "menu": false
       }
     }

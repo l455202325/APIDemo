@@ -44,7 +44,7 @@
                 },
                 {
                     name: '图片编辑',
-                    url: ''
+                    url: '/GraphicImage/Image'
                 }
             ]
         },

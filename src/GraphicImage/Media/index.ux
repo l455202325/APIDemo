@@ -2,12 +2,32 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
 
-        <div class="itemLine">
-            <image class="image" src="{{takePhotoUri}}"></image>
-            <!-- 点击识别二维码 -->
-            <input class="btn" type="button" value="拍照" onclick="takePhoto">
-        </div>
 
+        <div class="itemLine">
+            <image class="image" src="{{takePhotoUri}}" show="{{takePhotoUri != ''}}"></image>
+            <!-- 点击拍照 -->
+            <input class="btn takePhoto" type="button" value="拍照" onclick="takePhoto">
+        </div>
+        <div class="line"></div>
+
+
+        <video class="video" src="{{takeVideoUri}}" show="{{takeVideoUri != ''}}"></video>
+        <!-- 点击拍摄视频 -->
+        <input class="btn takeVideo" type="button" value="拍摄视频" onclick="takeVideo">
+
+        <div class="line"></div>
+
+        <div class="itemLine">
+            <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
+            <!-- 点击选择图片 -->
+            <input class="btn takePhoto" type="button" value="选择图片" onclick="pickImage">
+        </div>
+        <div class="line"></div>
+
+
+        <video class="video" src="{{pickVideoUri}}" show="{{pickVideoUri != ''}}"></video>
+        <!-- 点击选择视频 -->
+        <input class="btn takeVideo" type="button" value="选择视频" onclick="pickVideo">
     </div>
 </template>
 
@@ -15,29 +35,51 @@
     .demo-page {
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
     }
-    .itemLine{
+
+    .itemLine {
         flex-direction: row;
         text-align: center;
         padding: 20px;
     }
-    .image{
-        height: 300px;
+
+    .line {
+        width: 100%;
+        height: 1px;
+        background-color: #8d8d8d;
+        margin: 20px 0;
     }
-    .title {
-        font-size: 26px;
-        text-align: center;
+
+    .image {
+        height: 300px;
+        border: 2px solid #999999;
+        border-radius: 5px;
+    }
+
+    .video {
+        width: 640px;
+        height: 360px;
     }
 
     .btn {
-        width: 100px;
-        height: 45px;
+        width: 160px;
+        height: 90px;
         border-radius: 10px;
         background-color: #09ba07;
         font-size: 30px;
         color: #ffffff;
-        padding: 5px 5px;
+        line-height: 90px;
+    }
+
+    .takePhoto {
+        margin-top: 210px;
+        margin-left: 20px;
+    }
+
+    .takeVideo {
+        width: 480px;
+        margin-top: 20px;
     }
 </style>
 
@@ -47,7 +89,10 @@
 
     export default {
         data: {
-            takePhotoUri: '初始值'
+            takePhotoUri: '',
+            takeVideoUri: '',
+            pickImageUri: '',
+            pickVideoUri: '',
         },
         takePhoto() {
             media.takePhoto({
@@ -55,22 +100,69 @@
                     console.log("handling success: " + data.uri);
                     this.takePhotoUri = data.uri;
                 },
-                cancel:()=>{
+                cancel: () => {
                     prompt.showToast({
-                        message:'拍照已取消',
-                        duration:0
+                        message: '拍照已取消',
+                        duration: 0
                     });
                 },
-                fail:(data,code)=>{
+                fail: (data, code) => {
                     prompt.showToast({
-                        message:'fail msg:' + data + " code:" + code,
-                        duration:0
+                        message: 'fail msg:' + data + " code:" + code,
+                        duration: 0
                     });
                 },
-                complete:()=>{
+                complete: () => {
 
                 }
             })
+        },
+        takeVideo() {
+            media.takeVideo({
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.takeVideoUri = data.uri;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        pickImage() {
+            media.pickImage({
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.pickImageUri = data.uri
+
+                    prompt.showToast({
+                        message: 'uri:' + this.pickImageUri,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        pickVideo() {
+            media.pickVideo({
+                success: (data) =>{
+                    console.log("handling success: " + data.uri);
+                    this.pickVideoUri = data.uri
+                },
+                cancel: () => {
+                    prompt.showToast({
+                        message: '已取消选择',
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    prompt.showToast({
+                        message: 'fail msg:' + data + " code:" + code,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+
+                }
+            });
         }
     }
 </script>
