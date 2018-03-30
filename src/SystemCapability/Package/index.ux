@@ -1,0 +1,165 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+            <div class="lineItem">
+                <label class="label">应用包名：</label>
+                <input class="input" type="text" placeholder="请输入应用包名" value="{{hasInstalledPackage}}" @change="hasInstalledChange">
+            </div>
+
+            <!-- 点击查询应用是否安装 -->
+            <input class="btn" type="button" value="查询应用是否安装" onclick="hasInstalled">
+
+            <div class="lineItem">
+                <label class="label">应用包名：</label>
+                <input class="input" type="text" placeholder="请输入应用包名" value="{{installPackage}}" @change="installChange">
+            </div>
+
+            <!-- 点击安装应用 -->
+            <input class="btn mb" type="button" value="安装应用" onclick="install">
+
+
+
+            <!-- 点击打开QQ -->
+            <input class="btn" type="button" value="打开QQ" onclick="openQQ" show="{{QQIsInstalled}}">
+
+            <!-- 点击打开支付宝 -->
+            <input class="btn" type="button" value="打开支付宝" onclick="openAliPay" show="{{AliPayIsInstalled}}">
+
+            <!-- 点击打开微信 -->
+            <input class="btn" type="button" value="打开微信" onclick="openWeiChat" show="{{WeiChatIsInstalled}}">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .mb{
+        margin-bottom: 80px;
+    }
+
+    .content{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top:30px;
+    }
+    .lineItem{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        margin-top: 60px;
+    }
+    .input{
+        font-size: 26px;
+        color: #333333;
+        width: 60%;
+        border: 1px solid #8d8d8d;
+        padding: 5px;
+    }
+    .label {
+        font-size: 36px;
+        text-align: left;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 15px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import pkg from '@system.package';
+    import router from '@system.router';
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            hasInstalledPackage:'org.hapjs.mockup',
+            installPackage:'com.tencent.mm',
+            QQIsInstalled: false,
+            AliPayIsInstalled:false,
+            WeiChatIsInstalled:false,
+        },
+
+        onShow(){
+
+        },
+
+        hasInstalledChange(e){
+            this.hasInstalledPackage = e.value;
+        },
+        installChange(e){
+            this.installPackage = e.value;
+        },
+        hasInstalled(){
+            pkg.hasInstalled({
+                package: this.hasInstalledPackage,
+                success: (data)=> {
+                    console.log("handling success: " + data.result);
+                    let result = "未知";
+                    if (data.result){
+                        result = "应用 "+this.hasInstalledPackage+" 已安装"
+                    }else {
+                        result = "应用 " +this.hasInstalledPackage+ " 未安装"
+                    }
+                    prompt.showToast({
+                        message: result,
+                        duration: 0
+                    });
+                },
+                fail: (data, code)=> {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: 'handling fail msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        install(){
+            pkg.install({
+                package: this.installPackage,
+                success: (data)=> {
+                    console.log("handling success: " + data.result);
+                    let result = "未知";
+                    if (data.result){
+                        result = "应用 "+this.installPackage+" 已安装"
+                    }else {
+                        result = "应用 " +this.installPackage+ " 未安装"
+                    }
+                    prompt.showToast({
+                        message: result,
+                        duration: 0
+                    });
+                },
+                fail: (data, code) =>{
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: 'handling fail msg：' + data + " code：" + code,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        openQQ(){},
+        openAliPay(){},
+        openWeiChat(){
+            router.push({
+                uri: 'com.tencent.mm'
+            })
+        },
+    }
+</script>

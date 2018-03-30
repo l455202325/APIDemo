@@ -50,9 +50,6 @@
         padding: 20px;
         text-align: center;
     }
-    .label{
-        width: 220px;
-    }
     .input{
         font-size: 26px;
         color: #333333;

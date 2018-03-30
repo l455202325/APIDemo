@@ -56,6 +56,9 @@
     },
     {
       "name": "system.audio"
+    },
+    {
+      "name": "system.package"
     }
   ],
   "permissions": [
@@ -160,6 +163,9 @@
         "component": "index"
       },
       "SystemCapability/Battery": {
+        "component": "index"
+      },
+      "SystemCapability/Package": {
         "component": "index"
       }
     }
@@ -289,6 +295,10 @@
       },
       "SystemCapability/Battery": {
         "titleBarText": "电量信息",
+        "menu": false
+      },
+      "SystemCapability/Package": {
+        "titleBarText": "应用管理",
         "menu": false
       }
     }

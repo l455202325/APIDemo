@@ -84,7 +84,7 @@
                 },
                 {
                     name: '用用管理',
-                    url: ''
+                    url: '/SystemCapability/Package'
                 },
                 {
                     name: '录音',
