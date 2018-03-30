@@ -1,0 +1,31 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <text class="title">上个页面传递过来的数据是：{{param}}</text>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        font-size: 30px;
+        text-align: center;
+    }
+
+</style>
+
+<script>
+    export default {
+        data: {
+            param:''
+        }
+        ,
+        onShow(){
+            this.param = this.key;
+        }
+    }
+</script>

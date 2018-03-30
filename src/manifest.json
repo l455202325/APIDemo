@@ -197,6 +197,27 @@
       },
       "InterfaceInteraction/Share": {
         "component": "index"
+      },
+      "BasicFunction/Context": {
+        "component": "index"
+      },
+      "BasicFunction/Console": {
+        "component": "index"
+      },
+      "BasicFunction/Router/Name": {
+        "component": "name"
+      },
+      "BasicFunction/Router/Path": {
+        "component": "path"
+      },
+      "BasicFunction/Router/Param": {
+        "component": "param"
+      },
+      "BasicFunction/Router/Replace": {
+        "component": "index"
+      },
+      "BasicFunction/Router": {
+        "component": "index"
       }
     }
   },
@@ -349,6 +370,34 @@
       },
       "InterfaceInteraction/Share": {
         "titleBarText": "分享",
+        "menu": false
+      },
+      "BasicFunction/Context": {
+        "titleBarText": "应用上下文",
+        "menu": false
+      },
+      "BasicFunction/Console": {
+        "titleBarText": "日志打印",
+        "menu": false
+      },
+      "BasicFunction/Router": {
+        "titleBarText": "页面路由主界面",
+        "menu": false
+      },
+      "BasicFunction/Router/Name": {
+        "titleBarText": "页面路由Name",
+        "menu": false
+      },
+      "BasicFunction/Router/Path": {
+        "titleBarText": "页面路由Path",
+        "menu": false
+      },
+      "BasicFunction/Router/Param": {
+        "titleBarText": "页面路由传递参数",
+        "menu": false
+      },
+      "BasicFunction/Router/Replace": {
+        "titleBarText": "页面路由-上个页面不可返回",
         "menu": false
       }
     }

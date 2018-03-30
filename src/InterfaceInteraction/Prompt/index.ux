@@ -76,7 +76,7 @@
 
             prompt.showDialog({
                 title: '温馨提示',
-                message: '欢迎你加入开应用学习的大家庭，请给这个Demo打个分',
+                message: '欢迎你加入快应用学习的大家庭，请给这个Demo打个分',
                 buttons:buttons,
                 success: (data) =>{
                     console.log("handling callback");

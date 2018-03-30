@@ -1,0 +1,171 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击显示Toast -->
+        <input class="btn" type="button" value="给10086打个电话"  @click="call">
+        <input class="btn" type="button" value="给10086发个短信"  @click="sms">
+        <input class="btn" type="button" value="给455202325@qq.com发个邮件"  @click="mailto">
+        <input class="btn" type="button" value="打开百度"  @click="openWeb">
+        <input class="btn" type="button" value="通过路径打开新页面"  @click="openByPath">
+        <input class="btn" type="button" value="通过名称打开新页面"  @click="openByName">
+
+        <input class="btn" type="button" value="打开下个页面本界面不可返回"  @click="openReplace">
+
+        <input class="btn" type="button" value="返回上个页面"  @click="back">
+        <div class="content">
+            <div class="lineItem">
+                <label class="label2">传递的参数：</label>
+                <input class="input" type="text" placeholder="请输入需要传递的参数" value="{{param}}" @change="paramChange">
+            </div>
+            <input class="btn" type="button" value="给下一个页面传递参数"  @click="paramClick">
+        </div>
+
+
+        <label class="labelTitle">当前页面状态</label>
+        <label class="label">当前页面在页面栈中的位置：{{index}}</label>
+        <label class="label">当前页面的名称：{{name}}</label>
+        <label class="label">当前页面的路径：{{path}}</label>
+
+        <!-- 点击获取当前页面状态 -->
+        <input class="btn" type="button" value="获取当前页面状态"  @click="getState">
+
+        label class="labelTitle">页面数量</label>
+        <label class="label">当前页面栈的页面数量：{{length}}</label>
+        <!-- 点击获取当前页面栈的页面数量 -->
+        <input class="btn" type="button" value="获取当前页面栈的页面数量"  @click="getLength">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 40px;
+    }
+    .content{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top:30px;
+    }
+    .lineItem{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+    .label2 {
+        font-size: 36px;
+        text-align: left;
+    }
+    .label{
+        font-size: 24px;
+        text-align: left;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+    }
+    .labelTitle{
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+    .input{
+        font-size: 26px;
+        color: #333333;
+        width: 60%;
+        border: 1px solid #8d8d8d;
+        padding: 5px;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import router from '@system.router'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            param:'API Demo',
+            index:'未知',
+            name:'未知',
+            path:'未知',
+            length:'未知',
+
+        },
+        call(){
+            router.push({
+                uri: 'tel:10086'
+            });
+        },
+        sms(){
+            router.push({
+                uri: 'sms:10086?body=我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo'
+            });
+
+        },
+        mailto(){
+            router.push({
+                uri: 'mailto:455202325@qq.com?body=我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo'
+            });
+        },
+        openWeb(){
+            router.push({
+                uri: 'https://www.baidu.com'
+            });
+        },
+        openByPath(){
+            router.push({
+                uri: '/BasicFunction/Router/Path'
+            });
+        },
+        openByName(){
+            router.push({
+                uri: 'BasicFunction/Router/Name'
+            });
+        },
+        paramClick(){
+            router.push({
+                uri: 'BasicFunction/Router/Param',
+                params:{key:this.param}
+            });
+        },
+        paramChange(e){
+            this.param = e.value;
+        },
+        openReplace(){
+            router.replace({
+                uri: 'BasicFunction/Router/Replace',
+            });
+        },
+        back(){
+            router.back();
+        },
+        getState(){
+            let page = router.getState()
+            this.index = page.index;
+            this.name = page.name;
+            this.path = page.path;
+        },
+        getLength(){
+          this.length  = router.getLength()
+        }
+
+    }
+</script>

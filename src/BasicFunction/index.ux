@@ -40,15 +40,15 @@
             listData: [
                 {
                     name: '应用上下文',
-                    url: ''
+                    url: '/BasicFunction/Context'
                 },
                 {
                     name: '日志打印',
-                    url: ''
+                    url: '/BasicFunction/Console'
                 },
                 {
                     name: '页面路由',
-                    url: ''
+                    url: '/BasicFunction/Router'
                 }
             ]
         },

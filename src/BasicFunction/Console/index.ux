@@ -1,0 +1,53 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击显示Toast -->
+        <input class="btn" type="button" value="debug级别"  @click="debug">
+        <input class="btn" type="button" value="log级别"  @click="log">
+        <input class="btn" type="button" value="info级别"  @click="info">
+        <input class="btn" type="button" value="warn级别"  @click="warn">
+        <input class="btn" type="button" value="error级别"  @click="error">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+
+        },
+        debug(){
+            console.debug("这个是debug级别的日志")
+        },
+        log(){
+            console.log("这个是log级别的日志")
+        },
+        info(){
+            console.info("这个是info级别的日志")
+        },
+        warn(){
+            console.warn("这个是warn级别的日志")
+        },
+        error(){
+            console.error("这个是error级别的日志")
+        }
+    }
+</script>

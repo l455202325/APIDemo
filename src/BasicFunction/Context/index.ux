@@ -1,0 +1,73 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="labelTitle">应用信息</label>
+        <label class="label">应用名称：{{name}}</label>
+        <label class="label">应用版本名称：{{versionName}}</label>
+        <label class="label">应用版本号：{{versionCode}}</label>
+        <label class="label">log级别：{{logLevel}}</label>
+        <label class="label">应用来源：</label>
+        <label class="label">{{source}}</label>
+        <!-- 点击获取当前应用信息 -->
+        <input class="btn" type="button" value="获取当前应用信息"  @click="getInfo">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .label{
+        font-size: 24px;
+        text-align: left;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+    }
+    .labelTitle{
+        font-size: 30px;
+        text-align: left;
+        font-weight: bold;
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 40px;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import app from '@system.app'
+
+    export default {
+        data: {
+            name:'未知',
+            versionName:'未知',
+            versionCode:'未知',
+            source:'未知',
+            logLevel:'未知'
+        },
+
+        getInfo () {
+            let info = app.getInfo();
+            this.name = info.name;
+            this.versionName = info.versionName;
+            this.versionCode = info.versionCode;
+            this.logLevel = info.logLevel;
+            this.source = JSON.stringify(info.source);
+        }
+    }
+</script>
