@@ -1,0 +1,76 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <div class="itemLine">
+            <image class="image" src="{{takePhotoUri}}"></image>
+            <!-- 点击识别二维码 -->
+            <input class="btn" type="button" value="拍照" onclick="takePhoto">
+        </div>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .itemLine{
+        flex-direction: row;
+        text-align: center;
+        padding: 20px;
+    }
+    .image{
+        height: 300px;
+    }
+    .title {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .btn {
+        width: 100px;
+        height: 45px;
+        border-radius: 10px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        padding: 5px 5px;
+    }
+</style>
+
+<script>
+    import media from '@system.media'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            takePhotoUri: '初始值'
+        },
+        takePhoto() {
+            media.takePhoto({
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.takePhotoUri = data.uri;
+                },
+                cancel:()=>{
+                    prompt.showToast({
+                        message:'拍照已取消',
+                        duration:0
+                    });
+                },
+                fail:(data,code)=>{
+                    prompt.showToast({
+                        message:'fail msg:' + data + " code:" + code,
+                        duration:0
+                    });
+                },
+                complete:()=>{
+
+                }
+            })
+        }
+    }
+</script>

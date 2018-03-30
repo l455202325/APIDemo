@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: '多媒体',
-                    url: ''
+                    url: '/GraphicImage/Media'
                 },
                 {
                     name: '图片编辑',

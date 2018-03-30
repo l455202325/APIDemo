@@ -74,6 +74,9 @@
     },
     {
       "name": "system.share"
+    },
+    {
+      "name": "system.media"
     }
   ],
   "permissions": [
@@ -217,6 +220,9 @@
         "component": "index"
       },
       "BasicFunction/Router": {
+        "component": "index"
+      },
+      "GraphicImage/Media": {
         "component": "index"
       }
     }
@@ -398,6 +404,10 @@
       },
       "BasicFunction/Router/Replace": {
         "titleBarText": "页面路由-上个页面不可返回",
+        "menu": false
+      },
+      "GraphicImage/Media": {
+        "titleBarText": "多媒体",
         "menu": false
       }
     }
