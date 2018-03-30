@@ -1,0 +1,119 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击显示Toast -->
+        <input class="btn" type="button" value="显示Toast"  @click="showToast">
+
+        <!-- 点击显示对话框 -->
+        <input class="btn" type="button" value="显示对话框 1个按钮"  @click="showDialog(1)">
+        <input class="btn" type="button" value="显示对话框 2个按钮"  @click="showDialog(2)">
+        <input class="btn" type="button" value="显示对话框 3个按钮"  @click="showDialog(3)">
+
+        <!-- 点击显示上下文菜单 -->
+        <input class="btn" type="button" value="显示上下文菜单"  @click="showContextMenu">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            charging: '未知',
+            level: '未知'
+        },
+        showToast(){
+            prompt.showToast({
+                message: '这是一个Toast',
+                duration: 0
+            });
+        },
+        showDialog(what){
+            let buttons = [];
+
+            if(what == 1){
+                buttons = [{
+                    text: '非常好',
+                    color: '#33dd44'
+                }]
+            }else if(what == 2){
+                buttons = [{
+                    text: '非常好',
+                    color: '#33dd44'
+                },{
+                    text: '很好',
+                    color: '#cb6edd'
+                }]
+            }else if(what == 3){
+                buttons = [{
+                    text: '非常好',
+                    color: '#33dd44'
+                },{
+                    text: '很好',
+                    color: '#cb6edd'
+                },{
+                    text: '好',
+                    color: '#199cdd'
+                }];
+            }
+
+            prompt.showDialog({
+                title: '温馨提示',
+                message: '欢迎你加入开应用学习的大家庭，请给这个Demo打个分',
+                buttons:buttons,
+                success: (data) =>{
+                    console.log("handling callback");
+
+                    prompt.showToast({
+                        message: buttons[data.index].text,
+                        duration: 0
+                    });
+                },
+                cancel: (data) =>{
+                    console.log("handling cancel");
+                },
+                fail: (data, code) =>{
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        showContextMenu(){
+            let itemList = ['发起群聊', '添加朋友', '扫一扫', '收付款', '帮助与反馈'];
+            prompt.showContextMenu({
+                itemList: itemList,
+                itemColor: '#333333',
+                success: (data)=> {
+                    console.log("handling callback");
+                    prompt.showToast({
+                        message: itemList[data.index],
+                        duration: 0
+                    });
+                },
+                cancel: (data)=> {
+                    console.log("handling cancel");
+                },
+                fail: (data, code) =>{
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        }
+
+    }
+</script>

@@ -59,6 +59,9 @@
     },
     {
       "name": "system.package"
+    },
+    {
+      "name": "system.prompt"
     }
   ],
   "permissions": [
@@ -166,6 +169,9 @@
         "component": "index"
       },
       "SystemCapability/Package": {
+        "component": "index"
+      },
+      "InterfaceInteraction/Prompt": {
         "component": "index"
       }
     }
@@ -299,6 +305,10 @@
       },
       "SystemCapability/Package": {
         "titleBarText": "应用管理",
+        "menu": false
+      },
+      "InterfaceInteraction/Prompt": {
+        "titleBarText": "弹窗",
         "menu": false
       }
     }

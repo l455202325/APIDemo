@@ -44,7 +44,7 @@
                 },
                 {
                     name: '弹窗',
-                    url: ''
+                    url: '/InterfaceInteraction/Prompt'
                 },
                 {
                     name: '打开网页',
