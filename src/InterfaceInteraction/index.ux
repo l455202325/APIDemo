@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: '分享',
-                    url: ''
+                    url: '/InterfaceInteraction/Share'
                 },
                 {
                     name: '弹窗',
@@ -48,15 +48,15 @@
                 },
                 {
                     name: '打开网页',
-                    url: ''
+                    url: '/InterfaceInteraction/Webview'
                 },
                 {
                     name: '通知消息',
-                    url: ''
+                    url: '/InterfaceInteraction/Notification'
                 },
                 {
                     name: '震动',
-                    url: ''
+                    url: '/InterfaceInteraction/Vibrator'
                 }
             ]
         },

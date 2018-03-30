@@ -1,0 +1,45 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击显示通知 -->
+        <input class="btn" type="button" value="显示通知"  @click="show">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import notification from '@system.notification';
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+
+        },
+        show(){
+            notification.show({
+                contentTitle:'API Demo',
+                contentText:'点击后可以回到API Demo的接口列表页',
+                clickAction: {
+                    uri:'/DemoDetail'
+                }
+            });
+        }
+    }
+</script>

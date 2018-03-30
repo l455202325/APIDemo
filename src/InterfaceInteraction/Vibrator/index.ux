@@ -1,0 +1,39 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击触发震动 -->
+        <input class="btn" type="button" value="触发震动"  @click="vibrate">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import vibrator from '@system.vibrator'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+
+        },
+        vibrate(){
+            vibrator.vibrate()
+        }
+    }
+</script>

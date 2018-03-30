@@ -1,0 +1,47 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <!-- 点击分享数据到其他app -->
+        <input class="btn" type="button" value="分享数据到其他app" @click="share">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import share from '@system.share';
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {},
+        share() {
+            share.share({
+                type: "text/html",
+                data: "给你分享一个非常棒的快应用学习的Demo https://github.com/l455202325/APIDemo",
+                success: (data) => {
+                    console.log("handling success");
+                },
+                fail: (data, code) =>{
+                    console.log("handling fail, code=" + code);
+                }
+            });
+        }
+    }
+</script>

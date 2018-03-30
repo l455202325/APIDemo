@@ -62,6 +62,18 @@
     },
     {
       "name": "system.prompt"
+    },
+    {
+      "name": "system.webview"
+    },
+    {
+      "name": "system.vibrator"
+    },
+    {
+      "name": "system.notification"
+    },
+    {
+      "name": "system.share"
     }
   ],
   "permissions": [
@@ -172,6 +184,18 @@
         "component": "index"
       },
       "InterfaceInteraction/Prompt": {
+        "component": "index"
+      },
+      "InterfaceInteraction/Webview": {
+        "component": "index"
+      },
+      "InterfaceInteraction/Notification": {
+        "component": "index"
+      },
+      "InterfaceInteraction/Vibrator": {
+        "component": "index"
+      },
+      "InterfaceInteraction/Share": {
         "component": "index"
       }
     }
@@ -309,6 +333,22 @@
       },
       "InterfaceInteraction/Prompt": {
         "titleBarText": "弹窗",
+        "menu": false
+      },
+      "InterfaceInteraction/Webview": {
+        "titleBarText": "打开网页",
+        "menu": false
+      },
+      "InterfaceInteraction/Notification": {
+        "titleBarText": "通知消息",
+        "menu": false
+      },
+      "InterfaceInteraction/Vibrator": {
+        "titleBarText": "震动",
+        "menu": false
+      },
+      "InterfaceInteraction/Share": {
+        "titleBarText": "分享",
         "menu": false
       }
     }
