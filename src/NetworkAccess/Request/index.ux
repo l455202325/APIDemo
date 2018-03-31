@@ -1,0 +1,179 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
+        <!-- 点击选择图片 -->
+        <input class="btn" type="button" value="选择图片" onclick="pickImage">
+
+        <input class="btn" type="button" value="上传图片" onclick="upload">
+        <label>下载图片地址：http://pic1.win4000.com/wallpaper/2017-10-14/59e1bb9f01314.jpg</label>
+
+        <input class="btn" type="button" value="下载图片" onclick="download">
+
+        <label>下载图片存储路径：{{downloadImageUri}}</label>
+
+
+
+        <div class="demo-page" show="{{downloadImageUri != ''}}">
+            <image class="image" style="resize-mode:cover" src="{{downloadImageUri}}" show="{{downloadImageUri != ''}}"></image>
+        <label class="labelTitle">下载图片信息</label>
+        <label class="label">图片的宽度：{{width}} px</label>
+        <label class="label">图片的高度：{{height}} px</label>
+        <label class="label">图片的大小：{{size}}</label>
+
+        <input class="btn" type="button" value="获取下载图片信息" onclick="getImageInfo">
+        </div>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px;
+    }
+    .image{
+        width: 100%;
+    }
+
+    .btn {
+        width: 480px;
+        height: 90px;
+        border-radius: 10px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        line-height: 90px;
+        margin-top: 20px;
+    }
+    label{
+        width: 100%;
+    }
+</style>
+
+<script>
+    import image from '@system.image';
+    import media from '@system.media';
+    import request from '@system.request'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            pickImageUri: '',
+            downloadImageUri: '',
+            width: '',
+            height: '',
+            size: '',
+        },
+        // 选择图片不
+        pickImage() {
+            media.pickImage({
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.pickImageUri = data.uri
+                }
+            })
+        },
+        upload() {
+            if (this.pickImageUri == '') {
+                prompt.showToast({
+                    message: '请先选择图片',
+                    duration: 1
+                });
+                return;
+            }
+            // request.upload({
+            //     "url": "http://www.example.com",
+            //     "files": [
+            //         {
+            //             "uri": this.pickImageUri,
+            //             "name": "file1",
+            //             "filename": "test.png"
+            //         }
+            //     ],
+            //     "data": [
+            //         {
+            //             "name": "param1",
+            //             "value": "value1"
+            //         }
+            //     ],
+            //     success: (data) => {
+            //         console.log("handling success");
+            //     },
+            //     fail: (data, code) => {
+            //         console.log("handling fail, code=" + code);
+            //     }
+            // });
+            prompt.showToast({
+                message: '上传图片因为需要服务器配合，所以这里只给出了上传的实现，病没有做上传的功能',
+                duration: 1
+            });
+        },
+        download() {
+            request.download({
+                "url": "http://pic1.win4000.com/wallpaper/2017-10-14/59e1bb9f01314.jpg",
+                success: (data) => {
+                    console.log("handling success" + data.token);
+                    this.onDownloadComplete(data.token)
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" +data,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        onDownloadComplete(token) {
+
+            request.onDownloadComplete({
+                "token": token,
+                success:  (data) =>{
+                    console.log("handling success" + data.uri);
+                    this.downloadImageUri = data.uri;
+                },
+                fail: (data, code) =>{
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" +data,
+                        duration: 0
+                    });
+                },
+                complete: () =>{
+                    console.log("handling complete,");
+                }
+            })
+        },
+        getImageInfo(){
+            image.getImageInfo({
+                uri: this.downloadImageUri,
+                success: (data) => {
+                    console.log("handling success: size=" + data.size);
+                    this.width = data.width;
+                    this.uri = data.uri;
+                    this.height = data.height;
+                    if (data.size < 1024) {
+                        this.size = data.size + " Byte";
+                    } else if (data.size >= 1024 && data.size < 1024 * 1024) {
+                        this.size = (data.size / 1024).toFixed(2) + " KB";
+                    } else if (data.size >= 1024 * 1024) {
+                        this.size = (data.size / (1024 * 1024)).toFixed(2) + " MB"
+                    }
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" +data,
+                        duration: 0
+                    });
+                }
+            })
+        }
+
+    }
+</script>

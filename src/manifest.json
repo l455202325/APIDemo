@@ -83,6 +83,12 @@
     },
     {
       "name": "system.cipher"
+    },
+    {
+      "name": "system.request"
+    },
+    {
+      "name": "system.fetch"
     }
   ],
   "permissions": [
@@ -235,6 +241,12 @@
         "component": "index"
       },
       "Security/Cipher": {
+        "component": "index"
+      },
+      "NetworkAccess/Request": {
+        "component": "index"
+      },
+      "NetworkAccess/Fetch": {
         "component": "index"
       }
     }
@@ -428,6 +440,14 @@
       },
       "Security/Cipher": {
         "titleBarText": "密码算法",
+        "menu": false
+      },
+      "NetworkAccess/Request": {
+        "titleBarText": "上传下载",
+        "menu": false
+      },
+      "NetworkAccess/Fetch": {
+        "titleBarText": "数据请求",
         "menu": false
       }
     }

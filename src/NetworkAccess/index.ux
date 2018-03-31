@@ -40,11 +40,11 @@
             listData: [
                 {
                     name: '上传下载',
-                    url: ''
+                    url: '/NetworkAccess/Request'
                 },
                 {
                     name: '数据请求',
-                    url: ''
+                    url: '/NetworkAccess/Fetch'
                 }
             ]
         },

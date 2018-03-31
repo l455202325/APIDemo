@@ -131,7 +131,7 @@
     .demo-page {
         width: 100%;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
