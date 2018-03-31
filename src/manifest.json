@@ -80,6 +80,9 @@
     },
     {
       "name": "system.image"
+    },
+    {
+      "name": "system.cipher"
     }
   ],
   "permissions": [
@@ -229,6 +232,9 @@
         "component": "index"
       },
       "GraphicImage/Image": {
+        "component": "index"
+      },
+      "Security/Cipher": {
         "component": "index"
       }
     }
@@ -418,6 +424,10 @@
       },
       "GraphicImage/Image": {
         "titleBarText": "图片编辑",
+        "menu": false
+      },
+      "Security/Cipher": {
+        "titleBarText": "密码算法",
         "menu": false
       }
     }

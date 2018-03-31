@@ -1,0 +1,135 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <label class="label2">公钥:</label>
+        <label class="label2">{{publicKey}}</label>
+        <label class="label2">私钥:</label>
+        <label class="label2">{{privateKey}}</label>
+
+        <textarea placeholder="请输入需要加密的文本"
+               style="border: 1px solid #8d8d8d;height: 250px;width:100%; font-size: 24px;padding:10px;margin-top: 20px"
+                @change="inputContent"></textarea>
+        <input class="btn" type="button" value="加密" onclick="encrypt">
+        <label class="label2">加密后的密文:</label>
+        <label class="label2">{{privateContent}}</label>
+
+        <input class="btn" type="button" value="解密" onclick="decrypt">
+        <label class="label2">解密后的明文:</label>
+        <label class="label2">{{publicContent}}</label>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .btn {
+        width: 480px;
+        height: 90px;
+        border-radius: 10px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        line-height: 90px;
+        margin-top: 20px;
+    }
+
+    .label2 {
+        font-size: 24px;
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100%;
+        margin-top: 20px;
+
+    }
+
+
+</style>
+
+<script>
+    import cipher from '@system.cipher'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            publicKey: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDc7GR2MrfAoefES+wrs1ns2afT\n' +
+            'eJXSfIkEHfPXG9fVFjaws1ho4KcZfsxlA0+SXvc83f2SVGCuzULmM2lxxRCtcUN/\n' +
+            'h7SoaYEeluhqFimL2AEjfSwINHCLqObJkcjCfoZpE1JCehPiDOJsyT50Auc08h/4\n' +
+            'jHQfanyC1nc62LqUCQIDAQAB',
+            privateKey: 'MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANzsZHYyt8Ch58RL\n' +
+            '7CuzWezZp9N4ldJ8iQQd89cb19UWNrCzWGjgpxl+zGUDT5Je9zzd/ZJUYK7NQuYz\n' +
+            'aXHFEK1xQ3+HtKhpgR6W6GoWKYvYASN9LAg0cIuo5smRyMJ+hmkTUkJ6E+IM4mzJ\n' +
+            'PnQC5zTyH/iMdB9qfILWdzrYupQJAgMBAAECgYEAkibhH0DWR13U0gvYJeD08Lfd\n' +
+            'Sw1PMHyquEqIcho9Yv7bF3LOXjOg2EEGPx09mvuwXFgP1Kp1e67XPytr6pQQPzK7\n' +
+            'XAPcLPx80R/ZjZs8vNFndDOd1HgD3vSVmYQarNzmKi72tOUWMPevsaFXPHo6Xx3X\n' +
+            '8x0wYb7XuBsQguRctTECQQD7GWX3JUiyo562iVrpTDPOXsrUxmzCrgz2OZildxMd\n' +
+            'Pp/PkyDrx7mEXTpk4K/XnQJ3GpJNi2iDSxDuPSAeJ/aPAkEA4Tw4+1Z43S/xH3C3\n' +
+            'nfulYBNyB4si6KEUuC0krcC1pDJ21Gd12efKo5VF8SaJI1ZUQOzguV+dqNsB/JUY\n' +
+            'OFfX5wJAB1dKv9r7MR3Peg6x9bggm5vx2h6i914XSuuMJupASM6X5X2rrLj+F3yS\n' +
+            'RHi9K1SPyeOg+1tkBtKfABgRZFBOyQJAbuTivUSe73AqTKuHjB4ZF0ubqgEkJ9sf\n' +
+            'Q2rekzm9dOFvxjZGPQo1qALX09qATMi1ZN376ukby8ZAnSafLSZ64wJBAM2V37go\n' +
+            'Sj44HF76ksRow8gecuQm48NCTGAGTicXg8riKog2GC9y8pMNHAezoR9wXJF7kk+k\n' +
+            'lz5cHyoMZ9mcd30=',
+            textContent: '',
+            privateContent: '',
+            publicContent: '',
+        },
+
+        encrypt() {
+            prompt.showToast({
+                message: "加密",
+                duration: 0
+            });
+            cipher.rsa({
+                action: 'encrypt',
+                //待加密的文本内容
+                text: this.textContent,
+                //base64编码后的加密公钥
+                key: this.publicKey,
+                transformation:'RSA',
+                success: (data) => {
+                    console.log("handling success: " + data.text);
+                    this.privateContent = data.text;
+                },
+                fail: function (data, code) {
+                    console.log('cipher.rsa fail--------' + code + ': ' + data);
+                    prompt.showToast({
+                        message: 'cipher.rsa fail--------' + code + ': ' + data,
+                        duration: 0
+                    });
+                }
+            });
+        },
+        decrypt() {
+            //解密：
+            cipher.rsa({
+                action: 'decrypt',
+                //待解密的内容，是base64编码后的一段二进制值，解密后是文本内容“hello”
+                text: this.privateContent,
+                //base64编码后的解密私钥
+                key: this.privateKey,
+                transformation:'RSA',
+                success: (data) => {
+                    console.log("handling success: " + data.text);
+                    this.publicContent = data.text;
+                },
+                fail: function (data, code) {
+                    console.log('cipher.rsa fail--------' + code + ': ' + data);
+                    prompt.showToast({
+                        message: 'cipher.rsa fail--------' + code + ': ' + data,
+                        duration: 0
+                    });
+                }
+            });
+        },
+        inputContent(e){
+            this.textContent = e.value;
+        }
+    }
+</script>

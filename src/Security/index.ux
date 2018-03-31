@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: '密码算法',
-                    url: ''
+                    url: '/Security/Cipher'
                 }
             ]
         },
