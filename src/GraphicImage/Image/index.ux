@@ -2,54 +2,165 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
 
-        <div class="itemLine">
-            <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
-            <!-- 点击选择图片 -->
-            <input class="btn takePhoto" type="button" value="选择图片" onclick="pickImage">
-        </div>
+
+        <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
+        <!-- 点击选择图片 -->
+        <input class="btn" type="button" value="选择图片" onclick="pickImage">
         <div class="line"></div>
         <div class="demo-page" show="{{pickImageUri != ''}}">
-        <label class="labelTitle">图片信息</label>
-        <label class="label">图片地址：{{uri}}</label>
-        <label class="label">图片的宽度：{{width}} px</label>
-        <label class="label">图片的高度：{{height}} px</label>
-        <label class="label">图片的大小：{{size}}</label>
+            <label class="labelTitle">图片信息</label>
+            <label class="label">图片地址：{{uri}}</label>
+            <label class="label">图片的宽度：{{width}} px</label>
+            <label class="label">图片的高度：{{height}} px</label>
+            <label class="label">图片的大小：{{size}}</label>
 
-        <input class="btn takeVideo" type="button" value="获取图片信息" onclick="getImageInfo">
+            <input class="btn" type="button" value="获取图片信息" onclick="getImageInfo">
+
+            <label class="labelTitle">图片压缩参数</label>
+
+            <label class="label">图片的压缩质量:{{quality}}</label>
+
+            <slider class="slider" min="0" max="100" step="1" @change="sliderChange" value="75"/>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">尺寸压缩倍数:</label>
+                <input type="number" placeholder="必须大于0，尺寸会变为原图的1/ratio大小"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="ratioChange" value="2">
+            </div>
+
+            <div style="height: 80px;line-height: 80px;width: 100%;flex-direction: row">
+                <label class="label2">图片保存格式:</label>
+                <select class="select" @change="selectChange">
+                    <option for="item in selectList">{{item}}</option>
+                </select>
+            </div>
+            <input class="btn" type="button" value="压缩图片" onclick="compressImage">
+
+            <div class="demo-page" show="{{compressImageUri != ''}}">
+                <image style="margin-top: 20px" class="image" src="{{compressImageUri}}"
+                       show="{{compressImageUri != ''}}"></image>
+                <label class="labelTitle">压缩后图片信息</label>
+                <label class="label">图片的宽度：{{compressWidth}} px</label>
+                <label class="label">图片的高度：{{compressHeight}} px</label>
+                <label class="label">图片的大小：{{compressSize}}</label>
+
+                <input class="btn" type="button" value="获取压缩图片信息" onclick="getCompressImageInfo">
+            </div>
+
+            <div class="line"></div>
+            <label class="labelTitle">图片裁剪</label>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">裁剪的起始点的x坐标:</label>
+                <input type="number" placeholder="裁剪的起始点的x坐标，默认是0"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('x')" value="0">
+            </div>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">裁剪的起始点的y坐标:</label>
+                <input type="number" placeholder="裁剪的起始点的y坐标，默认是0"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('y')" value="0">
+            </div>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">裁剪的图片宽度:</label>
+                <input type="number" placeholder="裁剪的图片宽度"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('width')" value="100">
+            </div>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">裁剪的图片高度:</label>
+                <input type="number" placeholder="裁剪的图片高度"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('height')" value="100">
+            </div>
+            <label class="labelTitle">图片缩放</label>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">宽度的缩放比率:</label>
+                <input type="number" placeholder="缩放后宽度会变成原图的scaleX倍。默认是1"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('scaleX')" value="1">
+            </div>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">高度的缩放比率:</label>
+                <input type="number" placeholder="缩放后高度会变成原图的scaleY倍。默认是1"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('scaleY')" value="1">
+            </div>
+
+            <label class="labelTitle">图片旋转</label>
+            <div style="height: 80px;width: 100%;flex-direction: row;align-items: center">
+                <label class="label2">旋转的角度:</label>
+                <input type="number" placeholder="旋转的角度"
+                       style="border: 1px solid #8d8d8d;height: 50px;font-size: 24px;padding: 0 10px"
+                       @change="cropChange('degree')" value="0">
+            </div>
+            <input class="btn" type="button" value="执行编辑操作" onclick="applyOperations">
+
+            <div class="demo-page" show="{{applyOperationsUri != ''}}">
+                <image style="margin-top: 20px" class="image" src="{{applyOperationsUri}}"
+                       show="{{applyOperationsUri != ''}}"></image>
+                <label class="labelTitle">编辑操作后图片信息</label>
+                <label class="label">图片的宽度：{{applyOperationsWidth}} px</label>
+                <label class="label">图片的高度：{{applyOperationsHeight}} px</label>
+                <label class="label">图片的大小：{{applyOperationsSize}}</label>
+
+                <input class="btn" type="button" value="获取编辑操作后图片信息" onclick="getApplyOperationsImageInfo">
+            </div>
+
+            <div class="line"></div>
+
+            <input class="btn" type="button" value="打开编辑器来编辑图片" onclick="editImage">
+
+            <image style="margin-top: 20px" class="image" src="{{editImageUri}}"
+                   show="{{editImageUri != ''}}"></image>
+
+            <div class="demo-page" show="{{editImageUri != ''}}">
+                <label class="labelTitle">编辑器编辑图片的信息</label>
+                <label class="label">图片的宽度：{{editImageWidth}} px</label>
+                <label class="label">图片的高度：{{editImageHeight}} px</label>
+                <label class="label">图片的大小：{{editImageSize}}</label>
+
+                <input class="btn" type="button" value="获取编辑器编辑图片的信息" onclick="getEditImageInfo">
+            </div>
+
         </div>
-
-
-
     </div>
 </template>
 
 <style>
     .demo-page {
+        width: 100%;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: flex-end;
         align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
-    .label{
+
+    .label {
         font-size: 24px;
         text-align: left;
-        width:100%;
+        width: 100%;
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 20px;
     }
-    .labelTitle{
+
+    .label2 {
+        font-size: 24px;
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .labelTitle {
         font-size: 30px;
         text-align: left;
         font-weight: bold;
-        width:100%;
+        width: 100%;
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 40px;
-    }
-    .itemLine {
-        flex-direction: row;
-        text-align: center;
-        padding: 20px;
     }
 
     .line {
@@ -59,31 +170,33 @@
         margin: 20px 0;
     }
 
-    .image {
-        height: 300px;
-        border: 2px solid #999999;
-        border-radius: 5px;
-    }
-
     .btn {
-        width: 160px;
+        width: 480px;
         height: 90px;
         border-radius: 10px;
         background-color: #09ba07;
         font-size: 30px;
         color: #ffffff;
         line-height: 90px;
-    }
-
-    .takePhoto {
-        margin-top: 210px;
-        margin-left: 20px;
-    }
-
-    .takeVideo {
-        width: 480px;
         margin-top: 20px;
     }
+
+    .slider {
+        width: 100%;
+        color: #8d8d8d;
+        selected-color: #2daeff;
+        margin: 20px;
+    }
+
+    .select {
+        height: 80px;
+        width: 30%;
+    }
+
+    option {
+        padding: 10px;
+    }
+
 </style>
 
 <script>
@@ -98,8 +211,32 @@
             uri: '',
             height: '',
             size: '',
+            compressWidth: '',
+            compressHeight: '',
+            compressSize: '',
+            quality: 75,
+            ratio: 2,
+            format: 'JPEG',
+            selectList: ['JPEG', 'PNG', 'WEBP'],
+            cropX: 0,
+            cropY: 0,
+            cropWidth: 100,
+            cropHeight: 100,
+            scaleX: 1,
+            scaleY: 1,
+            degree: 1,
+            compressImageUri: '',
+            editImageUri: '',
+            editImageWidth: '',
+            editImageHeight: '',
+            editImageSize: '',
+            applyOperationsWidth: '',
+            applyOperationsHeight: '',
+            applyOperationsSize: '',
+            applyOperationsUri:''
 
         },
+        // 选择图片不
         pickImage() {
             media.pickImage({
                 success: (data) => {
@@ -108,27 +245,182 @@
                 }
             })
         },
-        getImageInfo(){
+        //获取图片信息
+        getImageInfo() {
             image.getImageInfo({
                 uri: this.pickImageUri,
-                success:(data)=> {
+                success: (data) => {
                     console.log("handling success: size=" + data.size);
-                    this.width =  data.width;
-                    this.uri =  data.uri;
-                    this.height =  data.height;
-                    if (data.size<1024){
+                    this.width = data.width;
+                    this.uri = data.uri;
+                    this.height = data.height;
+                    if (data.size < 1024) {
                         this.size = data.size + " Byte";
-                    } else if (data.size>=1024 && data.size<1024*1024) {
-                        this.size = (data.size/1024).toFixed(2) + " KB";
-                    }else if (data.size>= 1024*1024){
-                        this.size =  (data.size/(1024*1024)).toFixed(2) + " MB"
+                    } else if (data.size >= 1024 && data.size < 1024 * 1024) {
+                        this.size = (data.size / 1024).toFixed(2) + " KB";
+                    } else if (data.size >= 1024 * 1024) {
+                        this.size = (data.size / (1024 * 1024)).toFixed(2) + " MB"
                     }
 
                 },
-                fail:(data, code)=> {
+                fail: (data, code) => {
                     console.log("handling fail, code=" + code);
                 }
             })
+        },
+        sliderChange(e) {
+            this.quality = e.progress;
+        },
+        selectChange(e) {
+            this.format = e.newValue;
+        },
+        ratioChange(e) {
+            this.ratio = e.value;
+        },
+        //压缩图片
+        compressImage() {
+            image.compressImage({
+                uri: this.pickImageUri,
+                quality: this.quality,
+                ratio: this.ratio, // 变为原图的1/2大小
+                format: this.format,
+                success: (data) => {
+                    console.log(data.uri);
+                    this.compressImageUri = data.uri;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, data= " + data + " code=" + code,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        getCompressImageInfo() {
+            image.getImageInfo({
+                uri: this.compressImageUri,
+                success: (data) => {
+                    console.log("handling success: size=" + data.size);
+                    this.compressWidth = data.width;
+                    this.compressHeight = data.height;
+                    if (data.size < 1024) {
+                        this.compressSize = data.size + " Byte";
+                    } else if (data.size >= 1024 && data.size < 1024 * 1024) {
+                        this.compressSize = (data.size / 1024).toFixed(2) + " KB";
+                    } else if (data.size >= 1024 * 1024) {
+                        this.compressSize = (data.size / (1024 * 1024)).toFixed(2) + " MB"
+                    }
+
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        editImage() {
+            image.editImage({
+                uri: this.pickImageUri,
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.editImageUri = data.uri
+                },
+                cancel: (data) => {
+                    console.log("handling cancel");
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        getEditImageInfo() {
+            image.getImageInfo({
+                uri: this.editImageUri,
+                success: (data) => {
+                    console.log("handling success: size=" + data.size);
+                    this.editImageWidth = data.width;
+                    this.editImageHeight = data.height;
+                    if (data.size < 1024) {
+                        this.editImageSize = data.size + " Byte";
+                    } else if (data.size >= 1024 && data.size < 1024 * 1024) {
+                        this.editImageSize = (data.size / 1024).toFixed(2) + " KB";
+                    } else if (data.size >= 1024 * 1024) {
+                        this.editImageSize = (data.size / (1024 * 1024)).toFixed(2) + " MB"
+                    }
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        applyOperations() {
+            image.applyOperations({
+                uri: this.pickImageUri,
+                operations: [
+                    {
+                        action: 'scale',
+                        scaleX: this.scaleX,
+                        scaleY: this.scaleY
+                    },
+                    {
+                        action: 'crop',
+                        x: this.cropX,
+                        y: this.cropY,
+                        width: this.cropWidth,
+                        height: this.cropHeight
+                    },
+                    {
+                        action: 'rotate',
+                        degree: this.degree,
+                    }
+                ],
+                quality: 90,
+                format: 'webp',
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.applyOperationsUri = data.uri;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        getApplyOperationsImageInfo(){
+            image.getImageInfo({
+                uri: this.applyOperationsUri,
+                success: (data) => {
+                    console.log("handling success: size=" + data.size);
+                    this.applyOperationsWidth = data.width;
+                    this.applyOperationsHeight = data.height;
+                    if (data.size < 1024) {
+                        this.applyOperationsSize = data.size + " Byte";
+                    } else if (data.size >= 1024 && data.size < 1024 * 1024) {
+                        this.applyOperationsSize = (data.size / 1024).toFixed(2) + " KB";
+                    } else if (data.size >= 1024 * 1024) {
+                        this.applyOperationsSize = (data.size / (1024 * 1024)).toFixed(2) + " MB"
+                    }
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        cropChange(type,e){
+            if (type == 'x'){
+                this.cropX = e.value;
+            } else if (type == 'y'){
+                this.cropY = e.value;
+            }else if (type == 'width'){
+                this.cropWidth = e.value;
+            }else if (type == 'height'){
+                this.cropHeight = e.value;
+            }else if (type == 'scaleX'){
+                this.scaleX = e.value;
+            }else if (type == 'scaleY'){
+                this.scaleY = e.value;
+            }else if (type == 'degree'){
+                this.degree = e.value;
+            }
         }
     }
 </script>
