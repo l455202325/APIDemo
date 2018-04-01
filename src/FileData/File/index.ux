@@ -1,0 +1,64 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+        <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
+
+        <label>图片路径：{{pickImageUri}}</label>
+        <!-- 点击选择图片 -->
+        <input class="btn" type="button" value="选择图片" onclick="pickImage">
+
+
+
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px;
+    }
+    .image{
+        width: 100%;
+    }
+
+    .btn {
+        width: 480px;
+        height: 90px;
+        border-radius: 10px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        line-height: 90px;
+        margin-top: 20px;
+    }
+    label{
+        width: 100%;
+    }
+</style>
+
+<script>
+    import file from '@system.file'
+    import media from '@system.media';
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            pickImageUri: '',
+        },
+        // 选择图片不
+        pickImage() {
+            media.pickImage({
+                success: (data) => {
+                    console.log("handling success: " + data.uri);
+                    this.pickImageUri = data.uri
+                }
+            })
+        },
+
+    }
+</script>

@@ -106,15 +106,15 @@
                 url: "https://www.sojson.com/open/api/weather/json.shtml?city=" + this.city,
                 method: "GET",
                 success: (data) => {
-                    // console.log("title: " + JSON.parse(data.data).title);
+                    console.log("title: " + JSON.parse(data.data));
                     let dataGet = JSON.parse(data.data);
                     this.forecast = dataGet.data.forecast;
                     this.data = dataGet;
 
-                    prompt.showToast({
-                        message: "forecast.length = " + this.forecast.length,
-                        duration: 0
-                    });
+                    // prompt.showToast({
+                    //     message: "forecast.length = " + this.forecast.length,
+                    //     duration: 0
+                    // });
                 },
                 fail: (data, code) => {
                     console.log("handling fail, code=" + code);

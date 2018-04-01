@@ -92,6 +92,9 @@
     },
     {
       "name": "system.storage"
+    },
+    {
+      "name": "system.file"
     }
   ],
   "permissions": [
@@ -253,6 +256,9 @@
         "component": "index"
       },
       "FileData/Storage": {
+        "component": "index"
+      },
+      "FileData/File": {
         "component": "index"
       }
     }
@@ -458,6 +464,10 @@
       },
       "FileData/Storage": {
         "titleBarText": "数据存储",
+        "menu": false
+      },
+      "FileData/File": {
+        "titleBarText": "文件存储",
         "menu": false
       }
     }

@@ -44,7 +44,7 @@
                 },
                 {
                     name: '文件存储',
-                    url: ''
+                    url: '/FileData/File'
                 }
             ]
         },
