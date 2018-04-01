@@ -26,7 +26,7 @@
 
         <div class="bord-bottom">
             <div class="item-bar-row">
-                <input class="title" type="text" placeholder="请输入网址" @change="getOpenWeb">
+                <input class="title" type="text" placeholder="请输入网址" value="https://www.baidu.com" @change="getOpenWeb">
                 <input class="btn-bar" type="button" value="打开"  @click="openWeb">
             </div>
         </div>
