@@ -12,11 +12,16 @@
 
 
         <label>移动到的目录：internal://files/zixing/images</label>
+        <input class="btn" type="button" value="copy文件到指定目录" onclick="copy">
+        <label style="width: 100%;font-size: 24px;color: crimson">注意：测试完移动文件后就不能测试copy文件了，因为原文件已经被移动了，再copy的话就没有文件源了所以就会失败的</label>
+        <input class="btn" type="button" value="将文件移动到指定目录" onclick="move">
 
-        <input class="btn" type="button" value="将文件移动到指定目录" onclick="download">
-        <input class="btn" type="button" value="copy文件到指定目录" onclick="download">
 
-        <input class="btn" type="button" value="删除文件" onclick="download">
+        <input type="text" style="font-size: 24px; margin: 20px; padding: 10px;border: 1px solid #8d8d8d;"
+               placeholder="请输入uri，可点击下方目录查询按钮获得" @change="delUriChange">
+
+
+        <input class="btn" type="button" value="删除文件" onclick="deleteFile">
 
         <input class="btn" type="button" value="查询下载文件目录里面文件列表" onclick="getDownloadList">
         <list style="width: 100%; height: 500px" if="{{downloadFileList.length > 0}}">
@@ -31,11 +36,11 @@
         </list>
 
         <input class="btn" type="button" value="查询指定文件目录里面文件列表" onclick="getZixingList">
-        <list style="width: 100%;height: 500px" if="{{downloadFileList.length > 0}}">
+        <list style="width: 100%;height: 500px" if="{{zixingFileList.length > 0}}">
             <list-item type="list-item2"
                        style="flex-direction: column;width: 100%;padding: 10px 0;
                     border-bottom-width: 1px;border-bottom-color: #8d8d8d;align-items: flex-start"
-                       for="{{item in downloadFileList}}">
+                       for="{{item in zixingFileList}}">
                 <label style="width: 100%">文件路径：{{item.uri}}</label>
                 <label style="width: 100%">文件大小：{{item.length}}</label>
                 <label style="width: 100%">文件更新时间：{{item.lastModifiedTime}}</label>
@@ -84,7 +89,9 @@
     export default {
         data: {
             downloadImageUri: '',
-            downloadFileList: []
+            downloadFileList: [],
+            zixingFileList: [],
+            delUri: ''
         },
         download() {
             request.download({
@@ -143,8 +150,30 @@
                 }
             })
         },
+        getZixingList() {
+            file.list({
+                uri: "internal://files/zixing/images",
+                success: (data) => {
+                    console.log(data.fileList)
+                    let fileList = data.fileList;
+
+                    let len = fileList.length;
+                    for (let i = 0; i < len; i++) {
+                        let item = fileList[i];
+                        item.length = this.formatSize(item.length);
+                        item.lastModifiedTime = this.formatTime(item.lastModifiedTime);
+                        fileList[i] = item;
+                    }
+                    this.zixingFileList = fileList;
+
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
         formatTime(time) {
-            Date.prototype.toLocaleString = function() {
+            Date.prototype.toLocaleString = function () {
                 return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
             };
             let oldtime = new Date(time);
@@ -159,6 +188,78 @@
             } else if (length >= 1024 * 1024 && length < 1024 * 1024 * 1024) {
                 return (length / (1024 * 1024)).toFixed(2) + 'Mb'
             }
+        },
+        move() {
+            if (this.downloadImageUri == '') {
+                prompt.showToast({
+                    message: "请先点击下载图片",
+                    duration: 0
+                });
+                return;
+            }
+
+            file.move({
+                srcUri: this.downloadImageUri,
+                dstUri: "internal://files/zixing/images/" + Date.now().toString() + ".jpg",
+                success: (uri) => {
+                    console.log("move success: " + uri);
+                    prompt.showToast({
+                        message: "文件移动成功，Uri = " + uri + " 你可以点击最下方查询指定文件目录按钮",
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        }
+        , copy() {
+            if (this.downloadImageUri == '') {
+                prompt.showToast({
+                    message: "请先点击下载图片",
+                    duration: 0
+                });
+                return;
+            }
+            file.copy({
+                srcUri: this.downloadImageUri,
+                dstUri: "internal://files/zixing/images/" + Date.now().toString() + ".jpg",
+                success: function (uri) {
+                    console.log("copy success: " + uri);
+                    prompt.showToast({
+                        message: "copy success: " + uri + " 请点击下方的查询指定目录和查看",
+                        duration: 0
+                    });
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        deleteFile() {
+            if (this.delUri == '') {
+                prompt.showToast({
+                    message: "请输入要删除文件的uri",
+                    duration: 0
+                });
+                return;
+            }
+            file.delete({
+                uri: this.delUri,
+                success: (data) => {
+                    console.log("handling success");
+                    prompt.showToast({
+                        message: "删除成功请点击相关目录查看",
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        delUriChange(e) {
+            this.delUri = e.value;
         }
     }
 </script>
