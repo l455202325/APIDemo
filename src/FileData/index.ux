@@ -26,7 +26,7 @@
         width: 100%;
     }
     .item {
-        border-bottom-color: #d1d1d1;
+        border-bottom-color:#d1d1d1;
         border-bottom-width: 1px;
     }
 </style>
@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: '数据存储',
-                    url: ''
+                    url: '/FileData/Storage'
                 },
                 {
                     name: '文件存储',

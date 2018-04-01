@@ -89,6 +89,9 @@
     },
     {
       "name": "system.fetch"
+    },
+    {
+      "name": "system.storage"
     }
   ],
   "permissions": [
@@ -247,6 +250,9 @@
         "component": "index"
       },
       "NetworkAccess/Fetch": {
+        "component": "index"
+      },
+      "FileData/Storage": {
         "component": "index"
       }
     }
@@ -448,6 +454,10 @@
       },
       "NetworkAccess/Fetch": {
         "titleBarText": "数据请求",
+        "menu": false
+      },
+      "FileData/Storage": {
+        "titleBarText": "数据存储",
         "menu": false
       }
     }

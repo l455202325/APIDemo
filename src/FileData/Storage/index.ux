@@ -1,0 +1,178 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div style="width: 100%;flex-direction: row;justify-content: center">
+            <label>Key</label>
+            <input type="text" style="width: 30%" placeholder="请输入key" @change="inputChange('setKey')">
+            <label>value</label>
+            <input type="text" style="width: 45%" placeholder="请输入内容" @change="inputChange('setValue')">
+        </div>
+
+        <input class="btn" type="button" value="存储数据" @click="set">
+
+        <div style="width: 100%;flex-direction: row;justify-content: center;margin-top: 80px">
+            <label>Key</label>
+            <input type="text" style="width: 30%" placeholder="请输入key" @change="inputChange('getKey')">
+            <label>value</label>
+            <label style="width: 45%">{{getVal}}</label>
+        </div>
+
+        <input class="btn" type="button" value="查询数据" @click="get">
+
+        <div style="width: 100%;flex-direction: row;justify-content: center;margin-top: 80px">
+            <label>Key</label>
+            <input type="text" style="width: 30%" placeholder="请输入key" @change="inputChange('deleteKey')">
+        </div>
+
+        <input class="btn" type="button" value="删除数据" @click="delete">
+
+        <input class="btn" style="margin-top: 80px" type="button" value="清空数据" @click="clear">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+    }
+
+    input {
+        font-size: 24px;
+        padding: 5px 10px;
+        border: 1px solid #8d8d8d;
+        margin-right: 10px;
+    }
+
+    label {
+        font-size: 28px;
+        margin-right: 10px;
+
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 25px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    import storage from '@system.storage'
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            setKey: '',
+            setVal: '',
+            getKey: '',
+            getVal: '',
+            deleteKey: '',
+
+        },
+
+        inputChange(type, e) {
+            if (type == 'setKey') {
+                this.setKey = e.value;
+            } else if (type == 'setValue') {
+                this.setVal = e.value;
+            } else if (type == 'getKey') {
+                this.getKey = e.value;
+            } else if (type == 'deleteKey') {
+                this.deleteKey = e.value;
+            }
+        },
+        set() {
+            if (this.setKey == '' || this.setVal == '') {
+                prompt.showToast({
+                    message: '请先输入要存储的的key或者value',
+                    duration: 0
+                });
+                return;
+            }
+            storage.set({
+                key: this.setKey,
+                value: this.setVal,
+                success: (data) => {
+                    console.log("handling success");
+                    prompt.showToast({
+                        message: '存储成功',
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        get() {
+            if (this.getKey == '') {
+                prompt.showToast({
+                    message: '请先输入要查询的key',
+                    duration: 0
+                });
+                return;
+            }
+            storage.get({
+                key: this.getKey,
+                default:'我是查询失败后的默认数据',
+                success: (data) => {
+                    console.log("handling success");
+                    this.getVal = data
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        delete() {
+            if (this.deleteKey == '') {
+                prompt.showToast({
+                    message: '请先输入要删除的key',
+                    duration: 0
+                });
+                return;
+            }
+            storage.delete({
+                key: this.deleteKey,
+                success: (data) => {
+                    console.log("handling success");
+                    prompt.showToast({
+                        message: '删除成功',
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        clear() {
+            storage.clear({
+                success: (data) => {
+                    console.log("handling success");
+                    prompt.showToast({
+                        message: "清空成功",
+                        duration: 0
+                    });
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        }
+    }
+</script>
