@@ -106,6 +106,8 @@
                 }
             });
         },
+        onInit(){
+        },
         decrypt() {
             //解密：
             cipher.rsa({

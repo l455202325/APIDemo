@@ -2,13 +2,45 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
 
-        <image class="image" src="{{pickImageUri}}" show="{{pickImageUri != ''}}"></image>
+        <label>下载图片地址：http://pic1.win4000.com/pic/e/ab/00ec2f2888.jpg</label>
 
-        <label>图片路径：{{pickImageUri}}</label>
-        <!-- 点击选择图片 -->
-        <input class="btn" type="button" value="选择图片" onclick="pickImage">
+        <input class="btn" type="button" value="下载图片" onclick="download">
+
+        <label>下载图片存储路径：{{downloadImageUri}}</label>
+        <image class="image" style="resize-mode:cover" src="{{downloadImageUri}}"
+               show="{{downloadImageUri != ''}}"></image>
 
 
+        <label>移动到的目录：internal://files/zixing/images</label>
+
+        <input class="btn" type="button" value="将文件移动到指定目录" onclick="download">
+        <input class="btn" type="button" value="copy文件到指定目录" onclick="download">
+
+        <input class="btn" type="button" value="删除文件" onclick="download">
+
+        <input class="btn" type="button" value="查询下载文件目录里面文件列表" onclick="getDownloadList">
+        <list style="width: 100%; height: 500px" if="{{downloadFileList.length > 0}}">
+            <list-item type="list-item1"
+                       style="flex-direction: column;font-size: 24px;width: 100%;padding: 10px 0;
+                    border-bottom-width: 1px;border-bottom-color: #8d8d8d;align-items: flex-start"
+                       for="{{item in downloadFileList}}">
+                <label style="width: 100%">文件路径：{{item.uri}}</label>
+                <label style="width: 100%">文件大小：{{item.length}} byte</label>
+                <label style="width: 100%">文件更新时间：{{item.lastModifiedTime}}</label>
+            </list-item>
+        </list>
+
+        <input class="btn" type="button" value="查询指定文件目录里面文件列表" onclick="getZixingList">
+        <list style="width: 100%;height: 500px" if="{{downloadFileList.length > 0}}">
+            <list-item type="list-item2"
+                       style="flex-direction: column;width: 100%;padding: 10px 0;
+                    border-bottom-width: 1px;border-bottom-color: #8d8d8d;align-items: flex-start"
+                       for="{{item in downloadFileList}}">
+                <label style="width: 100%">文件路径：{{item.uri}}</label>
+                <label style="width: 100%">文件大小：{{item.length}}</label>
+                <label style="width: 100%">文件更新时间：{{item.lastModifiedTime}}</label>
+            </list-item>
+        </list>
 
 
     </div>
@@ -22,7 +54,8 @@
         align-items: center;
         padding: 40px;
     }
-    .image{
+
+    .image {
         width: 100%;
     }
 
@@ -36,29 +69,96 @@
         line-height: 90px;
         margin-top: 20px;
     }
-    label{
+
+    label {
         width: 100%;
     }
 </style>
 
 <script>
     import file from '@system.file'
-    import media from '@system.media';
+    import request from '@system.request'
     import prompt from '@system.prompt';
+
 
     export default {
         data: {
-            pickImageUri: '',
+            downloadImageUri: '',
+            downloadFileList: []
         },
-        // 选择图片不
-        pickImage() {
-            media.pickImage({
+        download() {
+            request.download({
+                "url": "http://pic1.win4000.com/pic/e/ab/00ec2f2888.jpg",
                 success: (data) => {
-                    console.log("handling success: " + data.uri);
-                    this.pickImageUri = data.uri
+                    console.log("handling success" + data.token);
+                    this.onDownloadComplete(data.token)
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" + data,
+                        duration: 0
+                    });
                 }
             })
         },
+        onDownloadComplete(token) {
 
+            request.onDownloadComplete({
+                "token": token,
+                success: (data) => {
+                    console.log("handling success" + data.uri);
+                    this.downloadImageUri = data.uri;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" + data,
+                        duration: 0
+                    });
+                },
+                complete: () => {
+                    console.log("handling complete,");
+                }
+            })
+        },
+        getDownloadList() {
+            file.list({
+                uri: "internal://mass/download/",
+                success: (data) => {
+                    console.log(data.fileList)
+                    let fileList = data.fileList;
+
+                    let len = fileList.length;
+                    for (let i = 0; i < len; i++) {
+                        let item = fileList[i];
+                        item.length = this.formatSize(item.length);
+                        item.lastModifiedTime = this.formatTime(item.lastModifiedTime);
+                        fileList[i] = item;
+                    }
+                    this.downloadFileList = fileList;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                }
+            })
+        },
+        formatTime(time) {
+            Date.prototype.toLocaleString = function() {
+                return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
+            };
+            let oldtime = new Date(time);
+
+            return oldtime.toLocaleString().toString();
+        },
+        formatSize(length) {
+            if (length >= 0 && length < 1024) {
+                return length + 'Byte'
+            } else if (length >= 1024 && length < 1024 * 1024) {
+                return (length / 1024).toFixed(2) + 'Kb'
+            } else if (length >= 1024 * 1024 && length < 1024 * 1024 * 1024) {
+                return (length / (1024 * 1024)).toFixed(2) + 'Mb'
+            }
+        }
     }
 </script>
