@@ -1,11 +1,35 @@
 <template>
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
-        <!-- 点击显示Toast -->
-        <input class="btn" type="button" value="给10086打个电话"  @click="call">
-        <input class="btn" type="button" value="给10086发个短信"  @click="sms">
-        <input class="btn" type="button" value="给455202325@qq.com发个邮件"  @click="mailto">
-        <input class="btn" type="button" value="打开百度"  @click="openWeb">
+        <div class="bord-bottom">
+            <div class="item-bar-row">
+                <input class="title" type="text" placeholder="请输入电话号码" @change="getCall">
+                <input class="btn-bar" type="button" value="拨打"  @click="call">
+            </div>
+        </div>
+
+        <div class="bord-bottom">
+            <div class="item-bar-column">
+                <input class="title" type="text" value="10086" placeholder="请输入电话号码" @change="getSmsPhone">
+                <textarea class="message" placeholder="请输入短信内容"  @change="getSmsContent"></textarea>
+                <input class="btn-bar" type="button" value="发送" @click="sms">
+            </div>
+        </div>
+
+        <div class="bord-bottom">
+            <div class="item-bar-column">
+                <input class="title" type="email" value="455202325@qq.com" placeholder="请输入邮箱" @change="getMailtoEmail">
+                <textarea class="message" placeholder="请输入内容" @change="getMailtoContent"></textarea>
+                <input class="btn-bar" type="button" value="发送" @click="mailto">
+            </div>
+        </div>
+
+        <div class="bord-bottom">
+            <div class="item-bar-row">
+                <input class="title" type="text" placeholder="请输入网址" @change="getOpenWeb">
+                <input class="btn-bar" type="button" value="打开"  @click="openWeb">
+            </div>
+        </div>
         <input class="btn" type="button" value="通过路径打开新页面"  @click="openByPath">
         <input class="btn" type="button" value="通过名称打开新页面"  @click="openByName">
 
@@ -85,6 +109,46 @@
         border: 1px solid #8d8d8d;
         padding: 5px;
     }
+    .bord-bottom{
+        border: 1px solid #e2e2e2;
+    }
+    .item-bar-row{
+        width: 100%;
+        padding: 50px;
+        flex-direction: row;
+    }
+    .item-bar-row .title{
+        width: 70%;
+        border:1px solid #999999;
+        padding-left: 20px;
+    }
+    .item-bar-row .btn-bar{
+        width: 30%;
+        background-color: #09ba07;
+        color: #ffffff;
+    }
+    .item-bar-column{
+        width: 100%;
+        padding: 50px;
+        flex-direction: column;
+    }
+    .item-bar-column .title{
+        width: 100%;
+        border:1px solid #999999;
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+    .item-bar-column .message{
+        width: 100%;
+        height: 300px;
+        border:1px solid #999999;
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+    .item-bar-column .btn-bar{
+        background-color: #09ba07;
+        color: #ffffff;
+    }
     .btn {
         width: 550px;
         height: 86px;
@@ -107,27 +171,50 @@
             name:'未知',
             path:'未知',
             length:'未知',
+            phoneNumber:'',
+            msgNumber:'10086',
+            msgContent:'我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
+            mailtoEmail:'455202325@qq.com',
+            mailtoContent:'我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
+            webUrl:'https://www.baidu.com',
 
+        },
+        getCall(e){
+            this.phoneNumber = e.value;
         },
         call(){
             router.push({
-                uri: 'tel:10086'
+                uri: 'tel:'+this.phoneNumber
             });
+        },
+        getSmsPhone(e){
+            this.msgNumber = e.value;
+        },
+        getSmsContent(e){
+            this.msgContent = e.value;
         },
         sms(){
             router.push({
-                uri: 'sms:10086?body=我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo'
+                uri: 'sms:'+this.msgNumber+'?body='+this.msgContent
             });
-
+        },
+        getMailtoEmail(e){
+            this.mailtoEmail = e.value;
+        },
+        getMailtoContent(e){
+            this.mailtoContent = e.value;
         },
         mailto(){
             router.push({
-                uri: 'mailto:455202325@qq.com?body=我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo'
+                uri: 'mailto:'+this.mailtoEmail+'?body='+this.mailtoContent
             });
+        },
+        getOpenWeb(e){
+            this.webUrl = e.value
         },
         openWeb(){
             router.push({
-                uri: 'https://www.baidu.com'
+                uri: this.webUrl
             });
         },
         openByPath(){
