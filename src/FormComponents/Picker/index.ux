@@ -3,20 +3,20 @@
     <div class="demo-page">
         <div style="flex-direction: row;align-items: center">
             <label>选择日期：</label>
-            <picker type="date" style="font-size: 36px; margin-left: 20px " value="{{dateValue}}" @change="pickerChange('date')"/>
+            <picker type="date" class="picker" value="{{dateValue}}" @change="pickerChange('date')"/>
         </div>
 
         <div style="flex-direction: row;align-items: center;margin-top: 50px">
             <label>选择时间：</label>
-            <picker type="time" style="font-size: 36px; margin-left: 20px " value="{{timeValue}}"  @change="pickerChange('time')"/>
+            <picker type="time" class="picker" value="{{timeValue}}" @change="pickerChange('time')"/>
         </div>
 
         <label style="margin-top: 150px;font-size: 36px;font-weight: bold">三级联动picker版</label>
         <div style="flex-direction: row;align-items: center;margin-top: 20px">
 
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择省" @change="pickerChange('time')"/>
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择市" @change="pickerChange('time')"/>
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择区" @change="pickerChange('time')"/>
+            <picker type="text" class="picker picker-border" show="{{provinces.length>0}}" value="{{provincesText}}" range="{{provinces}}" @change="pickerChange('province')"/>
+            <picker type="text" class="picker picker-border" show="{{citys.length>0}}" value="{{citysText}}" range="{{citys}}" @change="pickerChange('city')"/>
+            <picker type="text" class="picker picker-border" show="{{areas.length>0}}" value="{{areasText}}"  range="{{areas}}" @change="pickerChange('area')"/>
         </div>
 
 
@@ -31,6 +31,16 @@
         padding: 10px;
     }
 
+    .picker {
+        font-size: 36px;
+        margin-left: 20px;
+    }
+
+    .picker-border {
+        border: 1px solid #8d8d8d;
+        padding: 10px;
+    }
+
 </style>
 
 <script>
@@ -42,21 +52,77 @@
             dateValue: '请选择日期',
             timeValue: '请选择时间',
             lists: listData,
-
+            provinces:[],
+            citys:[],
+            areas:[],
+            provincesText:"请选择省",
+            citysText:"请选择市",
+            areasText:"请选择区",
+            provincesIndex:0,
+            cityIndex:0,
         },
         onShow() {
-            // prompt.showToast({
-            //     message:"lists："+JSON.stringify(listData),
-            //     duration:0
-            // });
+            this.getProvincesDatas();
+            // this.getCityDatas();
+            // this.getAreaDatas();
         }
         ,
-        pickerChange(what,e){
-           if (what == 'date'){
-               this.dateValue = e.year + "-" + (e.month+1) + "-" + e.day ;
-           } else if (what == 'time'){
-               this.timeValue = e.hour + ":" +  e.minute ;
-           }
+        pickerChange(what, e) {
+            if (what == 'date') {
+                this.dateValue = e.year + "-" + (e.month + 1) + "-" + e.day;
+            } else if (what == 'time') {
+                this.timeValue = e.hour + ":" + e.minute;
+            }else if (what == 'province'){
+                this.provincesText = e.newValue
+                this.provincesIndex = e.newSelected;
+
+                this.getCityDatas();
+
+            }else if (what == 'city'){
+                this.citysText = e.newValue;
+                this.cityIndex = e.newSelected;
+                this.getAreaDatas();
+
+            } else if (what == 'area') {
+                this.areasText = e.newValue;
+            }
+        },
+        getProvincesDatas(){
+            this.provinces = [];
+            this.citys = [];
+            this.areas = [];
+            var len = this.lists.length;
+            for (let i = 0; i < len; i++) {
+                this.provinces.push(this.lists[i].name);
+            }
+        },
+        getCityDatas(){
+            this.citys = [];
+            this.areas = [];
+            this.citysText = '请选择市';
+            var len = this.lists[this.provincesIndex].city.length;
+            for (let i = 0; i < len; i++) {
+                this.citys.push(this.lists[this.provincesIndex].city[i].name);
+            }
+
+            prompt.showToast({
+                message: JSON.stringify(this.citys),
+                duration: 0
+            });
+        },
+        getAreaDatas(){
+            this.areas = [];
+            this.areasText = '请选择市区';
+            var len = this.lists[this.provincesIndex].city[this.cityIndex].area.length;
+            for (let i = 0; i < len; i++) {
+                this.areas.push(this.lists[this.provincesIndex].city[this.cityIndex].area[i]);
+            }
+
+            prompt.showToast({
+                message: JSON.stringify(this.areas),
+                duration: 0
+            });
         }
+
     }
 </script>
