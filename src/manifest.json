@@ -103,7 +103,7 @@
     }
   ],
   "config": {
-    "logLevel": "off"
+    "logLevel": "debug"
   },
   "router": {
     "entry": "Demo",
@@ -262,6 +262,9 @@
         "component": "index"
       },
       "MediaComponents/Video": {
+        "component": "index"
+      },
+      "OtherComponents/Web": {
         "component": "index"
       }
     }
@@ -475,6 +478,10 @@
       },
       "MediaComponents/Video": {
         "titleBarText": "video",
+        "menu": false
+      },
+      "OtherComponents/Web": {
+        "titleBarText": "web",
         "menu": false
       }
     }

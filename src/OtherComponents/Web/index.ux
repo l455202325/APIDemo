@@ -1,0 +1,91 @@
+<template>
+    <div class="demo-page">
+        <div id="loading" show="{{isLoading}}"><label>加载中...</label></div>
+        <web id="web" src="{{url}}" @pagestart="pagestart" onpagefinish="pagefinish" ontitlereceive="titlereceive"
+             onerror="error"></web>
+        <div class="open-bar" show="{{!isLoading}}">
+            <input type="button" value="前一个页面" class="open-btn" @click="openBtnPre">
+            <input type="button" value="重新加载" class="open-btn" @click="openBtnReload">
+            <input type="button" value="后一个页面" class="open-btn" @click="openBtnNext">
+        </div>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #loading {
+        width: 100%;
+        height: 100%;
+        background-color: #00A000;
+        display: none;
+    }
+
+    #loading label {
+        width: 100%;
+        text-align: center;
+    }
+
+    .open-bar {
+        padding: 20px;
+        flex-direction: row;
+        background-color: #2a9700;
+    }
+
+    .open-btn {
+        width: 30%;
+        background-color: #f1f1f1;
+        color: #333333;
+        margin: 0 20px;
+        font-size: 24px;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            url: 'http://baidu.com',
+            isLoading: false
+        },
+        pagestart(){
+            this.isLoading = true;
+        },
+        pagefinish(){
+            this.isLoading = false;
+        },
+        openBtnPre(){
+            let _this = this;
+            this.$element('web').canBack({
+                callback: function (e) {
+                    if (e) {
+                        _this.$element('web').back();
+                    }
+                }
+            });
+        },
+        openBtnReload(){
+            this.$element('web').reload();
+        },
+        openBtnNext(){
+            let _this = this;
+            this.$element('web').canForward({
+                callback: function (e) {
+                    if (e) {
+                        _this.$element('web').forward()
+                    }
+                }
+            });
+        },
+        titlereceive(){
+
+        },
+        error(){
+
+        }
+    }
+
+</script>

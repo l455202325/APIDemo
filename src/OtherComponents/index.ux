@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: 'web',
-                    url: ''
+                    url: '/OtherComponents/Web'
                 }
             ]
         },

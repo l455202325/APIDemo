@@ -34,10 +34,10 @@
   |     |——slider
   |     |——switch
   |     |——textarea
-  |——媒体组件
-  |     |——video
-  |——其他组件
-  |     |——web
+  |——媒体组件(OK)
+  |     |——video(OK)
+  |——其他组件(OK)
+  |     |——web(OK)
 接口
   |——基本功能(OK)
   |     |——应用上下文(OK)
