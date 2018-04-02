@@ -52,7 +52,7 @@
                 },
                 {
                     name: 'picker',
-                    url: ''
+                    url: '/FormComponents/Picker'
                 },
                 {
                     name: 'select',

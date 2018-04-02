@@ -1,0 +1,62 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div style="flex-direction: row;align-items: center">
+            <label>选择日期：</label>
+            <picker type="date" style="font-size: 36px; margin-left: 20px " value="{{dateValue}}" @change="pickerChange('date')"/>
+        </div>
+
+        <div style="flex-direction: row;align-items: center;margin-top: 50px">
+            <label>选择时间：</label>
+            <picker type="time" style="font-size: 36px; margin-left: 20px " value="{{timeValue}}"  @change="pickerChange('time')"/>
+        </div>
+
+        <label style="margin-top: 150px;font-size: 36px;font-weight: bold">三级联动</label>
+        <div style="flex-direction: row;align-items: center;margin-top: 20px">
+
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择省"/>
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择市"/>
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择区"/>
+        </div>
+
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import {listData} from '../../Common/js/data'
+
+    export default {
+        data: {
+            dateValue: '请选择日期',
+            timeValue: '请选择时间',
+            lists: listData,
+
+        },
+        onShow() {
+            // prompt.showToast({
+            //     message:"lists："+JSON.stringify(listData),
+            //     duration:0
+            // });
+        }
+        ,
+        pickerChange(what,e){
+           if (what == 'date'){
+               this.dateValue = e.year + "-" + (e.month+1) + "-" + e.day ;
+           } else if (what == 'time'){
+               this.timeValue = e.hour + ":" +  e.minute ;
+           }
+        }
+    }
+</script>
