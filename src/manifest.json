@@ -106,11 +106,8 @@
     "logLevel": "debug"
   },
   "router": {
-    "entry": "Demo",
+    "entry": "DemoDetail",
     "pages": {
-      "Demo": {
-        "component": "index"
-      },
       "DemoDetail": {
         "component": "index"
       },
@@ -266,6 +263,12 @@
       },
       "OtherComponents/Web": {
         "component": "index"
+      },
+      "FormComponents/TextArea": {
+        "component": "index"
+      },
+      "FormComponents/Switch": {
+        "component": "index"
       }
     }
   },
@@ -274,10 +277,6 @@
     "titleBarTextColor": "#414141",
     "menu": true,
     "pages": {
-      "Demo": {
-        "titleBarText": "应用入口文件",
-        "menu": false
-      },
       "DemoDetail": {
         "titleBarText": "API接口列表"
       },
@@ -482,6 +481,14 @@
       },
       "OtherComponents/Web": {
         "titleBarText": "web",
+        "menu": false
+      },
+      "FormComponents/TextArea": {
+        "titleBarText": "textarea",
+        "menu": false
+      },
+      "FormComponents/Switch": {
+        "titleBarText": "switch",
         "menu": false
       }
     }

@@ -1,0 +1,36 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <textarea style="width: 100%;height: 50%;border: 1px solid #8d8d8d;border-radius: 10px;padding: 10px;font-size: 26px" @change="inpuChange"
+
+                  placeholder="这是一个textarea，您可以输入一段文字，你输入的文字同时也会显示在下方"></textarea>
+
+        <text style="width: 100%;margin-top: 50px">您输入的文字是：{{inputContent}}</text>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 40px;
+    }
+
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            inputContent: ''
+        },
+        inpuChange(e) {
+            this.inputContent = e.value;
+        }
+
+    }
+</script>

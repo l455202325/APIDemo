@@ -64,11 +64,11 @@
                 },
                 {
                     name: 'switch',
-                    url: ''
+                    url: '/FormComponents/Switch'
                 },
                 {
                     name: 'textarea',
-                    url: ''
+                    url: '/FormComponents/TextArea'
                 }
             ]
         },

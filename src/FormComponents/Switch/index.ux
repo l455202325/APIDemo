@@ -1,0 +1,43 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div style="flex-direction: row;width:100%;justify-content: flex-start;" >
+            <label>默认打开</label>
+            <switch style="width: 120px; height: 50px;color: #09ba07;margin-left: 50px"
+                    checked="true" @change="switchChange(1)"></switch>
+        </div>
+        <div style="flex-direction: row;align-items: center;margin-top: 50px">
+            <label>默认关闭</label>
+            <switch style="width: 120px;height: 50px;margin-left: 50px" checked="false"
+                    @change="switchChange(2)"></switch>
+        </div>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px;
+    }
+
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            inputContent: ''
+        },
+        switchChange(what, e) {
+            let state = e.checked ? '打开' : '关闭';
+            prompt.showToast({
+                message: "第" + what + "个开关被" + state,
+                duration: 0
+            });
+        }
+
+    }
+</script>

@@ -145,9 +145,9 @@
     props: ['name', 'icon'],
     data: {
       desc: '即点即用，让你省去下载安装的步骤，立即使用各类服务',
-      serviceType: '工具类',
-      subjectInfo: 'xxx有限公司',
-      copyright: ''
+      serviceType: 'API Demo',
+      subjectInfo: '紫星',
+      copyright: '紫星版权所有，大家随便使用 ©'
     },
     onInit () {
       // 设置标题栏
