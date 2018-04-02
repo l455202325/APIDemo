@@ -272,6 +272,9 @@
       },
       "FormComponents/Slider": {
         "component": "index"
+      },
+      "FormComponents/Select": {
+        "component": "index"
       }
     }
   },
@@ -496,6 +499,10 @@
       },
       "FormComponents/Slider": {
         "titleBarText": "slider",
+        "menu": false
+      },
+      "FormComponents/Select": {
+        "titleBarText": "select",
         "menu": false
       }
     }

@@ -56,7 +56,7 @@
                 },
                 {
                     name: 'select',
-                    url: ''
+                    url: '/FormComponents/Select'
                 },
                 {
                     name: 'slider',
