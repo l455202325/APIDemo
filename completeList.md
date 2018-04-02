@@ -31,9 +31,9 @@
   |     |——option
   |     |——picker
   |     |——select
-  |     |——slider
-  |     |——switch
-  |     |——textarea
+  |     |——slider(OK)
+  |     |——switch(OK)
+  |     |——textarea(OK)
   |——媒体组件(OK)
   |     |——video(OK)
   |——其他组件(OK)
