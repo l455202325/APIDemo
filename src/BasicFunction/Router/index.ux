@@ -12,7 +12,7 @@
             <div class="item-bar-column">
                 <input class="title" type="text" value="10086" placeholder="请输入电话号码" @change="getSmsPhone">
                 <textarea class="message" placeholder="请输入短信内容"  @change="getSmsContent"></textarea>
-                <input class="btn-bar" type="button" value="发送" @click="sms">
+                <input class="btn-bar" type="button" value="发送短信" @click="sms">
             </div>
         </div>
 
@@ -20,7 +20,7 @@
             <div class="item-bar-column">
                 <input class="title" type="email" value="455202325@qq.com" placeholder="请输入邮箱" @change="getMailtoEmail">
                 <textarea class="message" placeholder="请输入内容" @change="getMailtoContent"></textarea>
-                <input class="btn-bar" type="button" value="发送" @click="mailto">
+                <input class="btn-bar" type="button" value="发送邮件" @click="mailto">
             </div>
         </div>
 

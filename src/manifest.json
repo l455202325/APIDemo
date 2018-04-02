@@ -269,6 +269,9 @@
       },
       "FormComponents/Switch": {
         "component": "index"
+      },
+      "FormComponents/Slider": {
+        "component": "index"
       }
     }
   },
@@ -489,6 +492,10 @@
       },
       "FormComponents/Switch": {
         "titleBarText": "switch",
+        "menu": false
+      },
+      "FormComponents/Slider": {
+        "titleBarText": "slider",
         "menu": false
       }
     }

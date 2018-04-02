@@ -60,7 +60,7 @@
                 },
                 {
                     name: 'slider',
-                    url: ''
+                    url: '/FormComponents/Slider'
                 },
                 {
                     name: 'switch',
