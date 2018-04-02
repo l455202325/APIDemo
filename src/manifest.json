@@ -262,7 +262,7 @@
         "component": "index"
       },
       "OtherComponents/Web": {
-        "component": "index"
+        "component": "webIndex"
       },
       "FormComponents/TextArea": {
         "component": "index"
