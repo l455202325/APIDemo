@@ -11,12 +11,12 @@
             <picker type="time" style="font-size: 36px; margin-left: 20px " value="{{timeValue}}"  @change="pickerChange('time')"/>
         </div>
 
-        <label style="margin-top: 150px;font-size: 36px;font-weight: bold">三级联动</label>
+        <label style="margin-top: 150px;font-size: 36px;font-weight: bold">三级联动picker版</label>
         <div style="flex-direction: row;align-items: center;margin-top: 20px">
 
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择省"/>
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择市"/>
-            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择区"/>
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择省" @change="pickerChange('time')"/>
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择市" @change="pickerChange('time')"/>
+            <picker  type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px " value="请选择区" @change="pickerChange('time')"/>
         </div>
 
 
