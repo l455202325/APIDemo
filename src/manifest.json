@@ -260,6 +260,9 @@
       },
       "FileData/File": {
         "component": "index"
+      },
+      "MediaComponents/Video": {
+        "component": "index"
       }
     }
   },
@@ -468,6 +471,10 @@
       },
       "FileData/File": {
         "titleBarText": "文件存储",
+        "menu": false
+      },
+      "MediaComponents/Video": {
+        "titleBarText": "video",
         "menu": false
       }
     }

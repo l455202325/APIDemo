@@ -1,0 +1,135 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <video id="video" style="width: 100%; height: 560px" src="/static/fxsn.mp4" poster="/static/fxsn.jpg"
+               @start="onStart"
+               @pause="onPause" @finish="onFinish" @error="onError" @seeking="seeking" @seeked="seeked"
+               @timeupdate="timeupdate" @fullscreenchange="fullscreenchange" ></video>
+
+        <div style="flex-direction: row; margin: 40px">
+            <input type="button"
+                   style="width: 30%;margin: 10px;height: 60px;border-radius:30px;background-color: #09ba07;color: #f0f0f0;font-size: 30px"
+                   value="播放" @click="start">
+            <input type="button"
+                   style="width: 30%;margin: 10px;height: 60px;border-radius:30px;background-color: #09ba07;color: #f0f0f0;font-size: 30px"
+                   value="暂停" @click="pause">
+            <input type="button"
+                   style="width: 30%;margin: 10px;height: 60px;border-radius:30px;background-color: #09ba07;color: #f0f0f0;font-size: 30px"
+                   value="快进到50秒" @click="setCurrentTime">
+        </div>
+
+        <input type="button"
+               style="width: 60%;margin: 10px;height: 60px;border-radius:30px;background-color: #09ba07;color: #f0f0f0;font-size: 30px"
+               value="进入全屏播放" @click="requestFullscreen">
+
+        <!--<label style="width: 100%">当前播放时间：{{timeSt}} 秒</label>-->
+
+        <!--<div style="flex-direction: row; align-items: center">-->
+            <!--<label>连续播放：</label>-->
+            <!--<switch style="width: 200px; height: 60px; margin-left: 40px;color: #2a9700" @change="autoplayChange" checked="false"></switch>-->
+        <!--</div>-->
+
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    export default {
+        data: {
+            video: {},
+            timeSt:'0',
+            isAutoplay:false
+        },
+        onShow() {
+            this.video = this.$element('video')
+        },
+        onStart() {
+            // 开始播放
+
+            prompt.showToast({
+                message: 'onStart',
+                duration: 0
+            });
+        },
+        onPause() {
+            // 暂停时触发
+            prompt.showToast({
+                message: 'onPause',
+                duration: 0
+            });
+        },
+        onFinish() {
+            // 播放结束
+            prompt.showToast({
+                message: 'onFinish',
+                duration: 0
+            });
+        },
+        onError() {
+            //
+            prompt.showToast({
+                message: 'onError',
+                duration: 0
+            });
+        },
+        seeking() {
+            // 播放进度条滑动
+
+            prompt.showToast({
+                message: 'seeking',
+                duration: 0
+            });
+        },
+        seeked() {
+            //播放进度条滑动放开
+
+            prompt.showToast({
+                message: 'seeked',
+                duration: 0
+            });
+        },
+        timeupdate(e) {
+            // 播放进度变化
+//           this.timeSt = e.currenttime
+        },
+        fullscreenchange() {
+            // 视频进入和退出全屏
+            prompt.showToast({
+                message: 'fullscreenchange',
+                duration: 0
+            });
+        },
+        start() {
+            this.video.start();
+        },
+        pause() {
+            this.video.pause();
+        },
+        setCurrentTime() {
+            this.video.setCurrentTime(
+                {
+                    currenttime: 50
+                }
+            );
+        },
+        requestFullscreen(){
+            this.video.requestFullscreen();
+        },
+        autoplayChange(e){
+//            this.isAutoplay = e.checked
+            prompt.showToast({
+                message: JSON.stringify(e.checked),
+                duration: 0
+            });
+        }
+    }
+</script>
