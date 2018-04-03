@@ -278,6 +278,9 @@
       },
       "FormComponents/Picker": {
         "component": "index"
+      },
+      "FormComponents/Input": {
+        "component": "index"
       }
     }
   },
@@ -510,6 +513,11 @@
       },
       "FormComponents/Picker": {
         "titleBarText": "Picker",
+        "menu": false
+      },
+      "FormComponents/Input": {
+        "titleBarText": "Input",
+        "titleBarText": "Input",
         "menu": false
       }
     }
