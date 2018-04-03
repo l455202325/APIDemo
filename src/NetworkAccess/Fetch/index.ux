@@ -110,11 +110,6 @@
                     let dataGet = JSON.parse(data.data);
                     this.forecast = dataGet.data.forecast;
                     this.data = dataGet;
-
-                    // prompt.showToast({
-                    //     message: "forecast.length = " + this.forecast.length,
-                    //     duration: 0
-                    // });
                 },
                 fail: (data, code) => {
                     console.log("handling fail, code=" + code);
