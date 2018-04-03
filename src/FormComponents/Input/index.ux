@@ -1,0 +1,62 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个Button</text>
+            <input style="margin-left: 20px" type="button" value="这个是一个按钮">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个checkbox</text>
+            <input style="margin-left: 20px" type="checkbox" value="这个是一个checkbox">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个radio</text>
+            <input style="margin-left: 20px" type="radio" value="这个是一个radio">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" value="这个是一个text">
+        </div>
+
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import {listData} from '../../Common/js/data'
+
+    export default {
+        data: {},
+    }
+</script>

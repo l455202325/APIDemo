@@ -13,7 +13,7 @@
 
         <label>移动到的目录：internal://files/zixing/images</label>
         <input class="btn" type="button" value="copy文件到指定目录" onclick="copy">
-        <label style="width: 100%;font-size: 24px;color: crimson">注意：测试完移动文件后就不能测试copy文件了，因为原文件已经被移动了，再copy的话就没有文件源了所以就会失败的</label>
+        <label style="width: 100%;font-size: 24px;color: #DC143C">注意：测试完移动文件后就不能测试copy文件了，因为原文件已经被移动了，再copy的话就没有文件源了所以就会失败的</label>
         <input class="btn" type="button" value="将文件移动到指定目录" onclick="move">
 
 
