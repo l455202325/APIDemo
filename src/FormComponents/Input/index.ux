@@ -9,13 +9,16 @@
             <text>爱好：</text>
             <div style="flex-direction: column">
                 <div style="flex-direction: row">
-                    <input style="margin-left: 20px"  type="checkbox" name="ah" id="ahcf" value="吃饭"><label target="ahcf">吃饭</label>
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahcf" value="吃饭"><label
+                        target="ahcf">吃饭</label>
                 </div>
                 <div style="flex-direction: row">
-                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahsj" value="睡觉">吃饭<label target="ahsj">睡觉</label>
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahsj" value="睡觉">吃饭<label
+                        target="ahsj">睡觉</label>
                 </div>
                 <div style="flex-direction: row">
-                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahddd" value="打豆豆">吃饭<label target="ahddd">打豆豆</label>
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahddd" value="打豆豆">吃饭<label
+                        target="ahddd">打豆豆</label>
                 </div>
             </div>
 
@@ -23,9 +26,17 @@
         <div style="flex-direction: row; align-items: center; margin-top: 50px">
             <text>性别：</text>
 
-                <input style="margin-left: 20px" type="radio" name="xb" value="男">男
-                <input style="margin-left: 20px" type="radio" name="xb" value="女">女
-                <input style="margin-left: 20px" type="radio" name="xb" value="你猜">你猜
+            <div style="flex-direction: column">
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnan" value="男"><label
+                        target="xbnan">男</label></div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnv" value="女"><label
+                        target="xbnv">女</label></div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnc" value="你猜"><label
+                        target="xbnc">你猜</label></div>
+            </div>
 
         </div>
         <div style="flex-direction: row; align-items: center; margin-top: 50px">
