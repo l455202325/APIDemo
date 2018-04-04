@@ -278,6 +278,18 @@
       },
       "FormComponents/Picker": {
         "component": "index"
+      },
+      "FormComponents/Input": {
+        "component": "index"
+      },
+      "GeneralModule/Event": {
+        "component": "index"
+      },
+      "GeneralModule/Event/Swipe": {
+        "component": "index"
+      },
+      "GeneralModule/Event/SwipeDemo": {
+        "component": "index"
       }
     }
   },
@@ -287,7 +299,8 @@
     "menu": true,
     "pages": {
       "DemoDetail": {
-        "titleBarText": "API接口列表"
+        "titleBarText": "API接口列表",
+        "menu": true
       },
       "About": {
         "menu": false
@@ -510,6 +523,22 @@
       },
       "FormComponents/Picker": {
         "titleBarText": "Picker",
+        "menu": false
+      },
+      "FormComponents/Input": {
+        "titleBarText": "Input",
+        "menu": false
+      },
+      "GeneralModule/Event": {
+        "titleBarText": "通用事件",
+        "menu": false
+      },
+      "GeneralModule/Event/SwipeDemo": {
+        "titleBarText": "天气查询",
+        "menu": false
+      },
+      "GeneralModule/Event/Swipe": {
+        "titleBarText": "Swipe",
         "menu": false
       }
     }

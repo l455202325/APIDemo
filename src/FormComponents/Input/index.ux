@@ -1,0 +1,86 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>Button</text>
+            <input style="margin-left: 20px" type="button" value="按钮">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>爱好：</text>
+            <div style="flex-direction: column">
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahcf" value="吃饭"><label
+                        target="ahcf">吃饭</label>
+                </div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahsj" value="睡觉">吃饭<label
+                        target="ahsj">睡觉</label>
+                </div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="checkbox" name="ah" id="ahddd" value="打豆豆">吃饭<label
+                        target="ahddd">打豆豆</label>
+                </div>
+            </div>
+
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>性别：</text>
+
+            <div style="flex-direction: column">
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnan" value="男"><label
+                        target="xbnan">男</label></div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnv" value="女"><label
+                        target="xbnv">女</label></div>
+                <div style="flex-direction: row">
+                    <input style="margin-left: 20px" type="radio" name="xb" id="xbnc" value="你猜"><label
+                        target="xbnc">你猜</label></div>
+            </div>
+
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个text</text>
+            <input style="margin-left: 20px" type="text" placeholder="可以输汉字英文数字">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个email</text>
+            <input style="margin-left: 20px" type="email" placeholder="是不是下面多出一个@">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个date</text>
+            <input style="margin-left: 20px" type="date" placeholder="是不是只能输入数字">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个time</text>
+            <input style="margin-left: 20px" type="time" placeholder="这个是一个time">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个number</text>
+            <input style="margin-left: 20px" type="number" placeholder="只能输入数字哦 ">
+        </div>
+        <div style="flex-direction: row; align-items: center; margin-top: 50px">
+            <text>这是一个password</text>
+            <input style="margin-left: 20px" type="password" placeholder="看不见看不见">
+        </div>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import {listData} from '../../Common/js/data'
+
+    export default {
+        data: {},
+    }
+</script>

@@ -40,7 +40,7 @@
             listData: [
                 {
                     name: 'input',
-                    url: ''
+                    url: '/FormComponents/Input'
                 },
                 {
                     name: 'label',

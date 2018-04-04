@@ -1,0 +1,153 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page" @swipe="pageSwipe">
+
+        <!--<input class="input" type="text" placeholder="请输入要查询天气的城市名称" @change="cityChange">-->
+        <!--&lt;!&ndash; 点击请求数据 &ndash;&gt;-->
+        <!--<input class="btn" type="button" value="{{buttonText}}" onclick="fetch">-->
+        <text >{{city}} 天气预报</text>
+        <div style="flex-direction: column;margin: 20px 0" if="{{data.status != undefined && data.status == 200}}"
+            >
+            <text class="label" >城市：{{data.city}}</text>
+            <text class="label" >湿度：{{data.data.shidu}}</text>
+            <text class="label" >pm25：{{data.data.pm25}}</text>
+            <text class="label" >pm10：{{data.data.pm10}}</text>
+            <text class="label" >温度：{{data.data.wendu}}℃</text>
+            <text class="label" >污染程度：{{data.data.quality}}</text>
+            <text class="label" >感冒指数：{{data.data.ganmao}}</text>
+
+            <text class="label-title" @swipe="pageSwipe">未来天气状况</text>
+
+        </div>
+        <list if="forecast.length > 0" >
+            <list-item type="listItem" class="listitem" for="{{item in forecast}}">
+                <text class="title" >日期：{{item.date}}</text>
+                <text class="title" >日出时间：{{item.sunrise}}</text>
+                <text class="title" >日落时间：{{item.sunset}}</text>
+                <text class="title" >最高温度：{{item.high}}℃</text>
+                <text class="title" >最低温度：{{item.low}}℃</text>
+                <text class="title" >风向：{{item.fx}}</text>
+                <text class="title" >风力：{{item.fl}}</text>
+                <text class="title" >天气：{{item.type}}</text>
+                <text class="title" >notice：{{item.notice}}</text>
+            </list-item>
+        </list>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px;
+    }
+
+    .input {
+        width: 100%;
+        border: 1px solid #8d8d8d;
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 26px;
+        text-align: left;
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 480px;
+        height: 90px;
+        border-radius: 10px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        line-height: 90px;
+        margin-top: 20px;
+    }
+
+    .label {
+        width: 100%;
+    }
+
+    .label-title {
+        width: 100%;
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .listitem {
+        border-bottom-color: #d1d1d1;
+        border-bottom-width: 1px;
+        flex-direction: column;
+        padding: 20px 0;
+    }
+</style>
+
+<script>
+    import fetch from '@system.fetch'
+    import prompt from '@system.prompt';
+    import router from '@system.router'
+
+    export default {
+        data: {
+            city: '',
+            buttonText: '查询天气',
+            data: {},
+            forecast: [],
+            citys: ["北京市", "上海市", "西安市", "杭州市", "渭南市", "咸阳市"],
+            cityIndex: 0,
+        },
+        cityChange(e) {
+//            this.city = e.value;
+//            this.buttonText = '查询 ' + this.city + ' 天气'
+        },
+        onShow() {
+            this.city = this.citys[this.cityIndex];
+            this.fetch();
+        },
+        fetch() {
+            fetch.fetch({
+                url: "https://www.sojson.com/open/api/weather/json.shtml?city=" + this.city,
+                method: "GET",
+                success: (data) => {
+                    console.log("title: " + JSON.parse(data.data));
+                    let dataGet = JSON.parse(data.data);
+                    this.forecast = dataGet.data.forecast;
+                    this.data = dataGet;
+                },
+                fail: (data, code) => {
+                    console.log("handling fail, code=" + code);
+                    prompt.showToast({
+                        message: "handling fail, code=" + code + " data=" + data,
+                        duration: 0
+                    });
+                }
+            })
+        },
+        pageSwipe(e) {
+            if (e.direction == 'right') {
+                router.back();
+            } else if (e.direction == 'left') {
+                if (this.cityIndex < this.citys.length-1) {
+                    this.cityIndex++;
+                } else {
+                    this.cityIndex = 0;
+                }
+                this.city = this.citys[this.cityIndex];
+                this.fetch();
+
+            }
+
+            prompt.showToast({
+                message: e.direction,
+                duration: 0
+            });
+        }
+    }
+</script>

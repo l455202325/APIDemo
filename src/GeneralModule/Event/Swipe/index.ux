@@ -1,0 +1,60 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div id="page" class="demo-page" style="background-color:{{bgV}}" onswipe="divSwipe">
+
+        <text>请滑动你的手指 上↑下↓左←右→</text>
+
+        <text style="margin-top: 100px;font-size: 50px">滑动手指 切换心情</text>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 40px;
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .item {
+        border-bottom-color: #d1d1d1;
+        border-bottom-width: 1px;
+    }
+</style>
+
+<script>
+
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            bgV: "#f0f0f0"
+        },
+        divSwipe(e) {
+            let msg = "";
+            if (e.direction == 'left') {
+                msg = "向左滑动";
+            } else if (e.direction == 'right') {
+                msg = "向右滑动";
+            } else if (e.direction == 'up') {
+                msg = "向上滑动";
+            } else if (e.direction == 'down') {
+                msg = "向下滑动";
+            }
+            this.bgV = '#' + (Math.random() * 0xffffff << 0).toString(16);
+            prompt.showToast({
+                message: msg,
+                duration: 0
+            });
+
+
+        },
+    }
+</script>

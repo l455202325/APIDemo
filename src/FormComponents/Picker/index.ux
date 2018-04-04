@@ -3,20 +3,25 @@
     <div class="demo-page">
         <div style="flex-direction: row;align-items: center">
             <label>选择日期：</label>
-            <picker type="date" class="picker" value="{{dateValue}}" @change="pickerChange('date')"/>
+            <picker type="date" style="font-size: 36px; margin-left: 20px " value="{{dateValue}}"
+                    @change="pickerChange('date')"/>
         </div>
 
         <div style="flex-direction: row;align-items: center;margin-top: 50px">
             <label>选择时间：</label>
-            <picker type="time" class="picker" value="{{timeValue}}" @change="pickerChange('time')"/>
+            <picker type="time" style="font-size: 36px; margin-left: 20px " value="{{timeValue}}"
+                    @change="pickerChange('time')"/>
         </div>
 
         <label style="margin-top: 150px;font-size: 36px;font-weight: bold">三级联动picker版</label>
         <div style="flex-direction: row;align-items: center;margin-top: 20px">
 
-            <picker type="text" class="picker picker-border" show="{{provinces.length>0}}" value="{{provincesText}}" range="{{provinces}}" @change="pickerChange('province')"/>
-            <picker type="text" class="picker picker-border" show="{{citys.length>0}}" value="{{citysText}}" range="{{citys}}" @change="pickerChange('city')"/>
-            <picker type="text" class="picker picker-border" show="{{areas.length>0}}" value="{{areasText}}"  range="{{areas}}" @change="pickerChange('area')"/>
+            <picker type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px "
+                    value="{{province}}" range="{{provinceList}}" @change="pickerChange('province')"/>
+            <picker type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px "
+                    value="{{city}}" range="{{cityList}}" @change="pickerChange('city')"/>
+            <picker type="text" style="font-size: 36px; margin-left: 20px; border: 1px solid #8d8d8d;padding: 10px "
+                    value="{{area}}" range="{{areaList}}" @change="pickerChange('area')"/>
         </div>
 
 
@@ -31,16 +36,6 @@
         padding: 10px;
     }
 
-    .picker {
-        font-size: 36px;
-        margin-left: 20px;
-    }
-
-    .picker-border {
-        border: 1px solid #8d8d8d;
-        padding: 10px;
-    }
-
 </style>
 
 <script>
@@ -52,19 +47,24 @@
             dateValue: '请选择日期',
             timeValue: '请选择时间',
             lists: listData,
-            provinces:[],
-            citys:[],
-            areas:[],
-            provincesText:"请选择省",
-            citysText:"请选择市",
-            areasText:"请选择区",
-            provincesIndex:0,
-            cityIndex:0,
+            province: '请选择省',
+            city: '请选择市',
+            area: '请选择区',
+            provinceList: [],
+            cityList: [],
+            areaList: [],
+            selectProvince: {},
+            selectCity: {}
+
         },
         onShow() {
-            this.getProvincesDatas();
-            // this.getCityDatas();
-            // this.getAreaDatas();
+            // prompt.showToast({
+            //     message:"lists："+JSON.stringify(listData),
+            //     duration:0
+            // });
+            this.getProvinceList();
+            this.getCityList();
+            this.getAreaList();
         }
         ,
         pickerChange(what, e) {
@@ -73,56 +73,42 @@
             } else if (what == 'time') {
                 this.timeValue = e.hour + ":" + e.minute;
             }else if (what == 'province'){
-                this.provincesText = e.newValue
-                this.provincesIndex = e.newSelected;
-
-                this.getCityDatas();
-
+                this.province = e.newValue;
+                this.selectProvince = this.lists[e.newSelected];
+                this.getCityList();
+                this.getAreaList();
             }else if (what == 'city'){
-                this.citysText = e.newValue;
-                this.cityIndex = e.newSelected;
-                this.getAreaDatas();
-
-            } else if (what == 'area') {
-                this.areasText = e.newValue;
+                this.city = e.newValue;
+                this.selectCity = this.selectProvince.city[e.newSelected];
+                this.getAreaList();
+            }else if (what == 'area'){
+                this.area = e.newValue;
             }
         },
-        getProvincesDatas(){
-            this.provinces = [];
-            this.citys = [];
-            this.areas = [];
-            var len = this.lists.length;
-            for (let i = 0; i < len; i++) {
-                this.provinces.push(this.lists[i].name);
+        getProvinceList(){
+            let len = this.lists.length;
+            this.provinceList = [];
+            this.selectProvince = this.lists[0];
+            for (let i = 0; i < len ;i++){
+                this.provinceList.push(this.lists[i].name)
             }
         },
-        getCityDatas(){
-            this.citys = [];
-            this.areas = [];
-            this.citysText = '请选择市';
-            var len = this.lists[this.provincesIndex].city.length;
-            for (let i = 0; i < len; i++) {
-                this.citys.push(this.lists[this.provincesIndex].city[i].name);
+        getCityList(){
+            let len = this.selectProvince.city.length;
+            this.cityList = [];
+            for (let i = 0; i < len ;i++){
+                this.cityList.push(this.selectProvince.city[i].name)
             }
-
-            prompt.showToast({
-                message: JSON.stringify(this.citys),
-                duration: 0
-            });
+            this.selectCity = this.selectProvince.city[0];
+            this.city = '请选择市';
         },
-        getAreaDatas(){
-            this.areas = [];
-            this.areasText = '请选择市区';
-            var len = this.lists[this.provincesIndex].city[this.cityIndex].area.length;
-            for (let i = 0; i < len; i++) {
-                this.areas.push(this.lists[this.provincesIndex].city[this.cityIndex].area[i]);
+        getAreaList(){
+            let len = this.selectCity.area.length;
+            this.areaList = [];
+            for (let i = 0; i < len ;i++){
+                this.areaList.push(this.selectCity.area[i])
             }
-
-            prompt.showToast({
-                message: JSON.stringify(this.areas),
-                duration: 0
-            });
+            this.area = '请选择区';
         }
-
     }
 </script>

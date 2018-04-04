@@ -1,9 +1,23 @@
 <template>
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
-            <select style="width: 50%;padding-left:20px;height: 60px;margin:10px;color: #333333;border: 1px solid #8d8d8d" @change="listsChange">
+
+        <label style="font-size: 36px;font-weight: bold">三级联动select版</label>
+        <div style="flex-direction: row;margin-top: 100px">
+            <select style="width: 30%;padding-left:20px;height: 60px;margin:10px;color: #333333;border: 1px solid #8d8d8d"
+                    @change="listsChange(1)">
                 <option style="padding: 40px;color: #333333" for="{{item in lists}}">{{item.name}}</option>
             </select>
+            <select style="width: 30%;padding-left:20px;height: 60px;margin:10px;color: #333333;border: 1px solid #8d8d8d"
+                    @change="listsChange(2)">
+                <option style="padding: 40px;color: #333333" for="{{item in citys}}">{{item.name}}</option>
+            </select>
+            <select style="width: 30%;padding-left:20px;height: 60px;margin:10px;color: #333333;border: 1px solid #8d8d8d"
+                    @change="listsChange(3)">
+                <option style="padding: 40px;color: #333333" for="{{item in areas}}">{{item}}</option>
+            </select>
+        </div>
+        <text style="margin-top: 50px">在做这个的过程中花费了好久时间来调试，最后发现系统组件有BUG，这里记录一下，后面再修改，大家这里看看实现的逻辑即可</text>
 
 
     </div>
@@ -27,20 +41,59 @@
         data: {
             sliderValue: '10',
             lists: listData,
-
+            citys: [],
+            areas: [],
+            selectProvince: {},
+            selectCity: {}
         },
         onShow() {
             // prompt.showToast({
             //     message:"lists："+JSON.stringify(listData),
             //     duration:0
             // });
+            this.selectProvince = this.lists[0];
+            this.getCitys();
+            this.selectCity = this.selectProvince.city[0];
+            this.getAreas();
         }
         ,
-        listsChange(e){
-            prompt.showToast({
-                message:e.newValue,
-                duration:0
-            });
+        listsChange(what, e) {
+            if (what == 1) {
+                let index = this.getIndex(this.lists, e.newValue);
+
+                prompt.showToast({
+                    message: "index:" + index,
+                    duration: 0
+                });
+
+                this.selectProvince = this.lists[this.getIndex(this.lists, e.newValue)]
+                this.getCitys();
+
+                this.selectCity = this.selectProvince.city[0];
+                this.getAreas();
+
+            } else if (what == 2) {
+                this.selectCity = this.selectProvince.city[this.getIndex(this.lists, e.newValue)];
+                this.getAreas();
+            }
+        },
+        getCitys() {
+            this.citys = []
+            this.citys = this.selectProvince.city
+        },
+        getAreas() {
+            this.areas = [];
+            this.areas = this.selectCity.area;
+        },
+        getIndex(array, itemString) {
+            let len = array.length;
+            for (let i = 0; i < len; i++) {
+                let item = array[i];
+                if (item.name == itemString) {
+                    return i;
+                }
+            }
+            return 0;
         }
     }
 </script>
