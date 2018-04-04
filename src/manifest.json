@@ -536,6 +536,10 @@
       "GeneralModule/Event/SwipeDemo": {
         "titleBarText": "天气查询",
         "menu": false
+      },
+      "GeneralModule/Event/Swipe": {
+        "titleBarText": "Swipe",
+        "menu": false
       }
     }
   }
