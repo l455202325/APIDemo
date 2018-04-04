@@ -5,18 +5,18 @@
         <!--<input class="input" type="text" placeholder="请输入要查询天气的城市名称" @change="cityChange">-->
         <!--&lt;!&ndash; 点击请求数据 &ndash;&gt;-->
         <!--<input class="btn" type="button" value="{{buttonText}}" onclick="fetch">-->
-        <label >{{city}} 天气预报</label>
+        <text >{{city}} 天气预报</text>
         <div style="flex-direction: column;margin: 20px 0" if="{{data.status != undefined && data.status == 200}}"
             >
-            <label class="label" >城市：{{data.city}}</label>
-            <label class="label" >湿度：{{data.data.shidu}}</label>
-            <label class="label" >pm25：{{data.data.pm25}}</label>
-            <label class="label" >pm10：{{data.data.pm10}}</label>
-            <label class="label" >温度：{{data.data.wendu}}℃</label>
-            <label class="label" >污染程度：{{data.data.quality}}</label>
-            <label class="label" >感冒指数：{{data.data.ganmao}}</label>
+            <text class="label" >城市：{{data.city}}</text>
+            <text class="label" >湿度：{{data.data.shidu}}</text>
+            <text class="label" >pm25：{{data.data.pm25}}</text>
+            <text class="label" >pm10：{{data.data.pm10}}</text>
+            <text class="label" >温度：{{data.data.wendu}}℃</text>
+            <text class="label" >污染程度：{{data.data.quality}}</text>
+            <text class="label" >感冒指数：{{data.data.ganmao}}</text>
 
-            <label class="label-title" @swipe="pageSwipe">未来天气状况</label>
+            <text class="label-title" @swipe="pageSwipe">未来天气状况</text>
 
         </div>
         <list if="forecast.length > 0" >
