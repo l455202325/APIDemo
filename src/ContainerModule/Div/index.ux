@@ -1,0 +1,30 @@
+<template>
+    <div class="demo-page">
+        <div class="direction-row" style="flex-direction: row;width:100%;height:50px;border: 1px solid red;">
+            <div style="background-color: #00A000;width:50%;justify-content: center">
+                <text style="color: #ffffff;">direction-row1</text>
+            </div>
+            <div style="background-color: #199cdd;width:50%;justify-content: center">
+                <text style="color: #ffffff;">direction-row2</text>
+            </div>
+        </div>
+        <div class="direction-column" style="flex-direction: column;width:100%;border: 1px solid red;margin-top: 30px">
+            <div style="background-color: #00A000;width:100%;justify-content: center">
+                <text style="color: #ffffff;">direction-column</text>
+            </div>
+            <div style="background-color: #8d8d8d;width:100%;justify-content: center">
+                <text style="color: #ffffff;">direction-column</text>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<script>
+
+</script>
