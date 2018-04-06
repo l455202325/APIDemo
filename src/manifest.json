@@ -135,6 +135,9 @@
       "ContainerModule/Div": {
         "component": "index"
       },
+      "ContainerModule/Tabs": {
+        "component": "index"
+      },
       "BasicComponents": {
         "component": "index"
       },
@@ -546,6 +549,10 @@
       },
       "ContainerModule/Div": {
         "titleBarText": "Div",
+        "menu": false
+      },
+      "ContainerModule/Tabs": {
+        "titleBarText": "Tabs",
         "menu": false
       }
     }

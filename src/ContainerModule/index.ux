@@ -73,15 +73,15 @@
                 },
                 {
                     name: 'tabs',
-                    url: ''
+                    url: '/ContainerModule/Tabs'
                 },
                 {
                     name: 'tab-bar',
-                    url: ''
+                    url: '/ContainerModule/Tabs'
                 },
                 {
                     name: 'tab-content',
-                    url: ''
+                    url: '/ContainerModule/Tabs'
                 }
             ]
         },

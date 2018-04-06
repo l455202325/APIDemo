@@ -1,0 +1,78 @@
+<template>
+    <div class="demo-page">
+        <tabs @change="tabsChange" id="tab" index="{{currentIndex}}">
+            <tab-bar class="tab-bar">
+                <text for="{{(index,item) in list}}" class="{{currentIndex == index ? 'tab-sel':''}}" @click="tabBarClick(index)">{{item.title}}</text>
+            </tab-bar>
+            <tab-content class="tab-content" >
+                <div class="tab-content-section" for="{{(index,item) in list}}">
+                    <text>{{item.content}}</text>
+                </div>
+
+            </tab-content>
+        </tabs>
+    </div>
+</template>
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tab-bar {
+        height: 100px;
+        border: 0px solid #eeeeee;
+        border-bottom-width: 1px;
+    }
+
+    .tab-bar text {
+        flex-grow: 1;
+        text-align: center;
+        margin: 10px;
+    }
+    .tab-sel{
+        color: #00A000;
+    }
+
+    .tab-content {
+        flex: 1;
+        background-color: #eeeeee;
+    }
+    .tab-content-section{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<script>
+
+    export default {
+        data: {
+            list: [
+                {
+                    title: 'tab1',
+                    content: 'content1'
+                },
+                {
+                    title: 'tab2',
+                    content: 'content2'
+                },
+                {
+                    title: 'tab3',
+                    content: 'content3'
+                }
+            ],
+            currentIndex: 0
+        },
+        onShow() {
+
+        },
+        tabsChange(e){
+            this.currentIndex = e.index;
+        },
+        tabBarClick(index){
+           this.currentIndex = index;
+        }
+    }
+</script>

@@ -15,9 +15,9 @@
   |     ├━━ richtext
   |     ├━━ stack
   |     ├━━ swiper
-  |     ├━━ tabs
-  |     ├━━ tab-bar
-  |     └━━ tab-content
+  |     ├━━ tabs(OK)
+  |     ├━━ tab-bar(OK)
+  |     └━━ tab-content(OK)
   |——基础组件
   |     |——a
   |     |——image
