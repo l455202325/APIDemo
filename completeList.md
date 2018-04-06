@@ -26,11 +26,11 @@
   |     |——span
   |     |——text
   |——表单组件
-  |     |——input
+  |     |——input(OK)
   |     |——label
   |     |——option
-  |     |——picker
-  |     |——select
+  |     |——picker(OK)
+  |     |——select(OK)
   |     |——slider(OK)
   |     |——switch(OK)
   |     |——textarea(OK)
@@ -52,9 +52,9 @@
   |——网络访问(OK)
   |     |——上传下载(OK)
   |     |——数据请求(OK)
-  |——文件数据
-  |     |——数据存储
-  |     |——文件存储
+  |——文件数据(OK)
+  |     |——数据存储(OK)
+  |     |——文件存储(OK)
   |——系统能力(OK)
   |     |——二维码(OK)
   |     |——传感器(OK)
