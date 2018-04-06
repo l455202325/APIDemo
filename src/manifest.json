@@ -132,6 +132,9 @@
       "ContainerModule": {
         "component": "index"
       },
+      "ContainerModule/Div": {
+        "component": "index"
+      },
       "BasicComponents": {
         "component": "index"
       },
@@ -539,6 +542,10 @@
       },
       "GeneralModule/Event/Swipe": {
         "titleBarText": "Swipe",
+        "menu": false
+      },
+      "ContainerModule/Div": {
+        "titleBarText": "Div",
         "menu": false
       }
     }
