@@ -1,6 +1,6 @@
 <template>
   <!-- template里只能有一个根节点 -->
-  <div class="demo-page">
+  <div class="demo-page" >
     <text>{{selectDec}}</text>
     <list>
       <block for="item in lists">

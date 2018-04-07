@@ -1,38 +1,41 @@
+<import name="loading" src="../../Template/loading"></import>
 <template>
     <!-- template里只能有一个根节点 -->
-    <div class="demo-page">
+    <loading loading-text="正在加载..." loading-image="/Common/loading.png" loading-show="{{loadingShow}}">
+        <div class="demo-page">
 
-        <input class="input" type="text" placeholder="请输入要查询天气的城市名称" @change="cityChange">
-        <!-- 点击请求数据 -->
-        <input class="btn" type="button" value="{{buttonText}}" onclick="fetch">
-        <div style="flex-direction: column;margin: 20px 0" if="{{data.status != undefined && data.status == 200}}">
-            <label class="label">城市：{{data.city}}</label>
-            <label class="label">湿度：{{data.data.shidu}}</label>
-            <label class="label">pm25：{{data.data.pm25}}</label>
-            <label class="label">pm10：{{data.data.pm10}}</label>
-            <label class="label">温度：{{data.data.wendu}}℃</label>
-            <label class="label">污染程度：{{data.data.quality}}</label>
-            <label class="label">感冒指数：{{data.data.ganmao}}</label>
+            <input class="input" type="text" placeholder="请输入要查询天气的城市名称" @change="cityChange">
+            <!-- 点击请求数据 -->
+            <input class="btn" type="button" value="{{buttonText}}" onclick="fetch">
+            <div style="flex-direction: column;margin: 20px 0" if="{{data.status != undefined && data.status == 200}}">
+                <label class="label">城市：{{data.city}}</label>
+                <label class="label">湿度：{{data.data.shidu}}</label>
+                <label class="label">pm25：{{data.data.pm25}}</label>
+                <label class="label">pm10：{{data.data.pm10}}</label>
+                <label class="label">温度：{{data.data.wendu}}℃</label>
+                <label class="label">污染程度：{{data.data.quality}}</label>
+                <label class="label">感冒指数：{{data.data.ganmao}}</label>
 
-            <label class="label-title">未来天气状况</label>
+                <label class="label-title">未来天气状况</label>
 
 
-
+            </div>
+            <list if="forecast.length > 0">
+                <list-item type="listItem" class="listitem" for="{{item in forecast}}">
+                    <text class="title">日期：{{item.date}}</text>
+                    <text class="title">日出时间：{{item.sunrise}}</text>
+                    <text class="title">日落时间：{{item.sunset}}</text>
+                    <text class="title">最高温度：{{item.high}}℃</text>
+                    <text class="title">最低温度：{{item.low}}℃</text>
+                    <text class="title">风向：{{item.fx}}</text>
+                    <text class="title">风力：{{item.fl}}</text>
+                    <text class="title">天气：{{item.type}}</text>
+                    <text class="title">notice：{{item.notice}}</text>
+                </list-item>
+            </list>
         </div>
-        <list  if="forecast.length > 0">
-            <list-item type="listItem" class="listitem" for="{{item in forecast}}">
-                <text class="title">日期：{{item.date}}</text>
-                <text class="title">日出时间：{{item.sunrise}}</text>
-                <text class="title">日落时间：{{item.sunset}}</text>
-                <text class="title">最高温度：{{item.high}}℃</text>
-                <text class="title">最低温度：{{item.low}}℃</text>
-                <text class="title">风向：{{item.fx}}</text>
-                <text class="title">风力：{{item.fl}}</text>
-                <text class="title">天气：{{item.type}}</text>
-                <text class="title">notice：{{item.notice}}</text>
-            </list-item>
-        </list>
-    </div>
+    </loading>
+
 </template>
 
 <style>
@@ -56,6 +59,7 @@
         padding-top: 10px;
         width: 100%;
     }
+
     .btn {
         width: 480px;
         height: 90px;
@@ -70,7 +74,8 @@
     .label {
         width: 100%;
     }
-    .label-title{
+
+    .label-title {
         width: 100%;
         font-size: 36px;
         font-weight: bold;
@@ -78,6 +83,7 @@
         align-items: center;
         text-align: center;
     }
+
     .listitem {
         border-bottom-color: #d1d1d1;
         border-bottom-width: 1px;
@@ -95,23 +101,39 @@
             city: '',
             buttonText: '查询天气',
             data: {},
-            forecast: []
+            forecast: [],
+            loadingShow: false
         },
         cityChange(e) {
             this.city = e.value;
             this.buttonText = '查询 ' + this.city + ' 天气'
         },
         fetch() {
+            this.loadingShow = true;
             fetch.fetch({
                 url: "https://www.sojson.com/open/api/weather/json.shtml?city=" + this.city,
                 method: "GET",
                 success: (data) => {
+
+                    this.loadingShow = false;
                     console.log("title: " + JSON.parse(data.data));
                     let dataGet = JSON.parse(data.data);
-                    this.forecast = dataGet.data.forecast;
-                    this.data = dataGet;
+                    if (dataGet == null || dataGet == undefined || dataGet == '') {
+                        return;
+                    }
+                    if (dataGet.data){
+                        this.forecast = dataGet.data.forecast;
+                        this.data = dataGet;
+                    }else {
+                        prompt.showToast({
+                            message: "查询失败",
+                            duration: 0
+                        });
+                    }
+
                 },
                 fail: (data, code) => {
+                    this.loadingShow = false;
                     console.log("handling fail, code=" + code);
                     prompt.showToast({
                         message: "handling fail, code=" + code + " data=" + data,

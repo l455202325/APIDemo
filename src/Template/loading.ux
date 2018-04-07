@@ -1,0 +1,44 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <stack style="width: 100%;width: 100%">
+        <slot></slot>
+        <div style="width: 100%;height: 100%;justify-content: center;align-items: center">
+            <div style="width: 300px;height: 300px;margin-top:50px;border-radius: 20px;background-color: rgba(14,14,14,0.5);
+        flex-direction: column;justify-content: center;align-items: center" show="{{loadingShow}}">
+                <image class="loading" src="{{loadingImage}}"></image>
+                <text style="margin-top: 20px;color: #f1f1f1">{{loadingText}}</text>
+            </div>
+        </div>
+
+    </stack>
+</template>
+
+<style>
+    .loading {
+        width: 100px;
+        height: 100px;
+        animation-name: loading;
+        animation-duration: 2000ms;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes loading {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+</style>
+
+<script>
+
+    export default {
+        props: ['loadingText',
+            'loadingImage',
+        'loadingShow'],
+        data: {}
+    }
+</script>
