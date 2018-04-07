@@ -10,7 +10,7 @@
   |     ├━━ div
   |     ├━━ list
   |     ├━━ list-item
-  |     ├━━ popup
+  |     ├━━ popup(OK)
   |     ├━━ refresh
   |     ├━━ richtext
   |     ├━━ stack
@@ -28,7 +28,7 @@
   |——表单组件
   |     |——input(OK)
   |     |——label
-  |     |——option
+  |     |——option(OK)
   |     |——picker(OK)
   |     |——select(OK)
   |     |——slider(OK)

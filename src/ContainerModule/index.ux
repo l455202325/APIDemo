@@ -52,7 +52,7 @@
                 },
                 {
                     name: 'popup',
-                    url: ''
+                    url: '/ContainerModule/Popup'
                 },
                 {
                     name: 'refresh',

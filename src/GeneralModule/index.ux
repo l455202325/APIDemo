@@ -52,7 +52,7 @@
                 },
                 {
                     name: '通用动画',
-                    url: ''
+                    url: '/GeneralModule/Animation'
                 },
                 {
                     name: '通用渐变',

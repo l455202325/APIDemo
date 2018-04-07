@@ -135,6 +135,9 @@
       "ContainerModule/Div": {
         "component": "index"
       },
+      "ContainerModule/Popup": {
+        "component": "index"
+      },
       "ContainerModule/Tabs": {
         "component": "index"
       },
@@ -289,6 +292,9 @@
         "component": "index"
       },
       "GeneralModule/Event": {
+        "component": "index"
+      },
+      "GeneralModule/Animation": {
         "component": "index"
       },
       "GeneralModule/Event/Swipe": {
@@ -539,6 +545,10 @@
         "titleBarText": "通用事件",
         "menu": false
       },
+      "GeneralModule/Animation": {
+        "titleBarText": "通用动画",
+        "menu": false
+      },
       "GeneralModule/Event/SwipeDemo": {
         "titleBarText": "天气查询",
         "menu": false
@@ -553,6 +563,10 @@
       },
       "ContainerModule/Tabs": {
         "titleBarText": "Tabs",
+        "menu": false
+      },
+      "ContainerModule/Popup": {
+        "titleBarText": "Popup",
         "menu": false
       }
     }

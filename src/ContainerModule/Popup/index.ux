@@ -1,0 +1,62 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+
+            <div id="top" style="padding: 50px;margin-top: 50px;background-color: #199cdd;">
+                <text>ClickMe top</text>
+            </div>
+        <div id="left" style="padding: 50px;margin-top: 50px;background-color: #199cdd;">
+            <text>ClickMe left</text>
+        </div>
+        <div id="right" style="padding: 50px;margin-top: 50px;background-color: #199cdd;" >
+            <text>ClickMe right</text>
+        </div>
+        <div id="bottom" style="padding: 50px;margin-top: 50px;background-color: #199cdd;" >
+            <text>ClickMe bottom</text>
+        </div>
+        <div id="topLeft" style="padding: 50px;margin-top: 50px;background-color: #199cdd;">
+            <text>ClickMe topLeft</text>
+        </div>
+        <div id="topRight" style="padding: 50px;margin-top: 50px;background-color: #199cdd;">
+            <text>ClickMe topRight</text>
+        </div>
+        <div id="bottomLeft" style="padding: 50px;margin-top: 50px;background-color: #199cdd;">
+            <text>ClickMe bottomLeft</text>
+        </div>
+        <div id="bottomRight" style="padding: 50px;margin-top: 50px;background-color: #199cdd;" >
+            <text>ClickMe bottomRight</text>
+        </div>
+
+        <popup target="top" style="mask-color:rgba(255,168,35,0.3);padding: 20px" placement="top"><text>top</text></popup>
+        <popup target="left" style="mask-color:rgba(116,183,246,0.3);padding: 20px" placement="left"><text>left</text></popup>
+        <popup target="right" style="mask-color:rgba(127,255,99,0.31);padding: 20px" placement="right"><text>right</text></popup>
+        <popup target="bottom" style="mask-color:#1a2966;padding: 20px" placement="bottom"><text>bottom</text></popup>
+        <popup target="topLeft"  style="mask-color:#753219;padding: 20px" placement="topLeft"><text>topLeft</text></popup>
+        <popup target="topRight"  style="mask-color:rgba(0,0,0,0.5);padding: 20px" placement="topRight"><text>topRight</text></popup>
+        <popup target="bottomLeft"  style="mask-color:#347569;padding: 20px" placement="bottomLeft"><text>bottomLeft</text></popup>
+        <popup target="bottomRight"  style="mask-color:#980321;padding: 20px" placement="bottomRight"><text>bottomRight</text></popup>
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 200px;
+    }
+
+
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+
+        },
+
+    }
+</script>
