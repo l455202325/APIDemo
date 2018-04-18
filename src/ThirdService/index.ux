@@ -48,7 +48,7 @@
                 },
                 {
                     name: '第三方分享',
-                    url: ''
+                    url: '/ThirdService/Share'
                 }
             ]
         },

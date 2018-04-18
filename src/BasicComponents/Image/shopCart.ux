@@ -47,10 +47,11 @@
         data: {},
 
         onHomeClick() {
-
+            router.clear();
             // 跳转到应用内的某个页面
-            router.push({
-                uri: '/DemoDetail'
+
+            router.replace({
+                uri: '/Home'
             })
 
         }

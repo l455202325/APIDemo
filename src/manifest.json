@@ -95,6 +95,13 @@
     },
     {
       "name": "system.file"
+    },
+    {
+      "name": "service.share",
+      "params": {
+        "appSign": "8156d58a1da8a3a6c93b831ef5af3f4d",
+        "qqKey": "1106835346"
+      }
     }
   ],
   "permissions": [
@@ -106,9 +113,9 @@
     "logLevel": "debug"
   },
   "router": {
-    "entry": "DemoDetail",
+    "entry": "Home",
     "pages": {
-      "DemoDetail": {
+      "Home": {
         "component": "index"
       },
       "About": {
@@ -305,6 +312,12 @@
       },
       "GeneralModule/Event/SwipeDemo": {
         "component": "index"
+      },
+      "GeneralModule/Event/SwipeDemo": {
+        "component": "index"
+      },
+      "ThirdService/Share": {
+        "component": "index"
       }
     }
   },
@@ -313,12 +326,12 @@
     "titleBarTextColor": "#414141",
     "menu": true,
     "pages": {
-      "DemoDetail": {
-        "titleBarText": "API接口列表",
-        "menu": true
-      },
       "About": {
         "menu": false
+      },
+      "Home": {
+        "menu": false,
+        "titleBar":false
       },
       "SystemCapability": {
         "titleBarText": "系统能力",
@@ -573,6 +586,10 @@
       },
       "ContainerModule/Popup": {
         "titleBarText": "Popup",
+        "menu": false
+      },
+      "ThirdService/Share": {
+        "titleBarText": "Share",
         "menu": false
       }
     }

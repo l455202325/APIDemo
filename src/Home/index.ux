@@ -1,0 +1,211 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <tabs @change="tabsChange" id="tab" index="{{tabSelectedIndex}}">
+        <tab-content>
+            <div class="context" for="{{(index,item) in tabList}}">
+                <image style="width: 100px;height: 100px;margin-top: 100px;margin-bottom: 50px"
+                       src="{{item.selected}}"></image>
+                <text style="font-size: 30px;color: #666666;margin: 30px">{{item.introduce}}</text>
+                <list class="content-list">
+                    <block for="{{(index,listItem) in item.lists}}">
+                        <list-item type="list-item"
+                                   style="background-color: #ffffff;margin: 20px;padding: 20px;border-radius: 10px;border: 1px solid #d1d1d1;"
+                        @click="listItemClick(listItem)">
+                            <div style="width: 50%;">
+                                <image style="width: 80px;height: 80px;" src="{{listItem.icon}}"></image>
+                            </div>
+                            <div style="width: 50%;justify-content: flex-end">
+                                <text style="font-size: 40px;color: #333333;">{{listItem.name}}</text>
+                            </div>
+
+                        </list-item>
+
+                    </block>
+                </list>
+            </div>
+        </tab-content>
+        <tab-bar>
+            <div class="tab-item" for="{{(index,item) in tabList}}" @click="tabItemClick(index)">
+                <image class="tab-icon" src="{{(index == tabSelectedIndex) ? item.selected :item.normal}}"></image>
+                <text class="{{(index == tabSelectedIndex) ? 'selected' :'normal'}}">{{item.name}}</text>
+            </div>
+        </tab-bar>
+    </tabs>
+</template>
+
+<style>
+    .context {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f1f1;
+    }
+
+    .tab-item {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tab-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    tab-bar {
+        height: 120px;
+        border-top-color: #dbdbdb;
+        border-top-width: 1px;
+    }
+
+    .normal {
+        color: #999999;
+    }
+
+    .selected {
+        color: #09ba07;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            tabList: [
+                {
+                    name: '框架',
+                    normal: '/static/frame_normal.png',
+                    selected: '/static/frame_selected.png',
+                    introduce: '以下将展示快应用整体架构相关的能力，样式及用法仅供参考，大家在使用过程中遇到相关的问题可以直接使用，具体用法详见快应用官方开发文档',
+                    lists: []
+                },
+                {
+                    name: '组件',
+                    normal: '/static/element_normal.png',
+                    selected: '/static/element_selected.png',
+                    introduce: '以下将展示快应用组件相关的能力，样式及用法仅供参考，大家在使用过程可以根据自身的需求自定相关样式，具体用法详见快应用官方开发文档',
+                    lists: [
+                        {
+                            name: '通用组件',
+                            url: '/GeneralModule',
+                            icon: '/static/general_module.png'
+                        },
+                        {
+                            name: '容器组件',
+                            url: '/ContainerModule',
+                            icon: '/static/container_module.png'
+                        },
+                        {
+                            name: '基础组件',
+                            url: '/BasicComponents',
+                            icon: '/static/basic_components.png'
+                        },
+                        {
+                            name: '表单组件',
+                            url: '/FormComponents',
+                            icon: '/static/form_components.png'
+                        },
+                        {
+                            name: '媒体组件',
+                            url: '/MediaComponents',
+                            icon: '/static/media_components.png'
+                        },
+                        {
+                            name: '其他组件',
+                            url: '/OtherComponents',
+                            icon: '/static/other_components.png'
+                        }]
+                },
+                {
+                    name: '接口',
+                    normal: '/static/interface_normal.png',
+                    selected: '/static/interface_selected.png',
+                    introduce: '以下将展示快应用接口相关的能力，用法仅供参考，大家在使用过程中可以根据自身需求使用一种或者多种相关的属性及方法，具体用法详见快应用官方开发文档',
+                    lists: [
+                        {
+                            name: '基本功能',
+                            url: '/BasicFunction',
+                            icon: '/static/basic_function.png'
+                        },
+                        {
+                            name: '界面交互',
+                            url: '/InterfaceInteraction',
+                            icon: '/static/interface_interaction.png'
+                        },
+                        {
+                            name: '网络访问',
+                            url: '/NetworkAccess',
+                            icon: '/static/network_access.png'
+                        },
+                        {
+                            name: '文件数据',
+                            url: '/FileData',
+                            icon: '/static/file_data.png'
+                        },
+                        {
+                            name: '系统能力',
+                            url: '/SystemCapability',
+                            icon: '/static/system_capability.png'
+                        },
+                        {
+                            name: '安全',
+                            url: '/Security',
+                            icon: '/static/security.png'
+                        },
+                        {
+                            name: '图形图像',
+                            url: '/GraphicImage',
+                            icon: '/static/graphic_image.png'
+                        },
+                        {
+                            name: '声音音频',
+                            url: '/WaveAudio',
+                            icon: '/static/wave_audio.png'
+                        },
+                        {
+                            name: '厂商服务',
+                            url: '/VendorService',
+                            icon: '/static/vendor_service.png'
+                        },
+                        {
+                            name: '第三方服务',
+                            url: '/ThirdService',
+                            icon: '/static/third_service.png'
+                        }
+                    ]
+                },
+                {
+                    name: '常用布局',
+                    normal: '/static/layout_normal.png',
+                    selected: '/static/layout_selected.png',
+                    introduce: '以下将展示常用的一些布局及样式，样式及用法仅供参考，大家在使用过程中遇到相关的布局样式可以直接使用，如果没有也希望大家提出自己想要的样式，我会根据大家的需求尽可能的添加一些常用的布局样式，具体用法详见快应用官方开发文档',
+                    lists: []
+                }
+            ],
+            tabSelectedIndex: 2
+        },
+        tabItemClick(index) {
+            this.tabSelectedIndex = index;
+        },
+        tabsChange(e) {
+            this.tabSelectedIndex = e.index;
+        },
+        listItemClick(item){
+            const url = item.url;
+            if(url != null && url != ''){
+                // 跳转到应用内的某个页面
+                router.push({
+                    uri: url
+                })
+            }else {
+                prompt.showToast({
+                    message:'功能正在加紧时间开发中...',
+                    duration:0
+                });
+            }
+        }
+
+    }
+</script>

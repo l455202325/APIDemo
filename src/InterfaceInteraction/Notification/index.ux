@@ -37,7 +37,7 @@
                 contentTitle:'API Demo',
                 contentText:'点击后可以回到API Demo的接口列表页',
                 clickAction: {
-                    uri:'/DemoDetail'
+                    uri:'/Home'
                 }
             });
         }

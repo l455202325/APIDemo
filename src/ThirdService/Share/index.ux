@@ -1,0 +1,52 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <input class="btn" type="button" value="QQ分享" onclick="qqShare">
+        <input class="btn" type="button" value="微信分享" onclick="scan">
+        <input class="btn" type="button" value="微博分享" onclick="scan">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn {
+        width: 550px;
+        height: 86px;
+        margin-top: 75px;
+        border-radius: 43px;
+        background-color: #09ba07;
+        font-size: 30px;
+        color: #ffffff;
+        margin-top: 50px;
+    }
+</style>
+
+<script>
+    import share from '@service.share'
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {},
+        qqShare() {
+            console.log("provider ==> " + share.getProvider());
+            share.share({
+                shareType: 0,
+                title: "紫星快应用Api Demo",
+                summary: "这是一个功能最全的快应用学习的Demo，建议大家学习快应用的都收藏一下",
+                imagePath: "https://raw.githubusercontent.com/l455202325/APIDemo/master/images/group.jpg",
+                targetUrl: "https://github.com/l455202325/APIDemo",
+                success: (data)=> {
+                    console.log("handling success");
+                },
+                fail: (data, code)=> {
+                    console.log("handling fail, code=" + code);
+                }
+            });
+        }
+    }
+</script>
