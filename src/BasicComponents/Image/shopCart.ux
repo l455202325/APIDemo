@@ -1,0 +1,58 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <div class="cart-img">
+            <image src="/static/gouwuche.png"></image>
+        </div>
+
+        <text style="margin-top: 50px;margin-bottom: 50px;font-size: 30px">您的购物车中没有商品哦！</text>
+        <input class="btn" type="button" value="去首页逛逛" @click="onHomeClick">
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #F3F3F3;
+    }
+
+    .btn {
+        width: 480px;
+        height: 90px;
+        border-radius: 50px;
+        border: 1px solid #ff0000;
+        font-size: 30px;
+        color: #ff0000;
+        margin-top: 20px;
+        background-color: #F3F3F3;
+    }
+    .cart-img{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #E4E4E4;
+        border-radius: 150px;
+        width: 300px;
+        height:300px;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {},
+
+        onHomeClick() {
+
+            // 跳转到应用内的某个页面
+            router.push({
+                uri: '/DemoDetail'
+            })
+
+        }
+    }
+</script>

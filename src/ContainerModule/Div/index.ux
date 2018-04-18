@@ -1,6 +1,6 @@
 <template>
     <div class="demo-page">
-        <div class="direction-row" style="flex-direction: row;width:100%;height:50px;border: 1px solid red;">
+        <div class="direction-row" style="flex-direction: row;width:100%;height:50px;border: 1px solid #ff0000;">
             <div style="background-color: #00A000;width:50%;justify-content: center">
                 <text style="color: #ffffff;">direction-row1</text>
             </div>
@@ -8,7 +8,7 @@
                 <text style="color: #ffffff;">direction-row2</text>
             </div>
         </div>
-        <div class="direction-column" style="flex-direction: column;width:100%;border: 1px solid red;margin-top: 30px">
+        <div class="direction-column" style="flex-direction: column;width:100%;border: 1px solid #ff0000;margin-top: 30px">
             <div style="background-color: #00A000;width:100%;justify-content: center">
                 <text style="color: #ffffff;">direction-column</text>
             </div>

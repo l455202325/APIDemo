@@ -44,7 +44,7 @@
                 },
                 {
                     name: 'image',
-                    url: ''
+                    url: '/BasicComponents/Image'
                 },
                 {
                     name: 'progress',

@@ -1,15 +1,16 @@
 <template>
     <div class="demo-page">
         <tabs @change="tabsChange" id="tab" index="{{currentIndex}}">
-            <tab-bar class="tab-bar">
-                <text for="{{(index,item) in list}}" class="{{currentIndex == index ? 'tab-sel':''}}" @click="tabBarClick(index)">{{item.title}}</text>
-            </tab-bar>
+
             <tab-content class="tab-content" >
                 <div class="tab-content-section" for="{{(index,item) in list}}">
                     <text>{{item.content}}</text>
                 </div>
 
             </tab-content>
+            <tab-bar class="tab-bar">
+                <text for="{{(index,item) in list}}" class="{{currentIndex == index ? 'tab-sel':''}}" @click="tabBarClick(index)">{{item.title}}</text>
+            </tab-bar>
         </tabs>
     </div>
 </template>

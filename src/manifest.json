@@ -144,6 +144,9 @@
       "BasicComponents": {
         "component": "index"
       },
+      "BasicComponents/Image": {
+        "component": "shopCart"
+      },
       "FormComponents": {
         "component": "index"
       },
@@ -343,6 +346,9 @@
       },
       "BasicComponents": {
         "titleBarText": "基础组件",
+        "menu": false
+      },"BasicComponents/Image": {
+        "titleBarText": "购物车",
         "menu": false
       },
       "FormComponents": {

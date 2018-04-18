@@ -7,7 +7,7 @@
   },
   "description": "",
   "scripts": {
-    "build":   "cross-env NODE_PLATFORM=na NODE_PHASE=dv webpack --config ./node_modules/hap-tools/webpack.config.js",
+    "build": "cross-env NODE_PLATFORM=na NODE_PHASE=dv webpack --config ./node_modules/hap-tools/webpack.config.js",
     "release": "cross-env NODE_PLATFORM=na NODE_PHASE=ol webpack --config ./node_modules/hap-tools/webpack.config.js",
     "clear": "rm -rf build/* && rm -rf dist/*",
     "server": "cross-env NODE_MOUNTED_ROUTER=\"debug bundle\" node ./node_modules/hap-tools/debugger/server/index.js",
@@ -15,7 +15,7 @@
     "notify": "node ./node_modules/hap-tools/debugger/command/notify.js",
     "watch": "cross-env NODE_PLATFORM=na NODE_PHASE=dv webpack --config ./node_modules/hap-tools/webpack.config.js --watch",
     "watch:na": "npm run na:dv -- --watch",
-    "na":    "npm run na:dv -- --watch",
+    "na": "npm run na:dv -- --watch",
     "lint": "./node_modules/.bin/eslint src/",
     "na:dv": "cross-env NODE_PLATFORM=na NODE_PHASE=dv webpack --config ./node_modules/hap-tools/webpack.config.js",
     "na:qa": "cross-env NODE_PLATFORM=na NODE_PHASE=qa webpack --config ./node_modules/hap-tools/webpack.config.js",
