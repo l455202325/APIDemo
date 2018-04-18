@@ -1,6 +1,6 @@
 # 这个是快应用API的集合Demo
 ## 效果图
-![image](https://github.com/l455202325/APIDemo/blob/master/images/scan.gif)
+![image](https://github.com/l455202325/APIDemo/blob/master/images/quickapp.gif)
 ## 使用方式：
 1. Clone下来代码
 2. 打开命令行工具
