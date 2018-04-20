@@ -1,0 +1,96 @@
+
+<import name="home" src="../../Example/JD/home"></import>
+<import name="class" src="../../Example/JD/class"></import>
+<import name="find" src="../../Example/JD/find"></import>
+<import name="shopcart" src="../../Example/JD/shopcart"></import>
+<import name="me" src="../../Example/JD/me"></import>
+
+<template>
+    <!-- template里只能有一个根节点 -->
+    <tabs @change="tabsChange" id="tab" index="{{tabSelectedIndex}}">
+        <tab-content>
+            <home></home>
+            <class></class>
+            <find></find>
+            <shopcart></shopcart>
+            <me></me>
+        </tab-content>
+        <tab-bar>
+            <div class="tab-item" for="{{(index,item) in tabList}}" @click="tabItemClick(index)">
+                <image class="tab-icon" src="{{(index == tabSelectedIndex) ? item.selected :item.normal}}"></image>
+                <text style="font-size: 24px" class="{{(index == tabSelectedIndex) ? 'selected' :'normal'}}">{{item.name}}</text>
+            </div>
+        </tab-bar>
+    </tabs>
+</template>
+
+<style>
+    .tab-item {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tab-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    tab-bar {
+        height: 120px;
+        border-top-color: #dbdbdb;
+        border-top-width: 1px;
+    }
+
+    .normal {
+        color: #333333;
+    }
+
+    .selected {
+        color: #d81e06;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            tabList: [
+                {
+                    name: '首页',
+                    normal: '/static/jd_home1.png',
+                    selected: '/static/jd_home2.png'
+                },
+                {
+                    name: '分类',
+                    normal: '/static/jd_class1.png',
+                    selected: '/static/jd_class2.png'
+                },
+                {
+                    name: '发现',
+                    normal: '/static/jd_find1.png',
+                    selected: '/static/jd_find2.png'
+                },
+                {
+                    name: '购物车',
+                    normal: '/static/jd_cart1.png',
+                    selected: '/static/jd_cart2.png'
+                },
+                {
+                    name: '我的',
+                    normal: '/static/jd_me1.png',
+                    selected: '/static/jd_me2.png'
+                }
+            ],
+            tabSelectedIndex: 0
+        },
+        tabItemClick(index) {
+            this.tabSelectedIndex = index;
+        },
+        tabsChange(e) {
+            this.tabSelectedIndex = e.index;
+        }
+    }
+</script>

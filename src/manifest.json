@@ -318,6 +318,9 @@
       },
       "ThirdService/Share": {
         "component": "index"
+      },
+      "Example/JD": {
+        "component": "index"
       }
     }
   },
@@ -331,7 +334,9 @@
       },
       "Home": {
         "menu": false,
-        "titleBar":false
+        "titleBar":false,
+        "titleBarBackgroundColor":"#ff0000",
+        "titleBarTextColor": "#ffffff"
       },
       "SystemCapability": {
         "titleBarText": "系统能力",
@@ -590,6 +595,10 @@
       },
       "ThirdService/Share": {
         "titleBarText": "Share",
+        "menu": false
+      },
+      "Example/JD": {
+        "titleBarText": "京东商城",
         "menu": false
       }
     }

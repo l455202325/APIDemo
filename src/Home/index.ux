@@ -181,7 +181,13 @@
                     normal: '/static/layout_normal.png',
                     selected: '/static/layout_selected.png',
                     introduce: '以下将展示常用的一些布局及样式，样式及用法仅供参考，大家在使用过程中遇到相关的布局样式可以直接使用，如果没有也希望大家提出自己想要的样式，我会根据大家的需求尽可能的添加一些常用的布局样式，具体用法详见快应用官方开发文档',
-                    lists: []
+                    lists: [
+                        {
+                            name: '京东',
+                            url: '/Example/JD',
+                            icon: '/static/jd_logo.png'
+                        }
+                    ]
                 }
             ],
             tabSelectedIndex: 2

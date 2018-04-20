@@ -1,0 +1,19 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div  style="flex-direction: column">
+        <image style="width: 100%" src="/static/jd_me.png"></image>
+        <image style="width: 100%" src="/static/jd_me.png"></image>
+    </div>
+</template>
+
+<style>
+
+</style>
+
+<script>
+
+    export default {
+        props: [],
+        data: {}
+    }
+</script>
