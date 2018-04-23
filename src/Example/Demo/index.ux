@@ -1,0 +1,38 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <input type="text" value="{{userNme}}" style="width: 200px;font-size: 30px; height: 50px;border: 1px solid #999999;padding: 5px">
+        <input type="button" value="清除输入" style="font-size: 25px;margin-left: 20px" @click="clean">
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            listData: [
+                {
+                    name: '数据存储',
+                    url: '/FileData/Storage'
+                },
+                {
+                    name: '文件存储',
+                    url: '/FileData/File'
+                }
+            ],
+            userNme:'我是用户名'
+        },
+        clean(){
+            this.userNme = new String("");
+        }
+
+    }
+</script>

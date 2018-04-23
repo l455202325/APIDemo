@@ -321,6 +321,9 @@
       },
       "Example/JD": {
         "component": "index"
+      },
+      "Example/Demo": {
+        "component": "index"
       }
     }
   },
@@ -600,6 +603,10 @@
       "Example/JD": {
         "titleBarText": "京东商城",
         "menu": false
+      },
+      "Example/Demo": {
+        "titleBarText": "Demo",
+        "menu": true
       }
     }
   }

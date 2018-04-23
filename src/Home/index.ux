@@ -186,6 +186,11 @@
                             name: '京东',
                             url: '/Example/JD',
                             icon: '/static/jd_logo.png'
+                        },
+                        {
+                            name: 'Demo',
+                            url: '/Example/Demo',
+                            icon: '/static/jd_logo.png'
                         }
                     ]
                 }
