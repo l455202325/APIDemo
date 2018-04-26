@@ -191,6 +191,11 @@
                             name: 'Demo',
                             url: '/Example/Demo',
                             icon: '/static/jd_logo.png'
+                        },
+                        {
+                            name: '列表下拉刷新上拉加载更多',
+                            url: '/Example/LoadingRefresh',
+                            icon: '/static/loading_icon.png'
                         }
                     ]
                 }

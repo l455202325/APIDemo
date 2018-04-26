@@ -1,0 +1,57 @@
+<import name="column" src="../../ContainerModule/List/column"></import>
+<import name="row" src="../../ContainerModule/List/row"></import>
+<import name="grid" src="../../ContainerModule/List/grid"></import>
+<import name="listRefresh" src="../../ContainerModule/Refresh/index"></import>
+<import name="loadmore" src="../../ContainerModule/List/loadmore"></import>
+<template>
+    <!-- template里只能有一个根节点 -->
+    <tabs index="{{selectIndex}}" @change="tabChange">
+        <tab-bar mode="scrollable">
+            <text class="{{(selectIndex == 0) ? 'select':'normal'}}" style="padding: 20px" @click="tabClick(0)">垂直列表</text>
+            <text class="{{(selectIndex == 1) ? 'select':'normal'}}" style="padding: 20px" @click="tabClick(1)">水平列表</text>
+            <text class="{{(selectIndex == 2) ? 'select':'normal'}}" style="padding: 20px" @click="tabClick(2)">Grid</text>
+            <text class="{{(selectIndex == 3) ? 'select':'normal'}}" style="padding: 20px" @click="tabClick(3)">下拉刷新</text>
+            <text class="{{(selectIndex == 4) ? 'select':'normal'}}" style="padding: 20px" @click="tabClick(4)">加载更多</text>
+
+        </tab-bar>
+        <tab-content>
+            <column></column>
+            <row></row>
+            <grid></grid>
+            <listRefresh></listRefresh>
+            <loadmore></loadmore>
+        </tab-content>
+    </tabs>
+</template>
+
+<style>
+    .normal {
+        color: #333333;
+        border-bottom-width: 1px;
+        border-bottom-color: #8d8d8d;
+    }
+
+    .select {
+        color: #fc1613;
+        border-bottom-width: 5px;
+        border-bottom-color: #fc1613;
+    }
+
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            selectIndex:0
+        },
+        tabClick(index){
+            this.selectIndex = index;
+        },
+        tabChange(e){
+            this.selectIndex = e.index;
+        }
+    }
+</script>

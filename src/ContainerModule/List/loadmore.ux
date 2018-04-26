@@ -1,0 +1,60 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <list style="flex-direction:column;columns: 1" @scrollbottom="listScrollBottom">
+            <block for="(index,item) in listData">
+                <list-item type="listItem" style="padding: 10px">
+                    <div style="flex-direction: row">
+                        <image style="width: 400px;" src="https://m.360buyimg.com/mobilecms/s357x357_jfs/t19384/116/1415259132/87929/b1bb921c/5ac9c08cN4e70f24a.jpg!q50.jpg">
+
+                        </image>
+                        <div style="flex-direction: column;margin-left: 20px">
+                            <text style="font-size: 30px;color:#232326">亿健（YIJIAN） 【欧盟认证】亿健跑步机 家用静音折叠运动健身器材升级款9009 WiFi彩屏多功能</text>
+                            <div style="flex-direction: row;margin-top: 10px;margin-bottom: 10px">
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px; border-radius: 5px">45-47cm</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">手动调节</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">家用</text>
+                            </div>
+                            <div style="flex-direction: row;align-items: center ">
+                                <text style="color: #DC143C;font-size: 28px">￥</text>
+                                <text style="color: #DC143C;font-size: 40px;font-weight: bold">2499.00</text>
+                                <text style="background-color: #DC143C; margin-left:20px;height:30px ;color: #f1f1f1; font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">秒杀</text>
+                            </div>
+                        </div>
+                    </div>
+                </list-item>
+
+                <list-item type="loadMore" style="justify-content: center;margin-bottom: 20px" if="{{index == (listData.length-1)}}">
+                    <progress type="circular"></progress>
+                    <text style="margin-left: 20px">加载更多</text>
+                </list-item>
+            </block>
+        </list>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<script>
+    export default {
+        data: {
+            listData: [{},{},{},{},{},{},{},{},{},{}]
+        }
+        ,
+        listScrollBottom(){
+            setTimeout(()=>{
+                for (let i=0;i<10;i++){
+                    this.listData.push({});
+                }
+            },2000)
+        }
+    }
+</script>

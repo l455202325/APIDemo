@@ -44,11 +44,11 @@
                 },
                 {
                     name: 'list',
-                    url: ''
+                    url: '/ContainerModule/List'
                 },
                 {
                     name: 'list-item',
-                    url: ''
+                    url: '/ContainerModule/List'
                 },
                 {
                     name: 'popup',
@@ -56,7 +56,7 @@
                 },
                 {
                     name: 'refresh',
-                    url: ''
+                    url: '/ContainerModule/Refresh'
                 },
                 {
                     name: 'richtext',

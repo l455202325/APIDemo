@@ -1,0 +1,60 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <list style="flex-direction:row;columns: 1;">
+            <block for="item in listData">
+                <list-item type="listItem" class="item" style="padding: 10px">
+                    <div style="flex-direction: column">
+                        <image style="width: 400px;" src="https://m.360buyimg.com/mobilecms/s357x357_jfs/t8161/224/1169699991/177635/eb2192c2/59b64641N088dd6ad.jpg!q50.jpg">
+
+                        </image>
+                        <div style="flex-direction: column;margin-top: 20px">
+                            <text style="font-size: 30px;color:#232326;width: 400px;lines:3">小米（MI） 小米Note3 人脸解锁|美颜自拍|变焦双摄</text>
+                            <div style="flex-direction: row;margin-top: 10px;margin-bottom: 10px">
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px; border-radius: 5px">6GB</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">64GB</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">5.5英寸</text>
+                            </div>
+                            <div style="flex-direction: row;align-items: center ">
+                                <text style="color: #DC143C;font-size: 28px">￥</text>
+                                <text style="color: #DC143C;font-size: 40px;font-weight: bold">1999.00</text>
+                                <text style="background-color: #DC143C; margin-left:20px;height:30px ;color: #f1f1f1; font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">秒杀</text>
+                            </div>
+                        </div>
+                    </div>
+                </list-item>
+            </block>
+        </list>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 40px;
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+    .item {
+        border-bottom-color: #d1d1d1;
+        border-bottom-width: 1px;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            listData: [{},{},{},{},{},{},{},{},{},{},{},{},{}]
+        }
+    }
+</script>

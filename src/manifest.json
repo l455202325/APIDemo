@@ -145,6 +145,12 @@
       "ContainerModule/Popup": {
         "component": "index"
       },
+      "ContainerModule/List": {
+        "component": "index"
+      },
+      "ContainerModule/Refresh": {
+        "component": "index"
+      },
       "ContainerModule/Tabs": {
         "component": "index"
       },
@@ -323,6 +329,9 @@
         "component": "index"
       },
       "Example/Demo": {
+        "component": "index"
+      },
+      "Example/LoadingRefresh": {
         "component": "index"
       }
     }
@@ -596,6 +605,14 @@
         "titleBarText": "Popup",
         "menu": false
       },
+      "ContainerModule/List": {
+        "titleBarText": "List",
+        "menu": false
+      },
+      "ContainerModule/Refresh": {
+        "titleBarText": "Refresh",
+        "menu": false
+      },
       "ThirdService/Share": {
         "titleBarText": "Share",
         "menu": false
@@ -607,6 +624,10 @@
       "Example/Demo": {
         "titleBarText": "Demo",
         "menu": true
+      },
+      "Example/LoadingRefresh": {
+        "titleBarText": "LoadingRefresh",
+        "menu": false
       }
     }
   }

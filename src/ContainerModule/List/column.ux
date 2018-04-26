@@ -1,0 +1,50 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <list style="flex-direction:column;columns: 1">
+            <block for="item in listData">
+                <list-item type="listItem" style="padding: 10px">
+                    <div style="flex-direction: row">
+                        <image style="width: 400px;" src="https://m.360buyimg.com/mobilecms/s357x357_jfs/t16882/9/552095415/288278/439d9426/5a96519fN7b85c303.jpg!q50.jpg">
+
+                        </image>
+                        <div style="flex-direction: column;margin-left: 20px">
+                            <text style="font-size: 30px;color:#232326">雷柏（Rapoo） V500PRO 混光机械键盘 游戏键盘 吃鸡键盘 背光键盘 电脑键盘 笔记本键盘 黑色 黑轴</text>
+                            <div style="flex-direction: row;margin-top: 10px;margin-bottom: 10px">
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px; border-radius: 5px">机械键盘</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">黑轴</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">有线</text>
+                            </div>
+                            <div style="flex-direction: row;align-items: center ">
+                                <text style="color: #DC143C;font-size: 28px">￥</text>
+                                <text style="color: #DC143C;font-size: 40px;font-weight: bold">159.00</text>
+                                <text style="background-color: #DC143C; margin-left:20px;height:30px ;color: #f1f1f1; font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">秒杀</text>
+                            </div>
+                        </div>
+                    </div>
+                </list-item>
+            </block>
+        </list>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            listData: [{},{},{},{},{},{},{},{},{},{},{},{},{}]
+        }
+    }
+</script>

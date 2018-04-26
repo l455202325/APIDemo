@@ -1,0 +1,60 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <refresh class="demo-page" refreshing="{{isRefresh}}" @refresh="pageRefresh">
+        <list style="flex-direction:column;columns: 1">
+            <block for="item in listData">
+                <list-item type="listItem" class="item" style="padding: 10px">
+                    <div style="flex-direction: row">
+                        <image style="width: 400px;" src="https://m.360buyimg.com/mobilecms/s357x357_jfs/t17449/164/1606197870/91989/14966a6f/5ad0265fNa55d94dd.jpg!q50.jpg">
+
+                        </image>
+                        <div style="flex-direction: column;margin-left: 20px">
+                            <text style="font-size: 30px;color:#232326">硕美科（SOMIC）G936指挥官 7.1环绕声电竞游戏耳机 头戴式耳机 线控电脑耳麦 吃鸡耳机 绝地求生耳机</text>
+                            <div style="flex-direction: row;margin-top: 10px;margin-bottom: 10px">
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px; border-radius: 5px">吃鸡耳机</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">有线</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">电脑</text>
+                            </div>
+                            <div style="flex-direction: row;align-items: center ">
+                                <text style="color: #DC143C;font-size: 28px">￥</text>
+                                <text style="color: #DC143C;font-size: 40px;font-weight: bold">379.00</text>
+                                <text style="background-color: #DC143C; margin-left:20px;height:30px ;color: #f1f1f1; font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">秒杀</text>
+                            </div>
+                        </div>
+                    </div>
+                </list-item>
+            </block>
+        </list>
+
+    </refresh>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<script>
+    import prompt from '@system.prompt';
+
+    export default {
+        data: {
+            listData: [{},{},{},{},{},{},{},{},{},{},{},{},{}],
+            isRefresh:false,
+        },
+
+        pageRefresh:function(e){
+            this.isRefresh = e.refreshing
+            setTimeout(()=> {
+                this.isRefresh = false;
+                prompt.showToast({
+                    message: '刷新完成'
+                })
+            },2000);
+        }
+    }
+</script>

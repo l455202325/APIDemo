@@ -1,0 +1,50 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="demo-page">
+        <list style="flex-direction:column;columns: 2;">
+            <block for="item in listData">
+                <list-item type="listItem" style="padding: 10px">
+                    <div style="flex-direction: column">
+                        <image style="width: 100%;" src="https://m.360buyimg.com/mobilecms/s357x357_jfs/t5722/39/2398733476/154449/f11c8ef7/59310205Nfc494588.jpg!q50.jpg">
+
+                        </image>
+                        <div style="flex-direction: column;margin-top: 20px">
+                            <text style="font-size: 30px;color:#232326;lines:2">美的(Midea)电压力锅 一锅双胆 智能预约 WQC50A1P 5L高压锅</text>
+                            <div style="flex-direction: row;margin-top: 10px;margin-bottom: 10px">
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px; border-radius: 5px">电脑式</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">底盘加热</text>
+                                <text style="background-color: #ced5d4;font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">5L</text>
+                            </div>
+                            <div style="flex-direction: row;align-items: center ">
+                                <text style="color: #DC143C;font-size: 28px">￥</text>
+                                <text style="color: #DC143C;font-size: 40px;font-weight: bold">239.00</text>
+                                <text style="background-color: #DC143C; margin-left:20px;height:30px ;color: #f1f1f1; font-size: 20px;margin-right: 10px;padding: 5px;border-radius: 5px">秒杀</text>
+                            </div>
+                        </div>
+                    </div>
+                </list-item>
+            </block>
+        </list>
+
+    </div>
+</template>
+
+<style>
+    .demo-page {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<script>
+    import router from '@system.router';
+    import prompt from '@system.prompt'
+
+    export default {
+        data: {
+            listData: [{},{},{},{},{},{},{},{},{},{},{},{},{}]
+        }
+    }
+</script>

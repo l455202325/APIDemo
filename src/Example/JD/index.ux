@@ -24,6 +24,7 @@
     </tabs>
 </template>
 
+
 <style>
     .tab-item {
         flex-direction: column;
