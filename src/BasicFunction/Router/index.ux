@@ -4,14 +4,14 @@
         <div class="bord-bottom">
             <div class="item-bar-row">
                 <input class="title" type="text" placeholder="请输入电话号码" @change="getCall">
-                <input class="btn-bar" type="button" value="拨打"  @click="call">
+                <input class="btn-bar" type="button" value="拨打" @click="call">
             </div>
         </div>
 
         <div class="bord-bottom">
             <div class="item-bar-column">
                 <input class="title" type="text" value="10086" placeholder="请输入电话号码" @change="getSmsPhone">
-                <textarea class="message" placeholder="请输入短信内容"  @change="getSmsContent"></textarea>
+                <textarea class="message" placeholder="请输入短信内容" @change="getSmsContent"></textarea>
                 <input class="btn-bar" type="button" value="发送短信" @click="sms">
             </div>
         </div>
@@ -27,21 +27,21 @@
         <div class="bord-bottom">
             <div class="item-bar-row">
                 <input class="title" type="text" placeholder="请输入网址" value="https://www.baidu.com" @change="getOpenWeb">
-                <input class="btn-bar" type="button" value="打开"  @click="openWeb">
+                <input class="btn-bar" type="button" value="打开" @click="openWeb">
             </div>
         </div>
-        <input class="btn" type="button" value="通过路径打开新页面"  @click="openByPath">
-        <input class="btn" type="button" value="通过名称打开新页面"  @click="openByName">
+        <input class="btn" type="button" value="通过路径打开新页面" @click="openByPath">
+        <input class="btn" type="button" value="通过名称打开新页面" @click="openByName">
 
-        <input class="btn" type="button" value="打开下个页面本界面不可返回"  @click="openReplace">
+        <input class="btn" type="button" value="打开下个页面本界面不可返回" @click="openReplace">
 
-        <input class="btn" type="button" value="返回上个页面"  @click="back">
+        <input class="btn" type="button" value="返回上个页面" @click="back">
         <div class="content">
             <div class="lineItem">
                 <label class="label2">传递的参数：</label>
                 <input class="input" type="text" placeholder="请输入需要传递的参数" value="{{param}}" @change="paramChange">
             </div>
-            <input class="btn" type="button" value="给下一个页面传递参数"  @click="paramClick">
+            <input class="btn" type="button" value="给下一个页面传递参数" @click="paramClick">
         </div>
 
 
@@ -51,12 +51,12 @@
         <label class="label">当前页面的路径：{{path}}</label>
 
         <!-- 点击获取当前页面状态 -->
-        <input class="btn" type="button" value="获取当前页面状态"  @click="getState">
+        <input class="btn" type="button" value="获取当前页面状态" @click="getState">
 
         label class="labelTitle">页面数量</label>
         <label class="label">当前页面栈的页面数量：{{length}}</label>
         <!-- 点击获取当前页面栈的页面数量 -->
-        <input class="btn" type="button" value="获取当前页面栈的页面数量"  @click="getLength">
+        <input class="btn" type="button" value="获取当前页面栈的页面数量" @click="getLength">
     </div>
 </template>
 
@@ -67,13 +67,15 @@
         align-items: center;
         padding-bottom: 40px;
     }
-    .content{
+
+    .content {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        padding-top:30px;
+        padding-top: 30px;
     }
-    .lineItem{
+
+    .lineItem {
         flex-direction: row;
         justify-content: center;
         align-items: center;
@@ -81,74 +83,87 @@
         padding: 20px;
         text-align: center;
     }
+
     .label2 {
         font-size: 36px;
         text-align: left;
     }
-    .label{
+
+    .label {
         font-size: 24px;
         text-align: left;
-        width:100%;
+        width: 100%;
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 20px;
     }
-    .labelTitle{
+
+    .labelTitle {
         font-size: 30px;
         text-align: left;
         font-weight: bold;
-        width:100%;
+        width: 100%;
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 40px;
     }
-    .input{
+
+    .input {
         font-size: 26px;
         color: #333333;
         width: 60%;
         border: 1px solid #8d8d8d;
         padding: 5px;
     }
-    .bord-bottom{
+
+    .bord-bottom {
         border: 1px solid #e2e2e2;
     }
-    .item-bar-row{
+
+    .item-bar-row {
         width: 100%;
         padding: 50px;
         flex-direction: row;
     }
-    .item-bar-row .title{
+
+    .item-bar-row .title {
         width: 70%;
-        border:1px solid #999999;
+        border: 1px solid #999999;
         padding-left: 20px;
     }
-    .item-bar-row .btn-bar{
+
+    .item-bar-row .btn-bar {
         width: 30%;
         background-color: #09ba07;
         color: #ffffff;
     }
-    .item-bar-column{
+
+    .item-bar-column {
         width: 100%;
         padding: 50px;
         flex-direction: column;
     }
-    .item-bar-column .title{
+
+    .item-bar-column .title {
         width: 100%;
-        border:1px solid #999999;
+        border: 1px solid #999999;
         padding-left: 20px;
         margin-bottom: 10px;
     }
-    .item-bar-column .message{
+
+    .item-bar-column .message {
         width: 100%;
         height: 300px;
-        border:1px solid #999999;
+        border: 1px solid #999999;
         padding-left: 20px;
         margin-bottom: 10px;
     }
-    .item-bar-column .btn-bar{
+
+    .item-bar-column .btn-bar {
         background-color: #09ba07;
         color: #ffffff;
     }
+
     .btn {
         width: 550px;
         height: 86px;
@@ -166,92 +181,94 @@
 
     export default {
         data: {
-            param:'API Demo',
-            index:'未知',
-            name:'未知',
-            path:'未知',
-            length:'未知',
-            phoneNumber:'',
-            msgNumber:'10086',
-            msgContent:'我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
-            mailtoEmail:'455202325@qq.com',
-            mailtoContent:'我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
-            webUrl:'https://www.baidu.com',
+            param: 'API Demo',
+            index: '未知',
+            name: '未知',
+            path: '未知',
+            length: '未知',
+            phoneNumber: '',
+            msgNumber: '10086',
+            msgContent: '我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
+            mailtoEmail: '455202325@qq.com',
+            mailtoContent: '我这里有一个非常好的快应用学习的Demo，这是github的地址链接 https://github.com/l455202325/APIDemo',
+            webUrl: 'https://www.baidu.com',
 
         },
-        getCall(e){
+        getCall(e) {
             this.phoneNumber = e.value;
         },
-        call(){
+        call() {
             router.push({
-                uri: 'tel:'+this.phoneNumber
+                uri: 'tel:' + this.phoneNumber
             });
         },
-        getSmsPhone(e){
+        getSmsPhone(e) {
             this.msgNumber = e.value;
         },
-        getSmsContent(e){
+        getSmsContent(e) {
             this.msgContent = e.value;
         },
-        sms(){
+        sms() {
             router.push({
-                uri: 'sms:'+this.msgNumber+'?body='+this.msgContent
+                uri: 'sms:' + this.msgNumber + '?body=' + this.msgContent
             });
         },
-        getMailtoEmail(e){
+        getMailtoEmail(e) {
             this.mailtoEmail = e.value;
         },
-        getMailtoContent(e){
+        getMailtoContent(e) {
             this.mailtoContent = e.value;
         },
-        mailto(){
+        mailto() {
             router.push({
-                uri: 'mailto:'+this.mailtoEmail+'?body='+this.mailtoContent
+                uri: 'mailto:' + this.mailtoEmail + '?body=' + this.mailtoContent
             });
         },
-        getOpenWeb(e){
+        getOpenWeb(e) {
             this.webUrl = e.value
         },
-        openWeb(){
+        openWeb() {
             router.push({
                 uri: this.webUrl
             });
         },
-        openByPath(){
+        openByPath() {
             router.push({
                 uri: '/BasicFunction/Router/Path'
             });
         },
-        openByName(){
+        openByName() {
             router.push({
                 uri: 'BasicFunction/Router/Name'
             });
         },
-        paramClick(){
+        paramClick() {
             router.push({
                 uri: 'BasicFunction/Router/Param',
-                params:{key:this.param}
+                params: {
+                    key: this.param
+                }
             });
         },
-        paramChange(e){
+        paramChange(e) {
             this.param = e.value;
         },
-        openReplace(){
+        openReplace() {
             router.replace({
                 uri: 'BasicFunction/Router/Replace',
             });
         },
-        back(){
+        back() {
             router.back();
         },
-        getState(){
+        getState() {
             let page = router.getState()
             this.index = page.index;
             this.name = page.name;
             this.path = page.path;
         },
-        getLength(){
-          this.length  = router.getLength()
+        getLength() {
+            this.length = router.getLength()
         }
 
     }

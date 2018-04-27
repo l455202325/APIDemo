@@ -1,8 +1,9 @@
 <template>
     <!-- template里只能有一个根节点 -->
+
     <div class="demo-page">
         <input type="text" value="{{userNme}}" style="width: 200px;font-size: 30px; height: 50px;border: 1px solid #999999;padding: 5px">
-        <input type="button" value="清除输入" style="font-size: 25px;margin-left: 20px" @click="clean">
+        <input type="button" value="开始计时" style="font-size: 25px;margin-left: 20px" @click="clean">
 
     </div>
 </template>
@@ -28,10 +29,18 @@
                     url: '/FileData/File'
                 }
             ],
-            userNme:'我是用户名'
+            userNme:'60S',
+            times:60,
         },
         clean(){
-            this.userNme = new String("");
+//            this.userNme = new String("");
+            setTimeout(()=> {
+                this.times--
+                this.userNme = new String(this.times +"S")
+                if (this.times>0){
+                    this.clean()
+                }
+            },1000)
         }
 
     }

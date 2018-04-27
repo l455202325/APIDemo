@@ -8,10 +8,10 @@
   |     |——通用渐变
   |——容器组件
   |     ├━━ div
-  |     ├━━ list
-  |     ├━━ list-item
+  |     ├━━ list(OK)
+  |     ├━━ list-item(OK)
   |     ├━━ popup(OK)
-  |     ├━━ refresh
+  |     ├━━ refresh(OK)
   |     ├━━ richtext
   |     ├━━ stack
   |     ├━━ swiper
