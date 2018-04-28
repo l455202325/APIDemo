@@ -2,7 +2,7 @@
     <!-- template里只能有一个根节点 -->
     <div class="demo-page">
         <input type="button" value="定位到第5个元素" @click="listScrollTo">
-        <list id="list" style="flex-direction:column;columns: 1">
+        <list id="list" style="flex-direction:column;columns: 1" @scroll="listScroll">
             <block for="(index,item) in listData">
                 <list-item type="listItem" style="padding: 10px">
                     <div style="flex-direction: row">
@@ -67,6 +67,9 @@
             this.$element('list').scrollTo({
                 index: 5
             });
+        },
+        listScroll(e){
+            console.log("scrollXValue:" + e.scrollX + "\n" + "scrollYValue:" + e.scrollY +"\n");
         }
     }
 </script>

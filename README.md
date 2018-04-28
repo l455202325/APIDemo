@@ -12,8 +12,16 @@
 - 好了现在就可以愉快的看 API 效果了
 - [这个是已经完成API功能列表](https://github.com/l455202325/APIDemo/blob/master/completeList.md)，大家可查看，这个列表每天更新，直到全部开发完成
 
+----------
+如果你知识性想体验一下快应用的API的效果，你换没有搭建好开发环境，那也给你提供一个体验的方式，
+1. 下载快应用这两个app，
+[快应用调试器](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_debugger.apk),[快应用平台正式版预览](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_platform_preview_release.apk)
+**两个都要下载，都要安装**
+2. 再下载本demo的rpk文件，[下载点这里](https://github.com/l455202325/APIDemo/blob/master/completeList.md)
+3. 不管你用什么办法，把rpk文件移动到手机里面
+4. 然后打开`快应用调试器`，选择本地安装，找到刚才移动到手机里面的rpk文件，安装完就可以体验了
+> 另外如果体验完，下一次要是还想体验的话你如果再装一次，这就太...,解决这个问题的方法也很简单，打开另外一个app 你会看到`APIDemo`，右边👉有一个`秒开`，点击即可
 
-## 非常感谢大家积极参与到项目中来，现在功能开发小组人员已满，进入编写代码群二维码已经失效
 - 下面是进学习交流群的二维码链接
 ----------
 ![image](https://github.com/l455202325/APIDemo/blob/master/images/group.jpg)
