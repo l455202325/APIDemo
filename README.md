@@ -15,7 +15,7 @@
 ----------
 如果你只是想体验一下快应用的API的效果，你换没有搭建好开发环境，那也给你提供一个体验的方式，
 1. 下载快应用这两个app，
-`[快应用调试器](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_debugger.apk)`、`[快应用平台正式版预览](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_platform_preview_release.apk)`
+[快应用调试器](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_debugger.apk)、[快应用平台正式版预览](https://statres.quickapp.cn/quickapp/quickapp/201803/file/quickapp_platform_preview_release.apk)
 **两个都要下载，都要安装**
 2. 再下载本demo的rpk文件，[下载点这里](https://github.com/l455202325/APIDemo/blob/master/images/com.zixing.demo.rpk)
 3. 不管你用什么办法，把rpk文件移动到手机里面
